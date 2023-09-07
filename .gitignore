@@ -1,0 +1,40 @@
+#package file
+*.war
+*.ear
+
+#kdiff3 ingnore
+*.orig
+
+#maven ignore
+taget/
+
+#maven sonar ignore
+target/
+
+#eclipse ignore
+.settings/
+.project
+.classpath
+.txlcn/
+#idea
+*.ipr
+*.iml
+*.iws
+logs/
+.idea/*
+*.class
+logs/*.log
+*/target/*
+work/*
+# temp file
+*.log
+*.cache
+*.diff
+*.tmp
+
+#system
+.DS_Store
+Thumbs.db
+/.idea/modules.xml
+/.idea/compiler.xml
+/.gitignore
