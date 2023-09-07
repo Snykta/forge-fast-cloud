@@ -37,4 +37,3 @@ work/*
 Thumbs.db
 /.idea/modules.xml
 /.idea/compiler.xml
-/.gitignore
