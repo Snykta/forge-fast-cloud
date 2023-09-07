@@ -1,0 +1,10 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fast.start.config.Knife4jConfig,\
+  com.fast.start.config.LocalTimeZoneConfig,\
+  com.fast.start.config.WebMvcConfig,\
+  com.fast.start.config.FeignConfig
+
+
+
+
+  
