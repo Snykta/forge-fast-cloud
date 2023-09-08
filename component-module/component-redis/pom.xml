@@ -5,19 +5,26 @@
 
 	<parent>
 		<groupId>com.fast.cloud</groupId>
-		<artifactId>service-module</artifactId>
+		<artifactId>component-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 
 
-
-	<artifactId>fast-oms</artifactId>
+	<artifactId>component-redis</artifactId>
 	<version>1.0.0</version>
-	<name>fast-oms</name>
-	<description>oms 业务模块</description>
+	<name>component-redis</name>
+
+	<description>Redis自定义模块</description>
+
+
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
 
 
 		<dependency>
@@ -27,7 +34,9 @@
 		</dependency>
 
 
+
 	</dependencies>
+
 
 
 </project>

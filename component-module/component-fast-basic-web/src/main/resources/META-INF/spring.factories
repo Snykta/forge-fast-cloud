@@ -1,0 +1,10 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fast.start.basic.config.LocalTimeZoneConfig,\
+  com.fast.start.basic.config.WebMvcConfig,\
+  com.fast.start.basic.web.log.LogInfoAspect,\
+  com.fast.start.basic.utils.SpringContextUtil
+
+
+
+
+  

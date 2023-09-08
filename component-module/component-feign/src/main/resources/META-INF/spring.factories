@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fast.start.feign.config.FeignAutoConfig,\
+  com.fast.start.feign.utils.FeignContextUtil
+
+
+
+
+  

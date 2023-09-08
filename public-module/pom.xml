@@ -22,7 +22,6 @@
 	<modules>
 		<module>fast-auth</module>
 		<module>fast-gateway</module>
-		<module>fast-basic-web</module>
 	</modules>
 
 </project>

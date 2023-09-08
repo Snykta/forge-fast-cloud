@@ -19,7 +19,17 @@
 	<description>crm 业务模块</description>
 
 
+	<dependencies>
 
+
+		<dependency>
+			<groupId>com.fast.cloud</groupId>
+			<artifactId>component-fast-basic-web</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+
+	</dependencies>
 
 
 </project>

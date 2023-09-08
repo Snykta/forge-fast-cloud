@@ -5,20 +5,25 @@
 
 	<parent>
 		<groupId>com.fast.cloud</groupId>
-		<artifactId>service-module</artifactId>
+		<artifactId>component-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 
 
-
-	<artifactId>fast-oms</artifactId>
+	<artifactId>component-feign</artifactId>
 	<version>1.0.0</version>
-	<name>fast-oms</name>
-	<description>oms 业务模块</description>
+	<name>component-feign</name>
+
+	<description>Feign自定义模块</description>
+
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>com.fast.cloud</groupId>

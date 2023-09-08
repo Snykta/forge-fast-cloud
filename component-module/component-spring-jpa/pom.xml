@@ -2,32 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>com.fast.cloud</groupId>
-		<artifactId>service-module</artifactId>
+		<artifactId>component-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 
 
-
-	<artifactId>fast-oms</artifactId>
+	<artifactId>component-spring-jpa</artifactId>
 	<version>1.0.0</version>
-	<name>fast-oms</name>
-	<description>oms 业务模块</description>
+	<name>component-spring-jpa</name>
 
-	<dependencies>
+	<description>JPA配置模块</description>
 
-
-		<dependency>
-			<groupId>com.fast.cloud</groupId>
-			<artifactId>component-fast-basic-web</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-
-	</dependencies>
 
 
 </project>
