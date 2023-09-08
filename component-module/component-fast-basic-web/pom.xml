@@ -10,9 +10,9 @@
 	</parent>
 
 
-	<artifactId>fast-basic-web</artifactId>
+	<artifactId>component-fast-basic-web</artifactId>
 	<version>1.0.0</version>
-	<name>fast-basic-web</name>
+	<name>component-fast-basic-web</name>
 
 	<description>web基础通用配置、如果是Web项目则都可以引用此包</description>
 
@@ -38,9 +38,10 @@
 			<artifactId>spring-boot-starter-undertow</artifactId>
 		</dependency>
 
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
 		</dependency>
 
 		<dependency>
@@ -48,11 +49,6 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>cn.hutool</groupId>
@@ -65,17 +61,23 @@
 			<artifactId>aspectjweaver</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.alibaba.fastjson2</groupId>
+			<artifactId>fastjson2</artifactId>
 		</dependency>
 
 
-		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
-		</dependency>
 
 	</dependencies>
 
