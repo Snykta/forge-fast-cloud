@@ -22,7 +22,7 @@
 
 		<dependency>
 			<groupId>com.fast.cloud</groupId>
-			<artifactId>component-fast-basic-web</artifactId>
+			<artifactId>component-basic-web</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 

@@ -20,7 +20,7 @@
 
 	<!--模块-->
 	<modules>
-		<module>component-fast-basic-web</module>
+		<module>component-basic-web</module>
 		<module>component-mybatis-plus</module>
 		<module>component-redis</module>
 		<module>component-feign</module>

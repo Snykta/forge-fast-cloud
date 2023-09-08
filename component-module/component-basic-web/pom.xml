@@ -10,9 +10,9 @@
 	</parent>
 
 
-	<artifactId>component-fast-basic-web</artifactId>
+	<artifactId>component-basic-web</artifactId>
 	<version>1.0.0</version>
-	<name>component-fast-basic-web</name>
+	<name>component-basic-web</name>
 
 	<description>web基础通用配置、如果是Web项目则都可以引用此包</description>
 
