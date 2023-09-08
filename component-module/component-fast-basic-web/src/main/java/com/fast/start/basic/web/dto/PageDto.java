@@ -1,5 +1,6 @@
 package com.fast.start.basic.web.dto;
 
+
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -10,37 +10,29 @@ public class ServiceException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private Object[] args;
+    /**
+     * 错误码
+     */
+    private Integer code;
+
+    /**
+     * 错误提示
+     */
+    private String message;
+
 
     public ServiceException() {
-        super();
+
     }
 
-    public ServiceException(String msg) {
-        super(msg);
+    public ServiceException(String message)
+    {
+        this.message = message;
     }
 
-    public ServiceException(String msg, Object... args) {
-        super(msg);
-        this.args = args;
+    public ServiceException(String message, Integer code)
+    {
+        this.message = message;
+        this.code = code;
     }
-
-    public ServiceException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public ServiceException(String message, Throwable cause, Object... args) {
-        super(message, cause);
-    }
-
-    public ServiceException(Throwable cause) {
-        super(cause);
-    }
-
-    protected ServiceException(String message, Throwable cause,
-                           boolean enableSuppression,
-                           boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
-
 }

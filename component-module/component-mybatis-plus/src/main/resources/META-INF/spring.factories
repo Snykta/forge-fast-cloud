@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.fast.start.mybatis.config.MybatisPlusAutoConfig,\
+  com.fast.start.mybatis.filter.DruidSQLFilter,\
+  com.fast.start.mybatis.interceptor.SqlLogInterceptor
+  

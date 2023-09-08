@@ -5,29 +5,25 @@
 
 	<parent>
 		<groupId>com.fast.cloud</groupId>
-		<artifactId>component-module</artifactId>
+		<artifactId>service-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 
 
-	<artifactId>component-feign</artifactId>
+
+	<artifactId>fast-order</artifactId>
 	<version>1.0.0</version>
-	<name>component-feign</name>
-
-	<description>Feign自定义模块</description>
-
+	<name>fast-order</name>
+	<description>订单业务模块</description>
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
+			<groupId>com.fast.cloud</groupId>
+			<artifactId>component-fast-basic-web</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 

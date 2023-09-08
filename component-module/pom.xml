@@ -23,8 +23,6 @@
 		<module>component-fast-basic-web</module>
 		<module>component-mybatis-plus</module>
 		<module>component-redis</module>
-		<module>component-spring-jpa</module>
-		<module>component-swagger</module>
 		<module>component-feign</module>
 	</modules>
 

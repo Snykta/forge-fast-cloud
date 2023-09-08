@@ -3,31 +3,29 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+
+
 	<parent>
 		<groupId>com.fast.cloud</groupId>
-		<artifactId>component-module</artifactId>
+		<artifactId>service-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 
 
-	<artifactId>component-feign</artifactId>
+	<artifactId>fast-system</artifactId>
 	<version>1.0.0</version>
-	<name>component-feign</name>
-
-	<description>Feign自定义模块</description>
+	<name>fast-system</name>
+	<description>系统模块：用户信息、字典、配置、权限...</description>
 
 
 	<dependencies>
 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
+			<groupId>com.fast.cloud</groupId>
+			<artifactId>component-fast-basic-web</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 

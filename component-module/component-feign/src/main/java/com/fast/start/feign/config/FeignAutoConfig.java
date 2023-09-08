@@ -3,9 +3,7 @@ package com.fast.start.feign.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
-import javax.servlet.Servlet;
 
 
 /**
@@ -13,7 +11,6 @@ import javax.servlet.Servlet;
  */
 @Configuration
 @Slf4j
-@ConditionalOnClass({Servlet.class})
 public class FeignAutoConfig implements DisposableBean {
 
     public FeignAutoConfig(){

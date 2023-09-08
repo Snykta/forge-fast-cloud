@@ -1,6 +1,7 @@
 package com.fast.start.basic.utils;
 
 import cn.hutool.core.convert.Convert;
+import com.fast.start.basic.web.dto.PageDto;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -71,8 +72,6 @@ public class FastConvertUtil extends Convert {
         }
         return null;
     }
-
-
 
 
 }

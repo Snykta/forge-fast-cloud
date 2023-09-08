@@ -5,7 +5,7 @@
 
 	<parent>
 		<groupId>com.fast.cloud</groupId>
-		<artifactId>public-module</artifactId>
+		<artifactId>component-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
@@ -53,7 +53,6 @@
 		<dependency>
 			<groupId>cn.hutool</groupId>
 			<artifactId>hutool-all</artifactId>
-			<version>${hutool.version}</version>
 		</dependency>
 
 		<dependency>
@@ -72,11 +71,12 @@
 			<optional>true</optional>
 		</dependency>
 
-		<dependency>
-			<groupId>com.alibaba.fastjson2</groupId>
-			<artifactId>fastjson2</artifactId>
-		</dependency>
 
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+			<version>4.3.0</version>
+		</dependency>
 
 
 	</dependencies>
