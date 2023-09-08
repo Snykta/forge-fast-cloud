@@ -3,10 +3,13 @@ package com.fast.start.basic.web.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import java.io.Serializable;
 
 @ApiModel("基础分页查询父类")
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class PageSearchDto extends SearchDto implements Serializable {
 
     /**
