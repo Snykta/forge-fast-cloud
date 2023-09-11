@@ -1,6 +1,7 @@
 package com.fast.start.mybatis.config;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
@@ -11,6 +12,12 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+/**
+ *
+ * mybatisPlus配置
+ *
+ */
 
 @Slf4j
 @Configuration
@@ -38,7 +45,7 @@ public class MybatisPlusAutoConfig implements DisposableBean {
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
-        if (null == appName || appName.length() == 0) {
+        if (StrUtil.isEmpty(dbTypeName)) {
             throw new RuntimeException("模块：[" + appName + "] 没有配置具体数据库类型");
         }
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();

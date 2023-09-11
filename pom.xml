@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.fast.cloud</groupId>
@@ -15,9 +14,9 @@
 
 	<!--模块-->
 	<modules>
+		<module>component-module</module>
 		<module>public-module</module>
 		<module>service-module</module>
-		<module>component-module</module>
 	</modules>
 
 
@@ -123,7 +122,6 @@
 				<artifactId>spring-cloud-starter-openfeign</artifactId>
 				<version>${spring-cloud-openfeign.version}</version>
 			</dependency>
-
 
 
 
@@ -239,7 +237,6 @@
 			</plugins>
 		</pluginManagement>
 
-
 	</build>
 
 	<repositories>
@@ -274,12 +271,5 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
-
-
-
-
-
-
 
 </project>

@@ -3,7 +3,6 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-
 	<parent>
 		<groupId>com.fast.cloud</groupId>
 		<artifactId>fast-start-cloud</artifactId>
@@ -13,14 +12,13 @@
 	<artifactId>service-module</artifactId>
 	<packaging>pom</packaging>
 
-	<description>
-		service-module：业务服务组件
-	</description>
+
+	<description>业务模块：用户信息、字典、配置、权限...</description>
 
 	<!--模块-->
 	<modules>
-		<module>fast-system</module>
 		<module>fast-order</module>
+		<module>fast-system</module>
 	</modules>
 
 	<dependencies>

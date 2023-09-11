@@ -16,11 +16,16 @@
 	<artifactId>fast-system</artifactId>
 	<version>1.0.0</version>
 	<name>fast-system</name>
-	<description>系统模块：用户信息、字典、配置、权限...</description>
+
+	<description>系统模块</description>
 
 
 	<dependencies>
-
+		<dependency>
+			<groupId>com.fast.cloud</groupId>
+			<artifactId>component-mybatis-plus</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 
 
 	</dependencies>
