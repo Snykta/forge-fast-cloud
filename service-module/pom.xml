@@ -30,6 +30,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fast.cloud</groupId>
+			<artifactId>component-basic-web</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 
