@@ -55,7 +55,7 @@
 			<id>prod</id>
 			<properties>
 				<profile.active>prod</profile.active>
-				<app.swagger.enable>true</app.swagger.enable>
+				<app.swagger.enable>false</app.swagger.enable>
 
 			</properties>
 		</profile>
