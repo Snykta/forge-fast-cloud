@@ -1,0 +1,14 @@
+feign:
+  httpclient:
+    connection-timeout: 600000
+    connection-timer-repeat: 601000
+  client:
+    config:
+      default:
+        connect-timeout: 600000
+        read-timeout: 600000
+        logger-level: basic
+
+
+
+

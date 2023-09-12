@@ -36,7 +36,7 @@
 		<spring-boot-admin-service.version>2.7.7</spring-boot-admin-service.version>
 		<mybatis-plus.version>3.5.2</mybatis-plus.version>
 		<spring-druid.version>1.2.16</spring-druid.version>
-
+		<ok-http3.version>4.9.1</ok-http3.version>
 	</properties>
 
 
@@ -156,6 +156,13 @@
 				<artifactId>druid-spring-boot-starter</artifactId>
 				<version>${spring-druid.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>${ok-http3.version}</version>
+			</dependency>
+
 
 
 		</dependencies>
