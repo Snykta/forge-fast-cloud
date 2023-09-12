@@ -37,6 +37,7 @@
 		<mybatis-plus.version>3.5.2</mybatis-plus.version>
 		<spring-druid.version>1.2.16</spring-druid.version>
 		<ok-http3.version>4.9.1</ok-http3.version>
+		<knife4j-api.version>4.3.0</knife4j-api.version>
 	</properties>
 
 
@@ -46,6 +47,7 @@
 			<properties>
 				<profile.active>dev</profile.active>
 				<app.swagger.enable>true</app.swagger.enable>
+				<swagger.base.package>com.fast.start</swagger.base.package>
 			</properties>
 		</profile>
 
@@ -54,7 +56,7 @@
 			<properties>
 				<profile.active>prod</profile.active>
 				<app.swagger.enable>false</app.swagger.enable>
-
+				<swagger.base.package>com.fast.start</swagger.base.package>
 			</properties>
 		</profile>
 	</profiles>
@@ -163,6 +165,11 @@
 				<version>${ok-http3.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+				<version>${knife4j-api.version}</version>
+			</dependency>
 
 
 		</dependencies>

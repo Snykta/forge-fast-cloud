@@ -11,5 +11,8 @@ server:
 app:
   swagger:
     enable: @app.swagger.enable@
+swagger:
+  base:
+    package: @swagger.base.package@
 dbType:
   name: mysql

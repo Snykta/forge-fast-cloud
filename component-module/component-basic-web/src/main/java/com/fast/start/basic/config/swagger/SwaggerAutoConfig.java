@@ -33,6 +33,12 @@ public class SwaggerAutoConfig {
     @Value("${spring.application.name}")
     private String groupName;
 
+    /**
+     * 扫描包路径
+     */
+    @Value("${swagger.base.package}")
+    private String swaggerBasePackage;
+
 
     @Bean
     public Docket createRestUrlApi() {
@@ -42,7 +48,7 @@ public class SwaggerAutoConfig {
                 .groupName(groupName)
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.fast.start"))
+                .apis(RequestHandlerSelectors.basePackage(swaggerBasePackage))
                 .paths(PathSelectors.any())
                 .build();
     }
