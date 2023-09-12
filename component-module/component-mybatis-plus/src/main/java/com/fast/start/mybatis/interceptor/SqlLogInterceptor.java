@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 @Intercepts({@Signature(type = StatementHandler.class, method = "query", args = {Statement.class, ResultHandler.class}),
         @Signature(type = StatementHandler.class, method = "update", args = {Statement.class}),
         @Signature(type = StatementHandler.class, method = "batch", args = {Statement.class})})
-public class SqlLogInterceptor  implements Interceptor {
+public class SqlLogInterceptor implements Interceptor {
 
     /**
      * 定义一个包含需要添加单引号括起来的参数类型集合。

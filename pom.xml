@@ -35,7 +35,6 @@
 		<spring-boot-admin-client.version>2.7.7</spring-boot-admin-client.version>
 		<spring-boot-admin-service.version>2.7.7</spring-boot-admin-service.version>
 		<mybatis-plus.version>3.5.2</mybatis-plus.version>
-		<spring-boot-jdbc.version>2.7.13</spring-boot-jdbc.version>
 		<spring-druid.version>1.2.16</spring-druid.version>
 
 	</properties>
@@ -149,13 +148,6 @@
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-boot-starter</artifactId>
 				<version>${mybatis-plus.version}</version>
-			</dependency>
-
-
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-jdbc</artifactId>
-				<version>${spring-boot-jdbc.version}</version>
 			</dependency>
 
 

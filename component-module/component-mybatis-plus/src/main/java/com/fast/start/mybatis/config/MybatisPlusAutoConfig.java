@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInt
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.fast.start.mybatis.interceptor.SqlLogInterceptor;
 import lombok.extern.slf4j.Slf4j;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,14 +25,14 @@ import org.springframework.context.annotation.Configuration;
 public class MybatisPlusAutoConfig implements DisposableBean {
 
     public MybatisPlusAutoConfig(){
-        log.info("初始化[MybatisPlus]模块");
+        log.info("初始化[MybatisPlus]模块...");
     }
 
     /**
      * 配置模块名
      */
-    @Value("${mybatis.dbType.name}")
-    private String dbTypeName;
+    @Value("${dbType.name:#{null}}")
+    private String dbType;
 
 
     /**
@@ -45,11 +46,11 @@ public class MybatisPlusAutoConfig implements DisposableBean {
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
-        if (StrUtil.isEmpty(dbTypeName)) {
-            throw new RuntimeException("模块：[" + appName + "] 没有配置具体数据库类型");
+        if (StrUtil.isEmpty(dbType)) {
+            throw new RuntimeException("模块：[" + appName + "] 没有配置数据库类型");
         }
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.getDbType(dbTypeName)));// 分页插件
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.getDbType(dbType)));// 分页插件
         interceptor.addInnerInterceptor(new OptimisticLockerInnerInterceptor());// 乐观锁插件
         return interceptor;
     }
@@ -57,6 +58,6 @@ public class MybatisPlusAutoConfig implements DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-        log.info("关闭[MybatisPlus]模块");
+        log.info("关闭[MybatisPlus]模块...");
     }
 }

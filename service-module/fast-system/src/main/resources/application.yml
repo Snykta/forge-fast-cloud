@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: fast-system
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT+8
+      username: root
+      password: 123456
+server:
+  port: 8081
+app:
+  swagger:
+    enable: @app.swagger.enable@
+dbType:
+  name: mysql
