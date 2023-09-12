@@ -13,15 +13,16 @@ spring:
         stat:
           log-slow-sql: true
           slow-sql-millis: 2000
+      web-stat-filter:
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
       stat-view-servlet:
         allow: null
         url-pattern: /druid/*
         reset-enable: false
         login-username: admin
         login-password: F&8%*Ak+
-      web-stat-filter:
-        url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        enabled: true
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
