@@ -47,7 +47,6 @@
 			<artifactId>mysql-connector-j</artifactId>
 		</dependency>
 
-
 	</dependencies>
 
 </project>

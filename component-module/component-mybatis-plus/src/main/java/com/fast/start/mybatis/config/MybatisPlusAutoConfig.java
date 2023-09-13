@@ -20,10 +20,10 @@ import org.springframework.context.annotation.PropertySource;
 
 @Slf4j
 @Configuration
-@PropertySource("classpath:/config/application.yml")
+@PropertySource("classpath:config/application-mybatis.properties")
 public class MybatisPlusAutoConfig implements DisposableBean {
 
-    public MybatisPlusAutoConfig(){
+    public MybatisPlusAutoConfig() {
         log.info("初始化[MybatisPlus]模块...");
     }
 
