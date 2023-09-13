@@ -6,7 +6,7 @@
 
 
 	<parent>
-		<groupId>com.fast.cloud</groupId>
+		<groupId>com.fast</groupId>
 		<artifactId>service-module</artifactId>
 		<version>1.0.0</version>
 	</parent>
@@ -21,10 +21,15 @@
 
 
 	<dependencies>
+
 		<dependency>
-			<groupId>com.fast.cloud</groupId>
+			<groupId>com.fast</groupId>
+			<artifactId>component-basic-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fast</groupId>
 			<artifactId>component-mybatis-plus</artifactId>
-			<version>1.0.0</version>
 		</dependency>
 
 
