@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
     <springProperty scope="context" name="appFileName" source="spring.application.name" defaultValue="defaultName"/>
     <property name="FILE_ERROR_PATTERN"
               value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} %file:%line: %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
@@ -27,7 +27,7 @@
         <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
-            <FileNamePattern>./logs/${appFileName}-log/info.created_on_%d{yyyy-MM-dd HH:mm:ss.SSS}.part_%i.log</FileNamePattern>
+            <FileNamePattern>fast-cloud-logs/${appFileName}-log/info.created_on_%d{yyyy-MM-dd HH:mm:ss}.part_%i.log</FileNamePattern>
             <!--只保留最近90天的日志-->
             <maxHistory>90</maxHistory>
             <!--用来指定日志文件的上限大小，那么到了这个值，就会删除旧的日志-->
@@ -51,7 +51,7 @@
         <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
-            <FileNamePattern>./logs/${appFileName}-log/error.created_on_%d{yyyy-MM-dd HH:mm:ss.SSS}.part_%i.log</FileNamePattern>
+            <FileNamePattern>fast-cloud-logs/${appFileName}-log/error.created_on_%d{yyyy-MM-dd HH:mm:ss}.part_%i.log</FileNamePattern>
             <!--只保留最近90天的日志-->
             <maxHistory>90</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">

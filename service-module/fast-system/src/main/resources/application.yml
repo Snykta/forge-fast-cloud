@@ -2,8 +2,7 @@ spring:
   application:
     name: fast-system
   datasource:
-    druid:
-      url: jdbc:mysql://127.0.0.1:3306/demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT+8
+      url: jdbc:mysql://192.168.93.27:3306/fast_cloud_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai
       username: root
       password: 123456
 server:
@@ -14,5 +13,3 @@ app:
 swagger:
   base:
     package: @swagger.base.package@
-dbType:
-  name: mysql

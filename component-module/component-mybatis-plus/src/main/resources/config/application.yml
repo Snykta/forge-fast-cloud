@@ -1,5 +1,7 @@
 spring:
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
     druid:
       # 数据库连接池的初始大小
       initial-size: 3
