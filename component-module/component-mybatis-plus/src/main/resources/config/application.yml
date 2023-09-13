@@ -1,39 +1,63 @@
 spring:
   datasource:
     druid:
+      # 数据库连接池的初始大小
       initial-size: 3
+      # 数据库连接池的最小空闲连接数
       min-idle: 3
+      # 数据库连接池的最大活跃连接数
       max-active: 50
+      # 从连接池中获取连接时是否进行验证
       test-on-borrow: true
+      # 验证连接的查询语句
       validation-query: SELECT 1
+      # Druid的过滤器，包括stat和wall
       filters: stat,wall
+      # 连接属性配置
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 获取连接的最大等待时间
       max-wait: 5000
       filter:
         stat:
+          # 是否开启慢SQL日志
           log-slow-sql: true
-          slow-sql-millis: 2000
+          # 慢SQL的阈值，单位为毫秒
+          slow-sql-millis: 5000
       web-stat-filter:
+        # WebStatFilter的URL匹配模式
         url-pattern: /*
+        # 排除的URL模式，不进行统计
         exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
       stat-view-servlet:
+        # 是否允许访问Druid的监控页面，默认为null，表示允许所有IP访问
         allow: null
+        # Druid监控页面的URL匹配模式
         url-pattern: /druid/*
+        # 是否允许重置监控统计信息
         reset-enable: false
+        # 登录监控页面的用户名
         login-username: admin
+        # 登录监控页面的密码
         login-password: F&8%*Ak+
+        # 是否启用Druid的监控功能
         enabled: true
 
 mybatis-plus:
+  # Mapper XML 文件的位置，使用通配符匹配
   mapper-locations: classpath*:mapper/**/*.xml
+  # 实体类的包路径，用于自动扫描注册别名
   type-aliases-package: com.fast.start
   global-config:
     # 数据库相关配置
     db-config:
       #驼峰下划线转换
       table-underline: true
+    # 是否显示 MyBatis-Plus 的 Banner
     banner: false
   configuration:
+    # 是否开启下划线转驼峰命名规则
     map-underscore-to-camel-case: true
+    # 是否开启缓存
     cache-enabled: true
+    # 一级缓存作用域，默认为 statement，可选值为 session 或 statement(不开启)
     local-cache-scope: statement
