@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.fast.start.mybatis.config.MybatisPlusAutoConfig,\
-  com.fast.start.mybatis.interceptor.SqlLogInterceptor
+  com.fast.start.mybatis.interceptor.SqlLogInterceptor,\
+  com.fast.start.mybatis.config.gen.AutoConvertGenerator
   
