@@ -28,7 +28,7 @@ public @interface RateLimiter {
     @AliasFor("value") long max() default DEFAULT_REQUEST;
 
     /**
-     * 限流key
+     * 限流key（如果没有指定则使用系统默认Key）
      */
     String key() default "";
 

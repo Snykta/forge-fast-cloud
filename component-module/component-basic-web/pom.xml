@@ -14,9 +14,18 @@
 	<version>1.0.0</version>
 	<name>component-basic-web</name>
 
-	<description>web基础通用配置，如果是Web项目则都可以引用此包，此包默认引入Redis</description>
+	<description>
+		web基础通用配置，如果是Web项目则都可以引用此包
+		PS: 如需要限流注解，请单独在各自子项目中引入component-redis 依赖
+	</description>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -73,9 +82,11 @@
 		</dependency>
 
 
+		<!--<optional>true</optional> 此Redis依赖不向下传递，需要按需引入-->
 		<dependency>
 			<groupId>com.fast</groupId>
 			<artifactId>component-redis</artifactId>
+			<optional>true</optional>
 		</dependency>
 
 

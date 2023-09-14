@@ -33,6 +33,12 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>com.fast</groupId>
+			<artifactId>component-redis</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 

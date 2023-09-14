@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
 @RequestMapping
 public class TestController {
+
 
     @GetMapping("/hello")
     public String hello(){
@@ -22,6 +24,7 @@ public class TestController {
         System.out.println(1/0);
         return "hello-system";
     }
+
 
     @GetMapping("/hello3")
     public String hello3(String aa){

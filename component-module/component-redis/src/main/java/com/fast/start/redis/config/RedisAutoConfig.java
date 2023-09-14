@@ -10,6 +10,7 @@ import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -30,6 +31,7 @@ import org.springframework.scripting.support.ResourceScriptSource;
 @EnableCaching
 @AutoConfigureBefore(RedisAutoConfiguration.class)
 @ConditionalOnClass({StringRedisTemplate.class, RedisScript.class, RedisTemplate.class})
+@PropertySource("classpath:config/application-redis.properties")
 public class RedisAutoConfig extends CachingConfigurerSupport implements DisposableBean {
 
 
