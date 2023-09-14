@@ -36,7 +36,7 @@ public class SwaggerAutoConfig {
     /**
      * 扫描包路径
      */
-    @Value("${swagger.base.package}")
+    @Value("${app.swagger.package}")
     private String swaggerBasePackage;
 
 

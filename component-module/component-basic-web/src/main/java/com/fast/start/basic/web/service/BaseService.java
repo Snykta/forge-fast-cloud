@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class BaseService {
 
-    @Value("${app.debug}")
-    public Boolean appDebug;
+    @Value("${app.profile}")
+    public String appProfile;
 
 
 
