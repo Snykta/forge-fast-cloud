@@ -5,8 +5,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.fast.start.basic.utils.SpringContextUtil,\
   com.fast.start.basic.config.swagger.SwaggerAutoConfig,\
   com.fast.start.basic.handler.GlobalExceptionHandler,\
-  com.fast.start.basic.aspect.RateLimiterAspect,\
-  com.fast.start.basic.config.LocalFolderConfig
+  com.fast.start.basic.aspect.RateLimiterAspect
 
 
 
