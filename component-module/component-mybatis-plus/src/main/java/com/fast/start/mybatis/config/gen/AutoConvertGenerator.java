@@ -1,6 +1,7 @@
 package com.fast.start.mybatis.config.gen;
 
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.setting.dialect.Props;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -37,21 +38,24 @@ public class AutoConvertGenerator {
      * @param tableName 表名 多个用英文,分割
      */
     public void doGeneration(String tableName) {
-        DataSourceConfig.Builder dataSourceConfig =
-                new DataSourceConfig.Builder(dbUrl, dbUserName, dbPassWord)
-                        .dbQuery(new MySqlQuery())
-                        .typeConvert(new GenSqlTypeConvert());
-
+        System.out.println("............根据表结构开始自动生成代码 [controller dto entity dao service]............");
+        Props props = new Props("application.properties", "UTF-8");
+        dbUrl = props.getStr("spring.datasource.url");
         if (StrUtil.isEmpty(dbUrl)) {
-            log.error("数据库连接地址为空！");
+            log.error("数据库连接地址为空，生成失败！");
             return;
         }
-
-        System.out.println(String.format("当前数据库连接地址为：%s \r\n 是否继续[y/n]？", dbUrl));
+        System.out.println(String.format("当前数据库连接地址为：%s \n是否继续[y/n]？", dbUrl));
         Scanner sc = new Scanner(System.in);
         if (!StrUtil.equals(sc.nextLine(), "y", true)) {
             return;
         }
+
+
+        DataSourceConfig.Builder dataSourceConfig = new DataSourceConfig.Builder(dbUrl, "root", "123456")
+                        .dbQuery(new MySqlQuery())
+                        .typeConvert(new GenSqlTypeConvert());
+
 
         FastAutoGenerator fastAutoGenerator = FastAutoGenerator.create(dataSourceConfig);
 
@@ -64,7 +68,7 @@ public class AutoConvertGenerator {
 
         fastAutoGenerator.packageConfig(builder -> {
             builder.entity("entity")//实体类包名
-                    .parent("com.fast.start.system") // 父包名。不能为空
+                    .parent("com.fast.start.system") // 父包名，不能为空
                     .controller("controller")// 控制层包名
                     .mapper("dao") // mapper层包名
                     .other("dto") // 生成dto目录 可不用
