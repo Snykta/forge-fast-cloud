@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.fast</groupId>
+	<groupId>com.snykta</groupId>
 	<artifactId>fast-start-cloud</artifactId>
 	<version>1.0.0</version>
 
@@ -80,22 +80,22 @@
 
 			<!--自定义组件-->
 			<dependency>
-				<groupId>com.fast</groupId>
+				<groupId>com.snykta</groupId>
 				<artifactId>component-basic-web</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.fast</groupId>
+				<groupId>com.snykta</groupId>
 				<artifactId>component-feign</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.fast</groupId>
+				<groupId>com.snykta</groupId>
 				<artifactId>component-mybatis-plus</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.fast</groupId>
+				<groupId>com.snykta</groupId>
 				<artifactId>component-redis</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
@@ -285,7 +285,7 @@
 	<repositories>
 		<repository>
 			<id>public</id>
-			<name>aliyun nexus</name>
+			<name>AliYun nexus</name>
 			<url>https://maven.aliyun.com/repository/public</url>
 			<releases>
 				<enabled>true</enabled>
@@ -304,7 +304,7 @@
 	<pluginRepositories>
 		<pluginRepository>
 			<id>public</id>
-			<name>aliyun nexus</name>
+			<name>AliYun nexus</name>
 			<url>https://maven.aliyun.com/repository/public</url>
 			<releases>
 				<enabled>true</enabled>
