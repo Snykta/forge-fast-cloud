@@ -59,6 +59,10 @@
 				<redis.db>2</redis.db>
 
 			</properties>
+			<!--默认开发环境生效-->
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 
 		<profile>
