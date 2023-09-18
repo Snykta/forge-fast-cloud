@@ -1,7 +1,9 @@
 package ${package.Other};
 
 <#list table.importPackages as pkg>
-    import ${pkg};
+    <#if pkg?index_of("com.baomidou.mybatisplus") != 0>
+import ${pkg};
+    </#if>
 </#list>
 
 import lombok.Data;
@@ -24,8 +26,12 @@ private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
 
+    /**
+    * ${field.comment}
+    */
     @ApiModelProperty("${field.comment}")
     private ${field.propertyType} ${field.propertyName};
+
 </#list>
 <#------------  END 字段循环遍历  ---------->
 }

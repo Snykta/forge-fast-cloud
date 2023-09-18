@@ -1,46 +1,37 @@
-package com.fast.start.mybatis.config.gen;
+package com.fast.start.mybatis.gen;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.dialect.Props;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.FastAutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.querys.MySqlQuery;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-@Component
+
 @Slf4j
 public class AutoConvertGenerator {
-
-
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
-
-    @Value("${spring.datasource.username}")
-    private String dbUserName;
-
-    @Value("${spring.datasource.password}")
-    private String dbPassWord;
-
 
     /**
      * 根据表名生成相应结构代码
      *
-     * @param tableName 表名 多个用英文,分割
+     * @history
      */
-    public void doGeneration(String tableName) {
+    public static void doGeneration() {
+        Props applicationProps = new Props("application.properties", "UTF-8");
+        // 数据库地址
+        String dbUrl = applicationProps.getStr("spring.datasource.url");
+        String dbUserName = applicationProps.getStr("spring.datasource.username");
+        String dbPassWord = applicationProps.getStr("spring.datasource.password");
         System.out.println("............根据表结构开始自动生成代码 [controller dto entity dao service]............");
-        Props props = new Props("application.properties", "UTF-8");
-        dbUrl = props.getStr("spring.datasource.url");
         if (StrUtil.isEmpty(dbUrl)) {
             log.error("数据库连接地址为空，生成失败！");
             return;
@@ -48,22 +39,38 @@ public class AutoConvertGenerator {
         System.out.println(String.format("当前数据库连接地址为：%s \n是否继续[y/n]？", dbUrl));
         Scanner sc = new Scanner(System.in);
         if (!StrUtil.equals(sc.nextLine(), "y", true)) {
+            log.error("生成程序已终止.");
             return;
         }
 
+        System.out.println("请输入要生成的表名称，多个表名称请用英文,分割，输入完毕按回车进入下一步");
 
-        DataSourceConfig.Builder dataSourceConfig = new DataSourceConfig.Builder(dbUrl, "root", "123456")
-                        .dbQuery(new MySqlQuery())
-                        .typeConvert(new GenSqlTypeConvert());
+        String tableName = sc.nextLine();
+        if (StrUtil.isEmpty(tableName)) {
+            log.error("输入表名称为空，生成程序已终止.");
+            return;
+        }
+
+        String codePath = FileUtil.getAbsolutePath(System.getProperty("user.dir") + "/src/main/java");
+        String xmlPath = FileUtil.getAbsolutePath(System.getProperty("user.dir") + "/src/main/resources/mapper");
+
+        System.out.println(String.format("当前要生成的表名为：[%s]\n代码生成目录为：[%s]\nmapperXML生成目录为：[%s]", tableName, codePath, xmlPath));
+        System.out.println("是否继续[y/n]？");
+        if (!StrUtil.equals(sc.nextLine(), "y", true)) {
+            log.error("生成程序已终止.");
+            return;
+        }
+
+        DataSourceConfig.Builder dataSourceConfig = new DataSourceConfig.Builder(dbUrl, dbUserName, dbPassWord)
+                        .dbQuery(new MySqlQuery());
 
 
         FastAutoGenerator fastAutoGenerator = FastAutoGenerator.create(dataSourceConfig);
 
         fastAutoGenerator.globalConfig(builder -> {
             builder.author("Snykta")
-                    //.enableSwagger() // 启用swagger
                     .disableOpenDir() // 禁止打开输出目录
-                    .outputDir(System.getProperty("user.dir") + "/src/main/java"); // 指定输出目录
+                    .outputDir(codePath); // 指定输出目录
         });
 
         fastAutoGenerator.packageConfig(builder -> {
@@ -74,7 +81,7 @@ public class AutoConvertGenerator {
                     .other("dto") // 生成dto目录 可不用
                     .service("service") // service层包名
                     .serviceImpl("service.impl") // service实现类包名
-                    .pathInfo(Collections.singletonMap(OutputFile.xml, System.getProperty("user.dir") + "/src/main/resources/mapper")); // 自定义mapper.xml文件输出目录
+                    .pathInfo(Collections.singletonMap(OutputFile.xml, xmlPath)); // 自定义mapper.xml文件输出目录
         });
 
 

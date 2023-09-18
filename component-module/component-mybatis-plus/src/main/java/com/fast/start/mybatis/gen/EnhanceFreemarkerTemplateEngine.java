@@ -1,4 +1,4 @@
-package com.fast.start.mybatis.config.gen;
+package com.fast.start.mybatis.gen;
 
 import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import java.io.File;
 import java.util.Map;
 
+/**
+ * 自定义模板
+ */
 public class EnhanceFreemarkerTemplateEngine  extends FreemarkerTemplateEngine {
 
     @Override
