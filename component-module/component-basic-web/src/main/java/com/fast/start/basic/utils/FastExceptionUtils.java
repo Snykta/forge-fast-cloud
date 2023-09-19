@@ -1,11 +1,13 @@
 package com.fast.start.basic.utils;
 
+import cn.hutool.core.exceptions.ExceptionUtil;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class FastExceptionUtils {
+public class FastExceptionUtils extends ExceptionUtil {
 
 
     public static String toString(Exception ex) {
