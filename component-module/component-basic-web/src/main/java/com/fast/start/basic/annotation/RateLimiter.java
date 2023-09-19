@@ -7,7 +7,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
- * 限流注解
+ * 限流注解 使用此注解需要在实际项目中引入 component-redis 否则此注解无效
+ *
  * </p>
  *
  */
