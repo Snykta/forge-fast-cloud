@@ -51,10 +51,18 @@ public class AutoConvertGenerator {
             return;
         }
 
+        System.out.println("请输controller、dao、serviced等包的父包名，输入完毕按回车进入下一步");
+
+        String parentPack = sc.nextLine();
+        if (StrUtil.isEmpty(parentPack)) {
+            log.error("输入父包名为空，生成程序已终止.");
+            return;
+        }
+
         String codePath = FileUtil.getAbsolutePath(System.getProperty("user.dir") + "/src/main/java");
         String xmlPath = FileUtil.getAbsolutePath(System.getProperty("user.dir") + "/src/main/resources/mapper");
 
-        System.out.println(String.format("当前要生成的表名为：[%s]\n代码生成目录为：[%s]\nmapperXML生成目录为：[%s]", tableName, codePath, xmlPath));
+        System.out.println(String.format("当前要生成的表名为：[%s]\n代码生成目录为：[%s]\nmapperXML生成目录为：[%s]\n父包名为：[%s]", tableName, codePath, xmlPath, parentPack));
         System.out.println("是否继续[y/n]？");
         if (!StrUtil.equals(sc.nextLine(), "y", true)) {
             log.error("生成程序已终止.");
@@ -75,7 +83,7 @@ public class AutoConvertGenerator {
 
         fastAutoGenerator.packageConfig(builder -> {
             builder.entity("entity")//实体类包名
-                    .parent("com.fast.start.system") // 父包名，不能为空
+                    .parent(parentPack) // 父包名，不能为空
                     .controller("controller")// 控制层包名
                     .mapper("dao") // mapper层包名
                     .other("dto") // 生成dto目录 可不用
@@ -98,7 +106,7 @@ public class AutoConvertGenerator {
 
                     // Controller配置
                     .controllerBuilder()
-                    .superClass("com.fast.start.basic.web.controller.BaseController") // 设置父类
+                    .superClass("com.fast.start.basic.web.controller.BaseController") // 设置Controller父类
 
                     // Mapper配置
                     .mapperBuilder()
@@ -110,7 +118,7 @@ public class AutoConvertGenerator {
 
                     // Service配置
                     .serviceBuilder()
-                    .formatServiceFileName("%sService")//格式化 service 接口文件名称
+                    //.formatServiceFileName("%sService")//格式化 service 接口文件名称
                     .formatServiceImplFileName("%sServiceImpl")//格式化 service 接口文件名称
                     .controllerBuilder()
                     .enableRestStyle();

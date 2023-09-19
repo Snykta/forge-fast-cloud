@@ -6,7 +6,7 @@ import com.fast.start.basic.exception.ServiceException;
 import com.fast.start.basic.utils.FastExceptionUtils;
 import com.fast.start.basic.utils.FastObjUtil;
 import com.fast.start.basic.utils.FastStrUtil;
-import com.fast.start.basic.web.utils.HttpStatusCode;
+import com.fast.start.basic.web.utils.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -115,7 +115,7 @@ public class LogInfoAspect {
             }
             sbLog.append("\n\r|--错误内容：" + e + "\n\r" + FastExceptionUtils.getStackMsg(e));
             success = false;
-            throw new ServiceException(errorMsg, HttpStatusCode.ERROR);
+            throw new ServiceException(errorMsg, ResultCode.ERROR);
         } finally {
             stopWatch.stop();
             Double totalTimeSeconds = stopWatch.getTotalTimeSeconds();

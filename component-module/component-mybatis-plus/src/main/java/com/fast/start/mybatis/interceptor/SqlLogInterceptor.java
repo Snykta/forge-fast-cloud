@@ -89,7 +89,7 @@ public class SqlLogInterceptor implements Interceptor {
             // 获取 SQL 语句
             String sql = this.getSql(target);
             // 打印日志
-            log.warn("SQL执行监控->执行结果：[{}]，耗时：[{} 秒]，影响行数：[{}]，SQL语句：[{}]", status, (sqlCost / (1000)), lines, sql);
+            log.info("SQL执行监控->执行结果：[{}]，耗时：[{} 秒]，影响行数：[{}]，SQL语句：[{}]", status, (sqlCost / (1000)), lines, sql);
         }
     }
 

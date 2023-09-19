@@ -1,6 +1,6 @@
 package com.fast.start.basic.web.utils;
 
-public class HttpStatusCode {
+public class ResultCode {
 
 
     /**
