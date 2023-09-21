@@ -5,6 +5,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
+/**
+ * 统一返回消息体
+ * @param <T>
+ */
 @Data
 @NoArgsConstructor
 public class Ret<T> implements Serializable {

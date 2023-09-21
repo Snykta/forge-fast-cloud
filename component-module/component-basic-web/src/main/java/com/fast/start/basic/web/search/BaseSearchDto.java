@@ -1,16 +1,18 @@
-package com.fast.start.basic.web.dto;
+package com.fast.start.basic.web.search;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import java.io.Serializable;
 
-@ApiModel("基础分页查询父类")
+
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class PageSearchDto extends SearchDto implements Serializable {
+public class BaseSearchDto implements Serializable {
+
+    /**
+     * 关键字
+     */
+    @ApiModelProperty("关键字")
+    private String keyword;
 
     /**
      * 每页记录数

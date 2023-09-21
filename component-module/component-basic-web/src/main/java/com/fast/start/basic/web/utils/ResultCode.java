@@ -1,7 +1,9 @@
 package com.fast.start.basic.web.utils;
 
+/**
+ * 状态码
+ */
 public class ResultCode {
-
 
     /**
      * 成功

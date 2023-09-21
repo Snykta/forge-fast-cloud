@@ -10,32 +10,27 @@
     </parent>
 
 
-    <artifactId>fast-auth</artifactId>
+    <artifactId>fast-generator</artifactId>
     <version>1.0.0</version>
-    <name>fast-auth</name>
+    <name>fast-generator</name>
 
-    <description>微服务认证授权</description>
+    <description>自动生成代码</description>
 
 
     <dependencies>
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <groupId>com.snykta</groupId>
+            <artifactId>component-basic-web</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.snykta</groupId>
-            <artifactId>component-basic-web</artifactId>
+            <artifactId>component-mybatis-plus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
         </dependency>
 
     </dependencies>

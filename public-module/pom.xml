@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>com.snykta</groupId>
-		<artifactId>fast-start-cloud</artifactId>
-		<version>1.0.0</version>
-	</parent>
+    <parent>
+        <groupId>com.snykta</groupId>
+        <artifactId>fast-start-cloud</artifactId>
+        <version>1.0.0</version>
+    </parent>
 
-	<artifactId>public-module</artifactId>
-	<name>public-module</name>
-	<packaging>pom</packaging>
+    <artifactId>public-module</artifactId>
+    <name>public-module</name>
+    <packaging>pom</packaging>
 
-	<description>
-		public-module：公共服务组件
-	</description>
+    <description>
+        public-module：公共服务组件
+    </description>
 
 
-	<!--模块-->
-	<modules>
-		<module>fast-auth</module>
-		<module>fast-gateway</module>
-	</modules>
+    <!--模块-->
+    <modules>
+        <module>fast-auth</module>
+        <module>fast-gateway</module>
+    </modules>
 
 </project>

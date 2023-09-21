@@ -32,11 +32,10 @@
 		<spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
 		<spring-cloud-openfeign.version>3.1.8</spring-cloud-openfeign.version>
 		<hutool.version>5.8.15</hutool.version>
-		<fastjson.version>2.0.39</fastjson.version>
 		<spring-boot-admin-client.version>2.7.7</spring-boot-admin-client.version>
 		<spring-boot-admin-service.version>2.7.7</spring-boot-admin-service.version>
-		<mybatis-plus.version>3.5.2</mybatis-plus.version>
-		<mybatis-plus-gen.version>3.5.2</mybatis-plus-gen.version>
+		<mybatis-plus.version>3.5.3</mybatis-plus.version>
+		<mybatis-plus-gen.version>3.5.3</mybatis-plus-gen.version>
 		<spring-druid.version>1.2.16</spring-druid.version>
 		<ok-http3.version>4.9.1</ok-http3.version>
 		<knife4j-api.version>4.3.0</knife4j-api.version>
@@ -160,12 +159,6 @@
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-openfeign</artifactId>
 				<version>${spring-cloud-openfeign.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.alibaba.fastjson2</groupId>
-				<artifactId>fastjson2</artifactId>
-				<version>${fastjson.version}</version>
 			</dependency>
 
 
