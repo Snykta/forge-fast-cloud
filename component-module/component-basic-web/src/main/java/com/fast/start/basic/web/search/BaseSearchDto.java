@@ -11,9 +11,9 @@ import java.io.Serializable;
 public class BaseSearchDto implements Serializable {
 
     /**
-     * 关键字
+     * 搜索通用关键字
      */
-    @ApiModelProperty("关键字")
+    @ApiModelProperty("搜索通用关键字")
     private String keyword;
 
     /**
