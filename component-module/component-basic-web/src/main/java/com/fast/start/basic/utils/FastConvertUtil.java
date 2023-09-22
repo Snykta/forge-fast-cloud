@@ -206,9 +206,9 @@ public class FastConvertUtil extends Convert {
      * @return
      */
     public static <E, T> PageDto<T> toPageDto(E page, Class<T> clazz){
-        // 目前默认只转换MybatisPlus
+        // 目前默认只转换 MybatisPlus
         MybatisPlusPage mybatisPlusPage = FastBeanUtil.copyProperties(page, MybatisPlusPage.class);
-
+        // 未来如果使用其他分页，比如jpa，则使用 SpringDataJpaPage
         return PageDto.<T>builder().pageSize(mybatisPlusPage.getSize())
                 .pageNum(mybatisPlusPage.getCurrent())
                 .totalCount(mybatisPlusPage.getTotal())
