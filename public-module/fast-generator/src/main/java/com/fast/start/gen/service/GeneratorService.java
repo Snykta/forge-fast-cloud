@@ -1,15 +1,14 @@
 package com.fast.start.gen.service;
 
 
-
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.plugins.pagination.PageDTO;
 import com.fast.start.basic.utils.FastConvertUtil;
 import com.fast.start.basic.web.page.PageDto;
 import com.fast.start.gen.dto.ColumnDto;
 import com.fast.start.gen.dto.TableDto;
 import com.fast.start.gen.mapper.base.BaseGeneratorMapper;
 import com.fast.start.gen.dto.SearchDto;
+import com.fast.start.mybatis.page.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,10 +30,8 @@ public class GeneratorService {
      * @return
      */
     public PageDto<TableDto> queryPage(SearchDto searchDto) {
-        Page<TableDto> queryPage = baseGeneratorMapper.queryTableList(PageDTO.of(searchDto.getPageNum(), searchDto.getPageSize()), searchDto);
-        queryPage.setSearchCount(false);
+        Page<TableDto> queryPage = baseGeneratorMapper.queryTableList(PageRequest.of(searchDto.getPageNum(), searchDto.getPageSize()), searchDto);
         System.out.println(queryPage.getPages());
-
         return FastConvertUtil.toPageDto(queryPage, TableDto.class);
     }
 
