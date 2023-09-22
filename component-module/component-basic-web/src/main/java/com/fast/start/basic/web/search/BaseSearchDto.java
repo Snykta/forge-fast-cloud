@@ -4,7 +4,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.io.Serializable;
 
-
+/**
+ * 通用查询基类
+ */
 @Data
 public class BaseSearchDto implements Serializable {
 
