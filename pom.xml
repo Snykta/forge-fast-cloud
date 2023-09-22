@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.snykta</groupId>
-	<artifactId>fast-start-cloud</artifactId>
+	<artifactId>forge-fast-cloud</artifactId>
 	<version>1.0.0</version>
 
 	<packaging>pom</packaging>
 
-	<name>fast-start-cloud</name>
-	<description>fast-start-cloud 可快速开始的微服务框架</description>
+	<name>forge-fast-cloud</name>
+	<description>forge-fast-cloud 可快速开始的微服务框架</description>
 
 	<!--模块-->
 	<modules>
@@ -38,6 +38,7 @@
 		<spring-druid.version>1.2.16</spring-druid.version>
 		<ok-http3.version>4.9.1</ok-http3.version>
 		<knife4j-api.version>4.3.0</knife4j-api.version>
+		<apache.velocity.version>1.7</apache.velocity.version>
 	</properties>
 
 
@@ -47,7 +48,7 @@
 			<properties>
 				<profile.active>dev</profile.active>
 				<app.swagger.enable>true</app.swagger.enable>
-				<app.swagger.package>com.fast.start</app.swagger.package>
+				<app.swagger.package>com.snykta</app.swagger.package>
 				<mysql.url><![CDATA[jdbc:mysql://127.0.0.1:3306/fast_cloud_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai]]></mysql.url>
 				<mysql.username>root</mysql.username>
 				<mysql.password>123456</mysql.password>
@@ -80,25 +81,28 @@
 	<dependencyManagement>
 		<dependencies>
 
-			<!--自定义组件-->
+			<!--自定义组件：web核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-basic-web</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
 
+			<!--自定义组件：feign核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-feign</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
 
+			<!--自定义组件：mybatisPlus核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-mybatis-plus</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
 
+			<!--自定义组件：redis核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-redis</artifactId>
@@ -115,7 +119,7 @@
 				<scope>import</scope>
 			</dependency>
 
-			<!-- SpringCloud Alibaba 微服务 -->
+			<!-- SpringCloud AliBaBa 微服务 -->
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -133,30 +137,35 @@
 				<scope>import</scope>
 			</dependency>
 
+			<!--nacos服务注册组件-->
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
 				<version>${spring-cloud-alibaba.version}</version>
 			</dependency>
 
+			<!--微服务nacos配置监管-->
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 				<version>${spring-cloud-alibaba.version}</version>
 			</dependency>
 
+			<!--流控防护组件（限流、熔断降级..）-->
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
 				<version>${spring-cloud-alibaba.version}</version>
 			</dependency>
 
+			<!--工具类集合-->
 			<dependency>
 				<groupId>cn.hutool</groupId>
 				<artifactId>hutool-all</artifactId>
 				<version>${hutool.version}</version>
 			</dependency>
 
+			<!--跨服务请求feign-->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-openfeign</artifactId>
@@ -164,41 +173,53 @@
 			</dependency>
 
 
+			<!--springCloud微服务监控客户端-->
 			<dependency>
 				<groupId>de.codecentric</groupId>
 				<artifactId>spring-boot-admin-starter-client</artifactId>
 				<version>${spring-boot-admin-client.version}</version>
 			</dependency>
 
+			<!--springCloud微服务监控服务端-->
 			<dependency>
 				<groupId>de.codecentric</groupId>
 				<artifactId>spring-boot-admin-starter-server</artifactId>
 				<version>${spring-boot-admin-service.version}</version>
 			</dependency>
 
-
+			<!--mybatisPlus-->
 			<dependency>
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-boot-starter</artifactId>
 				<version>${mybatis-plus.version}</version>
 			</dependency>
 
+			<!--druid连接池-->
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>druid-spring-boot-starter</artifactId>
 				<version>${spring-druid.version}</version>
 			</dependency>
 
+			<!--OkHttp-->
 			<dependency>
 				<groupId>com.squareup.okhttp3</groupId>
 				<artifactId>okhttp</artifactId>
 				<version>${ok-http3.version}</version>
 			</dependency>
 
+			<!--自动生成API文档-->
 			<dependency>
 				<groupId>com.github.xiaoymin</groupId>
 				<artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
 				<version>${knife4j-api.version}</version>
+			</dependency>
+
+			<!--模板解析器-->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>${apache.velocity.version}</version>
 			</dependency>
 
 

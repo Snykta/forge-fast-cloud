@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.fast.start.gen.mapper.MySQLGeneratorMapper">
+<mapper namespace="com.snykta.gen.mapper.MySQLGeneratorMapper">
 
 
-	<resultMap id="resultTable" type="com.fast.start.gen.dto.TableDto">
+	<resultMap id="resultTable" type="com.snykta.gen.dto.TableDto">
 		<result column="table_name" property="tableName"/>
 		<result column="engine" property="engine"/>
 		<result column="table_comment" property="tableComment"/>
@@ -12,7 +12,7 @@
 	</resultMap>
 
 
-	<resultMap id="resultColumn" type="com.fast.start.gen.dto.ColumnDto">
+	<resultMap id="resultColumn" type="com.snykta.gen.dto.ColumnDto">
 		<result column="column_name" property="columnName"/>
 		<result column="data_type" property="dataType"/>
 		<result column="column_comment" property="columnComment"/>

@@ -5,7 +5,7 @@
 
 	<parent>
 		<groupId>com.snykta</groupId>
-		<artifactId>fast-start-cloud</artifactId>
+		<artifactId>forge-fast-cloud</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
@@ -17,7 +17,6 @@
 
 	<!--模块-->
 	<modules>
-		<module>fast-order</module>
 		<module>fast-system</module>
 	</modules>
 
