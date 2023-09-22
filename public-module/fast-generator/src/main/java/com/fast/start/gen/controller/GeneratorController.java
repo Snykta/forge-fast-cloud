@@ -1,38 +1,38 @@
-//package com.fast.start.gen.controller;
-//
-//import cn.hutool.core.io.IoUtil;
-//import com.fast.start.basic.web.utils.Ret;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestParam;
-//import org.springframework.web.bind.annotation.ResponseBody;
-//
-//import javax.annotation.Resource;
-//import javax.servlet.http.HttpServletResponse;
-//import java.io.IOException;
-//import java.util.Map;
-//
-///**
-// * 代码生成器
-// *
-// */
-//@Controller
-//@RequestMapping("/gen")
-//public class GeneratorController {
-////    @Resource
-////    private SysGeneratorService sysGeneratorService;
-//
-//    /**
-//     * 列表
-//     */
-//    @ResponseBody
-//    @RequestMapping("/list")
-//    public Ret<Void> list(@RequestParam Map<String, Object> params) {
-//        PageUtils pageUtil = sysGeneratorService.queryList(new Query(params));
-//
-//        return R.ok().put("page", pageUtil);
-//    }
-//
+
+package com.fast.start.gen.controller;
+
+import com.fast.start.basic.web.page.PageDto;
+import com.fast.start.basic.web.utils.Ret;
+import com.fast.start.gen.dto.SearchDto;
+import com.fast.start.gen.dto.TableDto;
+import com.fast.start.gen.service.GeneratorService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * 代码生成器
+ *
+ */
+@Controller
+@RequestMapping("/gen")
+public class GeneratorController {
+
+
+    private final GeneratorService sysGeneratorService;
+
+    public GeneratorController(GeneratorService sysGeneratorService) {
+        this.sysGeneratorService = sysGeneratorService;
+    }
+
+    /**
+     * 分页
+     */
+    @ResponseBody
+    @PostMapping("/queryPage")
+    public Ret<PageDto<TableDto>> queryPage(@RequestBody SearchDto searchDto) {
+        return Ret.success(sysGeneratorService.queryPage(searchDto));
+    }
+
 //    /**
 //     * 生成代码
 //     */
@@ -47,5 +47,4 @@
 //
 //        IoUtil.write(response.getOutputStream(), false, data);
 //    }
-//}
-//
+}

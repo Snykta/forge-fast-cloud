@@ -35,7 +35,6 @@
 		<spring-boot-admin-client.version>2.7.7</spring-boot-admin-client.version>
 		<spring-boot-admin-service.version>2.7.7</spring-boot-admin-service.version>
 		<mybatis-plus.version>3.5.3</mybatis-plus.version>
-		<mybatis-plus-gen.version>3.5.3</mybatis-plus-gen.version>
 		<spring-druid.version>1.2.16</spring-druid.version>
 		<ok-http3.version>4.9.1</ok-http3.version>
 		<knife4j-api.version>4.3.0</knife4j-api.version>
@@ -87,16 +86,19 @@
 				<artifactId>component-basic-web</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-feign</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-mybatis-plus</artifactId>
 				<version>${fast-start-cloud.version}</version>
 			</dependency>
+
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-redis</artifactId>
@@ -179,12 +181,6 @@
 				<groupId>com.baomidou</groupId>
 				<artifactId>mybatis-plus-boot-starter</artifactId>
 				<version>${mybatis-plus.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.baomidou</groupId>
-				<artifactId>mybatis-plus-generator</artifactId>
-				<version>${mybatis-plus-gen.version}</version>
 			</dependency>
 
 			<dependency>

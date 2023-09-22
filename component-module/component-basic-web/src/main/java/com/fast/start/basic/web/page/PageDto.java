@@ -30,22 +30,22 @@ public class PageDto<T> implements Serializable {
     /**
      * 每页记录数
      */
-    private Long pageSize;
+    private long pageSize;
 
     /**
      * 当前第几页
      */
-    private Long pageNum;
+    private long pageNum;
 
     /**
      * 总记录数
      */
-    private Long totalCount;
+    private long totalCount;
 
     /**
      * 总页数
      */
-    private Long totalPage;
+    private long totalPage;
 
 
 }

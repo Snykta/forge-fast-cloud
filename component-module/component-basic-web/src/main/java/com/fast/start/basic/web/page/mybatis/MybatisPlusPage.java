@@ -1,18 +1,18 @@
 package com.fast.start.basic.web.page.mybatis;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import lombok.Data;
 import java.util.List;
 
 
 /**
  *
+ * 适配器
+ *
  * mybatisPlus 分页结构体
  *
- * 所有属性来源为mybatisPlus自带的分页IPage类的属性
+ * 所有属性来源为mybatisPlus自带的分页 Page 类的属性
  *
  * 主要用于转换为 PageDto 使用
  *
@@ -21,8 +21,6 @@ import java.util.List;
  */
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class MybatisPlusPage {
 
     /**
@@ -49,5 +47,22 @@ public class MybatisPlusPage {
      * 数据集合
      */
     private List<Object> records;
+
+
+    /**
+     * 总页数
+     * @return
+     */
+    public long getPages() {
+        if (getSize() == 0) {
+            return 0L;
+        }
+        long pages = getTotal() / getSize();
+        if (getTotal() % getSize() != 0) {
+            pages++;
+        }
+        return pages;
+    }
+
 
 }
