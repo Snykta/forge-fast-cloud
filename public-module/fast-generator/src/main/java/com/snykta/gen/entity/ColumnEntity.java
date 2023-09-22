@@ -13,7 +13,7 @@ public class ColumnEntity {
     //属性名称(第一个字母大写)，如：user_name => UserName
     private String attrName;
     //属性名称(第一个字母小写)，如：user_name => userName
-    private String attrname;
+    private String attrNameSmall;
     //属性类型
     private String attrType;
     //auto_increment

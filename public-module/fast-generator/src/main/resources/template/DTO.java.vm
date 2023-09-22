@@ -24,7 +24,7 @@ public class ${className}DTO implements Serializable {
 
 #foreach ($column in $columns)
 	@ApiModelProperty(value = "$column.comments")
-	private $column.attrType $column.attrname;
+	private $column.attrType $column.attrNameSmall;
 
 #end
 

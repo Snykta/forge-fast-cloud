@@ -1,18 +1,25 @@
 package com.snykta.gen.utils;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.dialect.Props;
-import com.snykta.basic.web.utils.FastObjUtil;
-import com.snykta.basic.web.utils.FastStrUtil;
+import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.basic.web.utils.*;
 import com.snykta.gen.dto.ColumnDto;
 import com.snykta.gen.dto.TableDto;
 import com.snykta.gen.entity.ColumnEntity;
 import com.snykta.gen.entity.TableEntity;
+import org.apache.velocity.Template;
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 
 import java.io.File;
+import java.io.StringWriter;
+import java.text.DateFormat;
 import java.util.*;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -22,24 +29,7 @@ import java.util.zip.ZipOutputStream;
  */
 public class GenUtils {
 
-    public static List<String> getTemplates() {
-        List<String> templates = new ArrayList<String>();
-        templates.add("template/DTO.java.vm" );
-        templates.add("template/Entity.java.vm" );
-        templates.add("template/Dao.java.vm" );
-        templates.add("template/Dao.xml.vm" );
-        templates.add("template/Service.java.vm" );
-        templates.add("template/ServiceImpl.java.vm" );
-        templates.add("template/Controller.java.vm" );
-        templates.add("template/Excel.java.vm" );
-        templates.add("template/index.vue.vm" );
-        templates.add("template/add-or-update.vue.vm" );
-        templates.add("template/mysql.vm" );
-        templates.add("template/sqlserver.vm" );
-        templates.add("template/oracle.vm" );
-        templates.add("template/postgresql.vm" );
-        return templates;
-    }
+
 
     /**
      * 生成代码
@@ -55,9 +45,9 @@ public class GenUtils {
         tableEntity1.setTableName(tableDto.getTableName());
         tableEntity1.setComments(tableDto.getTableComment());
         //表名转换成Java类名
-        String className = tableToJava(tableDto.getTableName(), config.getStr("tablePrefix" ));
+        String className = tableToJava(tableDto.getTableName(), config.getStr("tablePrefix"));
         tableEntity1.setClassName(className);
-        tableEntity1.setClassname(FastStrUtil.lowerFirst(className));
+        tableEntity1.setClassNameSmall(FastStrUtil.lowerFirst(className));
 
         //列信息
         List<ColumnEntity> columnsEntityList = new ArrayList<>();
@@ -72,7 +62,7 @@ public class GenUtils {
             //列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
             columnEntity.setAttrName(attrName);
-            columnEntity.setAttrname(FastStrUtil.lowerFirst(attrName));
+            columnEntity.setAttrNameSmall(FastStrUtil.lowerFirst(attrName));
 
 
             // 列的数据类型，转换成Java类型
@@ -107,139 +97,79 @@ public class GenUtils {
 
 
 
+        // 封装模板数据
+        Map<String, Object> templateMap = new HashMap<>();
+        templateMap.put("tableName" , tableEntity1.getTableName());
+        templateMap.put("comments" , tableEntity1.getComments());
+        templateMap.put("pk" , tableEntity1.getPk());
+        templateMap.put("className" , tableEntity1.getClassName());
+        templateMap.put("classNameSmall" , tableEntity1.getClassNameSmall());
+        templateMap.put("pathName" , tableEntity1.getClassNameSmall().toLowerCase());
+        templateMap.put("columns" , tableEntity1.getColumns());
+        templateMap.put("hasBigDecimal" , hasBigDecimal);
+        templateMap.put("version" , config.getStr("version"));
+        templateMap.put("package" , config.getStr("package"));
+        templateMap.put("moduleName" , config.getStr("moduleName"));
+        templateMap.put("author" , config.getStr("author"));
+        templateMap.put("email" , config.getStr("email"));
+//        templateMap.put("datetime" , EyDateUtil.format(EyDateTimeUtil.now(), DatePattern.NORM_DATETIME_FORMAT));
+        templateMap.put("date" , EyDateUtil.format(EyDateTimeUtil.now(), DatePattern.NORM_DATE_FORMATTER));
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//        boolean hasBigDecimal = false;
-//
-//
-//
-//        //表信息
-//        TableEntity tableEntity1 = new TableEntity();
-////        tableEntity.setTableName(table.get("tableName" ));
-////        tableEntity.setComments(table.get("tableComment" ));
-////
-//
-//
-//        //表名转换成Java类名
-//        String className = tableToJava(table.getTableName(), config.getStr("tablePrefix"));
-//
-//        columnDtoList
-//
-//
-//
-//        tableEntity1.setClassName(className);
-//        tableEntity.setClassname(StringUtils.uncapitalize(className));
-//
-//        //列信息
-//        List<ColumnEntity> columnsList = new ArrayList<>();
-//        for (Map<String, String> column : columns) {
-//            ColumnEntity columnEntity = new ColumnEntity();
-//            columnEntity.setColumnName(column.get("columnName" ));
-//            columnEntity.setDataType(column.get("dataType" ));
-//            columnEntity.setComments(column.get("columnComment" ));
-//            columnEntity.setExtra(column.get("extra" ));
-//
-//            //列名转换成Java属性名
-//            String attrName = columnToJava(columnEntity.getColumnName());
-//            columnEntity.setAttrName(attrName);
-//            columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
-//
-//            //列的数据类型，转换成Java类型
-//            String attrType = config.getString(columnEntity.getDataType(), "unknowType" );
-//            columnEntity.setAttrType(attrType);
-//            if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
-//                hasBigDecimal = true;
-//            }
-//            //是否主键
-//            if ("PRI".equalsIgnoreCase(column.get("columnKey" )) && tableEntity.getPk() == null) {
-//                tableEntity.setPk(columnEntity);
-//            }
-//
-//            columnsList.add(columnEntity);
-//        }
-//        tableEntity.setColumns(columnsList);
-//
-//        //没主键，则第一个字段为主键
-//        if (tableEntity.getPk() == null) {
-//            tableEntity.setPk(tableEntity.getColumns().get(0));
-//        }
-//
-//        //设置velocity资源加载器
-//        Properties prop = new Properties();
-//        prop.put("file.resource.loader.class" , "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader" );
-//        Velocity.init(prop);
-//
-//        //封装模板数据
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("tableName" , tableEntity.getTableName());
-//        map.put("comments" , tableEntity.getComments());
-//        map.put("pk" , tableEntity.getPk());
-//        map.put("className" , tableEntity.getClassName());
-//        map.put("classname" , tableEntity.getClassname());
-//        map.put("pathName" , tableEntity.getClassname().toLowerCase());
-//        map.put("columns" , tableEntity.getColumns());
-//        map.put("hasBigDecimal" , hasBigDecimal);
-//        map.put("version" , config.getString("version" ));
-//        map.put("package" , config.getString("package" ));
-//        map.put("moduleName" , config.getString("moduleName" ));
-//        map.put("author" , config.getString("author" ));
-//        map.put("email" , config.getString("email" ));
-//        map.put("datetime" , DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-//        map.put("date" , DateUtils.format(new Date(), DateUtils.DATE_PATTERN));
-//
 //        for (int i = 0; i <= 10; i++) {
-//            map.put("id" + i, IdWorker.getId());
+//            templateMap.put("id" + i, EyIdUtil.getSnowflake());
 //        }
-//
-//        VelocityContext context = new VelocityContext(map);
-//
-//        //获取模板列表
-//        List<String> templates = getTemplates();
-//        for (String template : templates) {
-//            //渲染模板
-//            StringWriter sw = new StringWriter();
-//            Template tpl = Velocity.getTemplate(template, "UTF-8" );
-//            tpl.merge(context, sw);
-//
-//            try {
-//                //添加到zip
-//                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package" ), config.getString("moduleName" ))));
-//                IoUtil.writeUtf8(zip, false, sw.toString());
-//                zip.flush();
-//                IoUtil.close(sw);
-//                zip.closeEntry();
-//            } catch (IOException e) {
-//                throw new RenException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
-//            }
-//        }
+
+
+
+        VelocityContext context = new VelocityContext(templateMap);
+
+
+
+        //获取模板列表
+        List<String> templateList = getTemplates();
+
+
+        for (String template : templateList) {
+            //渲染模板
+            StringWriter sw = new StringWriter();
+            Template tpl = Velocity.getTemplate(template, "UTF-8");
+            tpl.merge(context, sw);
+
+            try {
+                //添加到zip
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity1.getClassName(), config.getStr("package"), config.getStr("moduleName"))));
+                IoUtil.writeUtf8(zip, false, sw.toString());
+                zip.flush();
+                IoUtil.close(sw);
+                zip.closeEntry();
+            } catch (Exception e) {
+                throw new ServiceException("渲染模板失败，表名：" + tableEntity1.getTableName(), e);
+            }
+        }
+
     }
 
+
+    /**
+     * 定义模板数据
+     * @return
+     */
+    private static List<String> getTemplates() {
+        List<String> templates = new ArrayList<>();
+        templates.add("template/DTO.java.vm" );
+        templates.add("template/Entity.java.vm" );
+        templates.add("template/Dao.java.vm" );
+        templates.add("template/Dao.xml.vm" );
+        templates.add("template/Service.java.vm" );
+        templates.add("template/ServiceImpl.java.vm" );
+        templates.add("template/Controller.java.vm" );
+        templates.add("template/Excel.java.vm" );
+
+        return templates;
+    }
 
     /**
      * 列名转换成Java属性名
@@ -313,31 +243,8 @@ public class GenUtils {
         if (template.contains("DTO.java.vm" )) {
             return packagePath + "dto" + File.separator + className + "DTO.java";
         }
-
-        if (template.contains("index.vue.vm" )) {
-            return "vue" + File.separator + "views" + File.separator + moduleName + File.separator + className.toLowerCase() + ".vue";
-        }
-
-        if (template.contains("add-or-update.vue.vm" )) {
-            return "vue" + File.separator + "views" + File.separator + moduleName + File.separator + className.toLowerCase() + "-add-or-update.vue";
-        }
-
-        if (template.contains("mysql.vm" )) {
-            return className.toLowerCase() + ".mysql.sql";
-        }
-
-        if (template.contains("oracle.vm" )) {
-            return className.toLowerCase() + ".oracle.sql";
-        }
-
-        if (template.contains("sqlserver.vm" )) {
-            return className.toLowerCase() + ".sqlserver.sql";
-        }
-
-        if (template.contains("postgresql.vm" )) {
-            return className.toLowerCase() + ".postgresql.sql";
-        }
-
-        return null;
+        throw new ServiceException("渲染模板失败，找不到可匹配的模板");
     }
+
+
 }

@@ -20,15 +20,7 @@ import java.util.Map;
 @Service
 public class ${className}ServiceImpl extends CrudServiceImpl<${className}Dao, ${className}Entity, ${className}DTO> implements ${className}Service {
 
-    @Override
-    public QueryWrapper<${className}Entity> getWrapper(Map<String, Object> params){
-        String id = (String)params.get("id");
 
-        QueryWrapper<${className}Entity> wrapper = new QueryWrapper<>();
-        wrapper.eq(StrUtil.isNotBlank(id), "id", id);
-
-        return wrapper;
-    }
 
 
 }

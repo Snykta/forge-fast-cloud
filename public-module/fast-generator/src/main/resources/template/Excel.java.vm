@@ -21,7 +21,7 @@ import java.util.Date;
 public class ${className}Excel {
 #foreach ($column in $columns)
     @ExcelProperty(value = "$!column.comments")
-    private $column.attrType $column.attrname;
+    private $column.attrType $column.attrNameSmall;
 #end
 
 }

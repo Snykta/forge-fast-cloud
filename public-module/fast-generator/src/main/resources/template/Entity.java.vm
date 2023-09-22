@@ -22,6 +22,6 @@ public class ${className}Entity {
     /**
      * $column.comments
      */
-	private $column.attrType $column.attrname;
+	private $column.attrType $column.attrNameSmall;
 #end
 }

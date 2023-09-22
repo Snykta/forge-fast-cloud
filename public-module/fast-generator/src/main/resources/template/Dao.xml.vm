@@ -3,9 +3,9 @@
 
 <mapper namespace="${package}.modules.${moduleName}.dao.${className}Dao">
 
-    <resultMap type="${package}.modules.${moduleName}.entity.${className}Entity" id="${classname}Map">
+    <resultMap type="${package}.modules.${moduleName}.entity.${className}Entity" id="${classNameSmall}Map">
 #foreach($column in $columns)
-        <result property="${column.attrname}" column="${column.columnName}"/>
+        <result property="${column.attrNameSmall}" column="${column.columnName}"/>
 #end
     </resultMap>
 
