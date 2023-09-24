@@ -20,7 +20,6 @@
 	</modules>
 
 
-
 	<!--版本属性-->
 	<properties>
 		<fast-start-cloud.version>1.0.0</fast-start-cloud.version>
