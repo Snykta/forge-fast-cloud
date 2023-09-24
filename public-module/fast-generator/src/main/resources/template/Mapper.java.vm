@@ -4,6 +4,7 @@ package ${package}.mapper;
 import ${package}.entity.${className}Entity;
 import org.springframework.stereotype.Repository;
 import com.snykta.mybatis.mapper.BaseMapperPlus;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * ${comments}
@@ -11,6 +12,7 @@ import com.snykta.mybatis.mapper.BaseMapperPlus;
  * @author ${author}
  * @date ${date}
  */
+@Mapper
 @Repository
 public interface ${className}Mapper extends BaseMapperPlus<${className}Entity> {
 	

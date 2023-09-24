@@ -39,13 +39,13 @@ public class GenUtils {
 
         boolean hasBigDecimal = false;
 
-        TableEntity tableEntity1 = new TableEntity();
-        tableEntity1.setTableName(tableDto.getTableName());
-        tableEntity1.setComments(tableDto.getTableComment());
+        TableEntity tableEntity = new TableEntity();
+        tableEntity.setTableName(tableDto.getTableName());
+        tableEntity.setComments(tableDto.getTableComment());
         //表名转换成Java类名
         String className = tableToJava(tableDto.getTableName(), config.getStr("tablePrefix"));
-        tableEntity1.setClassName(className);
-        tableEntity1.setClassNameSmall(FastStrUtil.lowerFirst(className));
+        tableEntity.setClassName(className);
+        tableEntity.setClassNameSmall(FastStrUtil.lowerFirst(className));
 
         //列信息
         List<ColumnEntity> columnsEntityList = new ArrayList<>();
@@ -79,18 +79,19 @@ public class GenUtils {
             }
 
             // 是否主键
-            if (FastStrUtil.equalsIgnoreCase("PRI", column.getColumnKey()) && FastObjUtil.isNull(tableEntity1.getPk())) {
-                tableEntity1.setPk(columnEntity);
+            if (FastStrUtil.equalsIgnoreCase("PRI", column.getColumnKey()) && columnsEntityList.parallelStream().noneMatch(ColumnEntity::getPkFlag)) {
+                columnEntity.setPkFlag(true);
+            } else {
+                columnEntity.setPkFlag(false);
             }
 
             columnsEntityList.add(columnEntity);
         }
-
-        tableEntity1.setColumns(columnsEntityList);
+        tableEntity.setColumns(columnsEntityList);
 
         // 没主键，则第一个字段为主键
-        if (FastObjUtil.isNull(tableEntity1.getPk())) {
-            tableEntity1.setPk(tableEntity1.getColumns().get(0));
+        if (columnsEntityList.parallelStream().noneMatch(ColumnEntity::getPkFlag)) {
+            columnsEntityList.get(0).setPkFlag(true);
         }
 
 
@@ -104,13 +105,12 @@ public class GenUtils {
 
         // 封装模板内部需要引用的数据
         Map<String, Object> templateMap = new HashMap<>();
-        templateMap.put("tableName" , tableEntity1.getTableName());
-        templateMap.put("comments" , tableEntity1.getComments());
-        templateMap.put("pk" , tableEntity1.getPk());
-        templateMap.put("className" , tableEntity1.getClassName());
-        templateMap.put("classNameSmall" , tableEntity1.getClassNameSmall());
-        templateMap.put("pathName" , tableEntity1.getClassNameSmall().toLowerCase());
-        templateMap.put("columns" , tableEntity1.getColumns());
+        templateMap.put("tableName" , tableEntity.getTableName());
+        templateMap.put("comments" , tableEntity.getComments());
+        templateMap.put("className" , tableEntity.getClassName());
+        templateMap.put("classNameSmall" , tableEntity.getClassNameSmall());
+        templateMap.put("pathName" , tableEntity.getClassNameSmall().toLowerCase());
+        templateMap.put("columns" , tableEntity.getColumns());
         templateMap.put("hasBigDecimal" , hasBigDecimal);
         templateMap.put("package" , packName);
         templateMap.put("author" , config.getStr("author"));
@@ -133,13 +133,13 @@ public class GenUtils {
 
             try {
                 //添加到zip
-                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity1.getClassName(), config.getStr("package"))));
+                zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), packName)));
                 IoUtil.writeUtf8(zip, false, sw.toString());
                 zip.flush();
                 IoUtil.close(sw);
                 zip.closeEntry();
             } catch (Exception e) {
-                throw new ServiceException("渲染模板失败，表名：" + tableEntity1.getTableName(), e);
+                throw new ServiceException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
             }
         }
 

@@ -1,5 +1,6 @@
 package com.snykta.gen.entity;
 
+
 import lombok.Data;
 
 @Data
@@ -19,6 +20,8 @@ public class ColumnEntity {
     //auto_increment
     private String extra;
     // 是否存在时间类型
-    private boolean hasDateTypeFlag;
+    private Boolean hasDateTypeFlag;
+    // 是否为主键
+    private Boolean pkFlag;
 
 }

@@ -39,7 +39,6 @@ public class GeneratorService {
      */
     public PageDto<TableDto> queryPage(SearchDto searchDto) {
         Page<TableDto> queryPage = baseGeneratorMapper.queryTableList(PageRequest.of(searchDto.getPageNum(), searchDto.getPageSize()), searchDto);
-        System.out.println(queryPage.getPages());
         return FastConvertUtil.toPageDto(queryPage, TableDto.class);
     }
 

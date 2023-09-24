@@ -5,6 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import com.snykta.basic.web.web.entity.BaseEntity;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -28,7 +31,12 @@ public class ${className}Entity extends BaseEntity {
     /**
      * $column.comments
      */
+#if($column.pkFlag)
+    @TableId(value = "$column.columnName", type = IdType.ASSIGN_ID)
+#else
     @TableField("$column.columnName")
-	private $column.attrType $column.attrNameSmall;
+#end
+    private $column.attrType $column.attrNameSmall;
+
 #end
 }
