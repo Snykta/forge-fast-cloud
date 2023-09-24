@@ -47,7 +47,7 @@ public class LogInfoAspect {
     }
 
 
-    @Pointcut("execution(public * com.fast.start.*.controller.*Controller.*(..))")
+    @Pointcut("execution(public * com.snykta.*.controller.*Controller.*(..))")
     public void inAction() {
     }
 

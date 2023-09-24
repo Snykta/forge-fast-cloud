@@ -1,7 +1,10 @@
-package ${package}.modules.${moduleName}.entity;
+package ${package}.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import com.snykta.basic.web.web.entity.BaseEntity;
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -11,17 +14,21 @@ import java.util.Date;
 /**
  * ${comments}
  *
- * @author ${author} ${email}
- * @since ${version} ${date}
+ * 表结构实体类
+ *
+ * @author ${author}
+ * @date ${date}
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @TableName("${tableName}")
-public class ${className}Entity {
+public class ${className}Entity extends BaseEntity {
 
 #foreach ($column in $columns)
     /**
      * $column.comments
      */
+    @TableField("$column.columnName")
 	private $column.attrType $column.attrNameSmall;
 #end
 }

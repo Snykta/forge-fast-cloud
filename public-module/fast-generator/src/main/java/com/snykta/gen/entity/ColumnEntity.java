@@ -18,4 +18,7 @@ public class ColumnEntity {
     private String attrType;
     //auto_increment
     private String extra;
+    // 是否存在时间类型
+    private boolean hasDateTypeFlag;
+
 }

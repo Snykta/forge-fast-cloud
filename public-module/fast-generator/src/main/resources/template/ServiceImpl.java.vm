@@ -1,25 +1,34 @@
-package ${package}.modules.${moduleName}.service.impl;
+package ${package}.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import ${package}.common.service.impl.CrudServiceImpl;
-import ${package}.modules.${moduleName}.dao.${className}Dao;
-import ${package}.modules.${moduleName}.dto.${className}DTO;
-import ${package}.modules.${moduleName}.entity.${className}Entity;
-import ${package}.modules.${moduleName}.service.${className}Service;
-import cn.hutool.core.util.StrUtil;
+
+import ${package}.mapper.${className}Mapper;
+import ${package}.dto.${className}Dto;
+import ${package}.entity.${className}Entity;
+import ${package}.service.I${className}Service;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
+import com.snykta.basic.web.web.service.BaseService;
 import java.util.Map;
 
 /**
  * ${comments}
  *
- * @author ${author} ${email}
- * @since ${version} ${date}
+ * 禁止删除 @Transactional(readOnly = true)
+ *
+ * 增删改的操作方法上需要加上 @Transactional(rollbackFor = Exception.class)
+ *
+ * @author ${author}
+ * @since ${date}
  */
-@Service
-public class ${className}ServiceImpl extends CrudServiceImpl<${className}Dao, ${className}Entity, ${className}DTO> implements ${className}Service {
+@Service("${classNameSmall}Service")
+@Transactional(readOnly = true)
+public class ${className}ServiceImpl extends BaseService implements I${className}Service {
 
+    private final ${className}Mapper ${classNameSmall}Mapper;
+
+    public ${className}ServiceImpl(${className}Mapper ${classNameSmall}Mapper) {
+        this.${classNameSmall}Mapper = ${classNameSmall}Mapper;
+    }
 
 
 

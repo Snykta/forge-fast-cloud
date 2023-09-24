@@ -1,10 +1,10 @@
-package ${package}.modules.${moduleName}.dto;
+package ${package}.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 #if(${hasBigDecimal})
@@ -14,17 +14,26 @@ import java.math.BigDecimal;
 /**
  * ${comments}
  *
- * @author ${author} ${email}
- * @since ${version} ${date}
+ * 表结构对应 Dto
+ *
+ * @author ${author}
+ * @date ${date}
  */
 @Data
 @ApiModel(value = "${comments}")
-public class ${className}DTO implements Serializable {
+public class ${className}Dto implements Serializable {
     private static final long serialVersionUID = 1L;
 
 #foreach ($column in $columns)
-	@ApiModelProperty(value = "$column.comments")
-	private $column.attrType $column.attrNameSmall;
+
+    /**
+    * $column.comments
+    */
+    @ApiModelProperty(value = "$column.comments")
+#if($column.hasDateTypeFlag)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+#end
+    private $column.attrType $column.attrNameSmall;
 
 #end
 

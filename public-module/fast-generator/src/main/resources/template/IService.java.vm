@@ -1,0 +1,15 @@
+package ${package}.service;
+
+
+import ${package}.dto.${className}Dto;
+import ${package}.entity.${className}Entity;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${date}
+ */
+public interface I${className}Service {
+
+}
