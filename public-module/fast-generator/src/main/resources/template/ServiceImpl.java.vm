@@ -9,17 +9,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.snykta.basic.web.web.service.BaseService;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * ${comments}
  *
- * 禁止删除 @Transactional(readOnly = true)
+ * 1、禁止删除 @Transactional(readOnly = true)
+ * 2、禁止继承或者实现mybatisPlus自带的crud基类service
  *
  * 增删改的操作方法上需要加上 @Transactional(rollbackFor = Exception.class)
  *
  * @author ${author}
  * @since ${date}
  */
+@Slf4j
 @Service("${classNameSmall}Service")
 @Transactional(readOnly = true)
 public class ${className}ServiceImpl extends BaseService implements I${className}Service {
