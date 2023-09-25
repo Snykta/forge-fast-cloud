@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-public class FastExceptionUtils extends ExceptionUtil {
+public class CyExceptionUtils extends ExceptionUtil {
 
 
     public static String toString(Exception ex) {

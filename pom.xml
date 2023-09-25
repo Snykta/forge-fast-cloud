@@ -47,7 +47,6 @@
 			<properties>
 				<profile.active>dev</profile.active>
 				<app.swagger.enable>true</app.swagger.enable>
-				<app.swagger.package>com.snykta</app.swagger.package>
 				<mysql.url><![CDATA[jdbc:mysql://127.0.0.1:3306/fast_cloud_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai]]></mysql.url>
 				<mysql.username>root</mysql.username>
 				<mysql.password>123456</mysql.password>
@@ -68,7 +67,6 @@
 			<properties>
 				<profile.active>prod</profile.active>
 				<app.swagger.enable>false</app.swagger.enable>
-				<app.swagger.package>com.fast.start</app.swagger.package>
 			</properties>
 		</profile>
 	</profiles>

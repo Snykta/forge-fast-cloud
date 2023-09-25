@@ -3,9 +3,9 @@ package com.snykta.basic.web.log;
 
 import cn.hutool.json.JSONUtil;
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.FastExceptionUtils;
-import com.snykta.basic.web.utils.FastObjUtil;
-import com.snykta.basic.web.utils.FastStrUtil;
+import com.snykta.basic.web.utils.CyExceptionUtils;
+import com.snykta.basic.web.utils.CyObjUtil;
+import com.snykta.basic.web.utils.CyStrUtil;
 import com.snykta.basic.web.web.utils.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -37,12 +37,12 @@ import java.util.List;
 @Slf4j
 @Order(1)
 @ConditionalOnClass({Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class})
-public class LogInfoAspect {
+public class LogAspect {
 
 
     private final Environment environment;
 
-    public LogInfoAspect(Environment environment) {
+    public LogAspect(Environment environment) {
         this.environment = environment;
     }
 
@@ -60,7 +60,7 @@ public class LogInfoAspect {
         sbLog.append("\n\r------------操作日志开始------------------");
         Object returnValue = null;
         boolean success = true;
-        LogInfoDto logInfoDto = new LogInfoDto();
+        LogDto logInfoDto = new LogDto();
         try {
             stopWatch.start();
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
@@ -76,7 +76,7 @@ public class LogInfoAspect {
             List<Object> canSerizableList = new ArrayList<>();
             Object[] args = proceedingJoinPoint.getArgs();
             for (Object object : args) {
-                if (FastObjUtil.isNotNull(object) && (object instanceof Serializable)) {
+                if (CyObjUtil.isNotNull(object) && (object instanceof Serializable)) {
                     canSerizableList.add(object);
                 }
             }
@@ -105,15 +105,15 @@ public class LogInfoAspect {
             if (e instanceof ServiceException) {
                 errorMsg = e.getMessage();
             } else {
-                if (FastStrUtil.isNotEmpty(e.getMessage())) {
+                if (CyStrUtil.isNotEmpty(e.getMessage())) {
                     errorMsg = e.getMessage();
                 } else {
-                    if (FastObjUtil.isNotNull(e.getCause())) {
+                    if (CyObjUtil.isNotNull(e.getCause())) {
                         errorMsg = e.getCause().toString();
                     }
                 }
             }
-            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + FastExceptionUtils.getStackMsg(e));
+            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + CyExceptionUtils.getStackMsg(e));
             success = false;
             throw new ServiceException(errorMsg, ResultCode.ERROR);
         } finally {

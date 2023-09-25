@@ -13,7 +13,7 @@ import java.util.List;
  * 类与类转换
  */
 @Slf4j
-public class FastConvertUtil extends Convert {
+public class CyConvertUtil extends Convert {
 
 
     /**
@@ -27,7 +27,7 @@ public class FastConvertUtil extends Convert {
      */
     public static <E extends BaseEntity, T> List<T> convertToDto(List<E> fromList, Class<T> toClass, String ...ignoreProperties) {
         List<T> list = new ArrayList<>();
-        if (FastCollectionUtil.isNotEmpty(fromList)) {
+        if (CyCollectionUtil.isNotEmpty(fromList)) {
             fromList.forEach(fromClass -> {
                 try {
                     list.add(convertToDto(fromClass, toClass, ignoreProperties));
@@ -50,12 +50,12 @@ public class FastConvertUtil extends Convert {
      * @return
      */
     public static <E extends BaseEntity, T> T convertToDto(E fromClass, Class<T> toClass, String... ignoreProperties) {
-        if (FastObjUtil.isNull(fromClass)) {
+        if (CyObjUtil.isNull(fromClass)) {
             return null;
         }
         try {
             T toClazz =  toClass.newInstance();
-            FastBeanUtil.copyProperties(fromClass, toClazz, ignoreProperties);
+            CyBeanUtil.copyProperties(fromClass, toClazz, ignoreProperties);
             return toClazz;
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +75,7 @@ public class FastConvertUtil extends Convert {
      */
     public static <E, T extends BaseEntity> List<T> convertToEntity(List<E> fromList, Class<T> toClass, String ...ignoreProperties) {
         List<T> list = new ArrayList<>();
-        if(FastCollectionUtil.isNotEmpty(fromList)) {
+        if(CyCollectionUtil.isNotEmpty(fromList)) {
             fromList.forEach(fromClass -> {
                 try {
                     list.add(convertToEntity(fromClass, toClass, ignoreProperties));
@@ -98,12 +98,12 @@ public class FastConvertUtil extends Convert {
      * @return
      */
     public static <E, T extends BaseEntity> T convertToEntity(E fromClass, Class<T> toClass, String... ignoreProperties) {
-        if (FastObjUtil.isNull(fromClass)) {
+        if (CyObjUtil.isNull(fromClass)) {
             return null;
         }
         try {
             T toClazz =  toClass.newInstance();
-            FastBeanUtil.copyProperties(fromClass, toClazz, ignoreProperties);
+            CyBeanUtil.copyProperties(fromClass, toClazz, ignoreProperties);
             return toClazz;
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,7 +143,7 @@ public class FastConvertUtil extends Convert {
                 return null;
             }
             T toClazz = clazz.newInstance();
-            FastBeanUtil.copyProperties(fromClazz, toClazz, ignoreProperties);
+            CyBeanUtil.copyProperties(fromClazz, toClazz, ignoreProperties);
             return toClazz;
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,9 +181,9 @@ public class FastConvertUtil extends Convert {
                 try {
                     n = clazz.newInstance();
                     if(ignoreProperties == null || ignoreProperties.length == 0){
-                        FastBeanUtil.copyProperties(p, n);
+                        CyBeanUtil.copyProperties(p, n);
                     } else {
-                        FastBeanUtil.copyProperties(p, n, ignoreProperties);
+                        CyBeanUtil.copyProperties(p, n, ignoreProperties);
                     }
                     list.add(n);
                 } catch (Exception e) {
@@ -207,7 +207,7 @@ public class FastConvertUtil extends Convert {
      */
     public static <E, T> PageDto<T> toPageDto(E page, Class<T> clazz){
         // 目前默认只转换 MybatisPlus
-        MybatisPlusPage mybatisPlusPage = FastBeanUtil.copyProperties(page, MybatisPlusPage.class);
+        MybatisPlusPage mybatisPlusPage = CyBeanUtil.copyProperties(page, MybatisPlusPage.class);
         // 未来如果使用其他分页，比如jpa，则使用 SpringDataJpaPage
         return PageDto.<T>builder().pageSize(mybatisPlusPage.getSize())
                 .pageNum(mybatisPlusPage.getCurrent())

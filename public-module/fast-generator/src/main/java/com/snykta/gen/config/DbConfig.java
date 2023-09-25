@@ -1,7 +1,7 @@
 package com.snykta.gen.config;
 
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.FastStrUtil;
+import com.snykta.basic.web.utils.CyStrUtil;
 import com.snykta.gen.mapper.MySQLGeneratorMapper;
 import com.snykta.gen.mapper.OracleGeneratorMapper;
 import com.snykta.gen.mapper.PostgreSQLGeneratorMapper;
@@ -37,16 +37,16 @@ public class DbConfig {
     @Bean
     @Primary
     public BaseGeneratorMapper getGeneratorDao() {
-        if (FastStrUtil.equalsIgnoreCase("mysql", dbType)) {
+        if (CyStrUtil.equalsIgnoreCase("mysql", dbType)) {
             return mySQLGeneratorMapper;
         }
-        if (FastStrUtil.equalsIgnoreCase("oracle", dbType)) {
+        if (CyStrUtil.equalsIgnoreCase("oracle", dbType)) {
             return oracleGeneratorMapper;
         }
-        if (FastStrUtil.equalsIgnoreCase("sqlserver", dbType)) {
+        if (CyStrUtil.equalsIgnoreCase("sqlserver", dbType)) {
             return sqlServerGeneratorMapper;
         }
-        if (FastStrUtil.equalsIgnoreCase("postgresql", dbType)) {
+        if (CyStrUtil.equalsIgnoreCase("postgresql", dbType)) {
             return postgreSQLGeneratorMapper;
         }
         throw new ServiceException("不支持当前数据库生成代码：" + dbType);

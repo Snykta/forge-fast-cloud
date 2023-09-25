@@ -1,8 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.snykta.basic.web.config.LocalTimeZoneConfig,\
   com.snykta.basic.web.config.WebMvcConfig,\
-  com.snykta.basic.web.log.LogInfoAspect,\
-  com.snykta.basic.web.utils.SpringContextUtil,\
+  com.snykta.basic.web.log.LogAspect,\
+  com.snykta.basic.web.utils.CySpringUtil,\
   com.snykta.basic.web.config.swagger.SwaggerAutoConfig,\
   com.snykta.basic.web.handler.GlobalExceptionHandler,\
   com.snykta.basic.web.aspect.RateLimiterAspect

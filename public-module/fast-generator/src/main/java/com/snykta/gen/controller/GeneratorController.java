@@ -1,7 +1,7 @@
 package com.snykta.gen.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.snykta.basic.web.utils.FastStrUtil;
+import com.snykta.basic.web.utils.CyStrUtil;
 import com.snykta.basic.web.web.page.PageDto;
 import com.snykta.basic.web.web.utils.Ret;
 import com.snykta.gen.dto.SearchDto;
@@ -42,7 +42,7 @@ public class GeneratorController {
      */
     @GetMapping("/code")
     public void code(@RequestParam("tables") String tables,@RequestParam("packName") String packName, HttpServletResponse response) throws Exception {
-        byte[] data = sysGeneratorService.generatorCode(FastStrUtil.splitToArray(tables, ","), packName);
+        byte[] data = sysGeneratorService.generatorCode(CyStrUtil.splitToArray(tables, ","), packName);
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"GenCode.zip\"");
         response.addHeader("Content-Length", "" + data.length);

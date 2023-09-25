@@ -6,8 +6,8 @@ import cn.hutool.core.io.IoUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.snykta.basic.web.exception.ServiceException;
 import com.snykta.basic.web.utils.CyReUtil;
-import com.snykta.basic.web.utils.FastConvertUtil;
-import com.snykta.basic.web.utils.FastObjUtil;
+import com.snykta.basic.web.utils.CyConvertUtil;
+import com.snykta.basic.web.utils.CyObjUtil;
 import com.snykta.basic.web.web.page.PageDto;
 import com.snykta.gen.dto.ColumnDto;
 import com.snykta.gen.dto.TableDto;
@@ -39,7 +39,7 @@ public class GeneratorService {
      */
     public PageDto<TableDto> queryPage(SearchDto searchDto) {
         Page<TableDto> queryPage = baseGeneratorMapper.queryTableList(PageRequest.of(searchDto.getPageNum(), searchDto.getPageSize()), searchDto);
-        return FastConvertUtil.toPageDto(queryPage, TableDto.class);
+        return CyConvertUtil.toPageDto(queryPage, TableDto.class);
     }
 
     /**
@@ -79,7 +79,7 @@ public class GeneratorService {
         for (String tableName : tableNames) {
             //查询表信息
             TableDto table = queryTable(tableName);
-            if (FastObjUtil.isNull(table)) {
+            if (CyObjUtil.isNull(table)) {
                 throw new ServiceException(String.format("表名：[%s] 不存在", tableName));
             }
             //查询列信息

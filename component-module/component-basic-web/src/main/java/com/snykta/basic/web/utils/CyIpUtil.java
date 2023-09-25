@@ -6,7 +6,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
-public class EyIpUtil {
+public class CyIpUtil {
     private final static String UNKNOWN = "unknown";
     private final static int MAX_LENGTH = 15;
 
@@ -20,28 +20,28 @@ public class EyIpUtil {
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             ip = request.getHeader("x-forwarded-for");
-            if (FastStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            if (CyStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
                 ip = request.getHeader("Proxy-Client-IP");
             }
-            if (FastStrUtil.isEmpty(ip) || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
+            if (CyStrUtil.isEmpty(ip) || ip.length() == 0 || UNKNOWN.equalsIgnoreCase(ip)) {
                 ip = request.getHeader("WL-Proxy-Client-IP");
             }
-            if (FastStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            if (CyStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
                 ip = request.getHeader("HTTP_CLIENT_IP");
             }
-            if (FastStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            if (CyStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
                 ip = request.getHeader("HTTP_X_FORWARDED_FOR");
             }
-            if (FastStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
+            if (CyStrUtil.isEmpty(ip) || UNKNOWN.equalsIgnoreCase(ip)) {
                 ip = request.getRemoteAddr();
             }
         } catch (Exception e) {
             log.error("IPUtils ERROR 获取IP异常", e);
         }
         // 使用代理，则获取第一个IP地址
-        if (!FastStrUtil.isEmpty(ip) && ip.length() > MAX_LENGTH) {
-            if (ip.indexOf(FastStrUtil.COMMA) > 0) {
-                ip = ip.substring(0, ip.indexOf(FastStrUtil.COMMA));
+        if (!CyStrUtil.isEmpty(ip) && ip.length() > MAX_LENGTH) {
+            if (ip.indexOf(CyStrUtil.COMMA) > 0) {
+                ip = ip.substring(0, ip.indexOf(CyStrUtil.COMMA));
             }
         }
         return ip;

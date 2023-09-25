@@ -2,8 +2,8 @@ package com.snykta.basic.web.handler;
 
 
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.FastObjUtil;
-import com.snykta.basic.web.utils.FastStrUtil;
+import com.snykta.basic.web.utils.CyObjUtil;
+import com.snykta.basic.web.utils.CyStrUtil;
 import com.snykta.basic.web.web.utils.ResultCode;
 import com.snykta.basic.web.web.utils.Ret;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +26,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     public Ret<Void> handleServiceException(ServiceException e, HttpServletRequest request)
     {
-        if (FastStrUtil.isEmpty(e.getMessage())) {
+        if (CyStrUtil.isEmpty(e.getMessage())) {
             e.setMessage("系统内部异常");
         }
-        if (FastObjUtil.isNull(e.getCode())) {
+        if (CyObjUtil.isNull(e.getCode())) {
             e.setCode(ResultCode.ERROR);
         }
         return Ret.fail(e.getCode(), e.getMessage());

@@ -2,7 +2,6 @@ package com.snykta.gen.utils;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.dialect.Props;
 import com.snykta.basic.web.exception.ServiceException;
 import com.snykta.basic.web.utils.*;
@@ -45,7 +44,7 @@ public class GenUtils {
         //表名转换成Java类名
         String className = tableToJava(tableDto.getTableName(), config.getStr("tablePrefix"));
         tableEntity.setClassName(className);
-        tableEntity.setClassNameSmall(FastStrUtil.lowerFirst(className));
+        tableEntity.setClassNameSmall(CyStrUtil.lowerFirst(className));
 
         //列信息
         List<ColumnEntity> columnsEntityList = new ArrayList<>();
@@ -60,7 +59,7 @@ public class GenUtils {
             //列名转换成Java属性名
             String attrName = columnToJava(columnEntity.getColumnName());
             columnEntity.setAttrName(attrName);
-            columnEntity.setAttrNameSmall(FastStrUtil.lowerFirst(attrName));
+            columnEntity.setAttrNameSmall(CyStrUtil.lowerFirst(attrName));
 
 
             // 列的数据类型，转换成Java类型
@@ -72,14 +71,14 @@ public class GenUtils {
             }
 
             // 是否包含时间类型
-            if (FastStrUtil.containsAnyIgnoreCase(attrType, "date", "time")) {
+            if (CyStrUtil.containsAnyIgnoreCase(attrType, "date", "time")) {
                 columnEntity.setHasDateTypeFlag(true);
             } else {
                 columnEntity.setHasDateTypeFlag(false);
             }
 
             // 是否主键
-            if (FastStrUtil.equalsIgnoreCase("PRI", column.getColumnKey()) && columnsEntityList.parallelStream().noneMatch(ColumnEntity::getPkFlag)) {
+            if (CyStrUtil.equalsIgnoreCase("PRI", column.getColumnKey()) && columnsEntityList.parallelStream().noneMatch(ColumnEntity::getPkFlag)) {
                 columnEntity.setPkFlag(true);
             } else {
                 columnEntity.setPkFlag(false);
@@ -114,7 +113,7 @@ public class GenUtils {
         templateMap.put("hasBigDecimal" , hasBigDecimal);
         templateMap.put("package" , packName);
         templateMap.put("author" , config.getStr("author"));
-        templateMap.put("date" , EyDateUtil.format(EyDateTimeUtil.now(), DatePattern.NORM_DATE_FORMATTER));
+        templateMap.put("date" , CyDateUtil.format(CyDateTimeUtil.now(), DatePattern.NORM_DATE_FORMATTER));
 
 
 
@@ -168,8 +167,8 @@ public class GenUtils {
      */
     private static String columnToJava(String columnName) {
         StringBuilder sb = new StringBuilder();
-        FastStrUtil.split(columnName, "_").forEach(key -> {
-            sb.append(StrUtil.upperFirst(key));
+        CyStrUtil.split(columnName, "_").forEach(key -> {
+            sb.append(CyStrUtil.upperFirst(key));
         });
         return sb.toString();
     }
@@ -178,12 +177,12 @@ public class GenUtils {
      * 表名转换成Java类名
      */
     private static String tableToJava(String tableName, String tablePrefix) {
-        if (StrUtil.isNotBlank(tablePrefix)) {
+        if (CyStrUtil.isNotBlank(tablePrefix)) {
             tableName = tableName.startsWith(tablePrefix) ? tableName.replaceFirst(tablePrefix, "" ) : tableName;
         }
         StringBuilder sb = new StringBuilder();
-        FastStrUtil.split(tableName, "_").forEach(key -> {
-            sb.append(StrUtil.upperFirst(key));
+        CyStrUtil.split(tableName, "_").forEach(key -> {
+            sb.append(CyStrUtil.upperFirst(key));
         });
         return sb.toString();
     }
@@ -200,7 +199,7 @@ public class GenUtils {
      */
     private static String getFileName(String template, String className, String packageName) {
         String packagePath = "main" + File.separator + "java" + File.separator;
-        if (StrUtil.isNotBlank(packageName)) {
+        if (CyStrUtil.isNotBlank(packageName)) {
             packagePath += packageName.replace("." , File.separator) + File.separator;
         }
 

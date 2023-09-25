@@ -1,10 +1,10 @@
 package com.snykta.basic.web.aspect;
 
 import com.snykta.basic.web.annotation.RateLimiter;
-import com.snykta.basic.web.constant.BasicConstant;
+import com.snykta.basic.web.constant.CyBasicConstant;
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.EyIpUtil;
-import com.snykta.basic.web.utils.FastStrUtil;
+import com.snykta.basic.web.utils.CyIpUtil;
+import com.snykta.basic.web.utils.CyStrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -57,12 +57,12 @@ public class RateLimiterAspect {
         if (rateLimiter != null) {
             String key = rateLimiter.key();
             // 默认用类名+方法名做限流的 key 前缀
-            if (FastStrUtil.isBlank(key)) {
-                key = method.getDeclaringClass().getName() + FastStrUtil.DOT + method.getName();
+            if (CyStrUtil.isBlank(key)) {
+                key = method.getDeclaringClass().getName() + CyStrUtil.DOT + method.getName();
             }
             // 最终限流的 key 为 前缀 + IP地址 + token信息
-            String ipAddr = FastStrUtil.isEmpty(EyIpUtil.getIpAddr()) ? "无IP" : EyIpUtil.getIpAddr();
-            key = key + SEPARATOR + ipAddr + "|" + request.getHeader(BasicConstant.HEAD_TOKEN_VALUE);
+            String ipAddr = CyStrUtil.isEmpty(CyIpUtil.getIpAddr()) ? "无IP" : CyIpUtil.getIpAddr();
+            key = key + SEPARATOR + ipAddr + "|" + request.getHeader(CyBasicConstant.HEAD_TOKEN_VALUE);
 
             long max = rateLimiter.max();
             long timeout = rateLimiter.timeout();

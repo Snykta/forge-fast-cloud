@@ -2,7 +2,7 @@ package com.snykta.basic.web.utils;
 
 import cn.hutool.core.collection.CollectionUtil;
 
-public class FastCollectionUtil extends CollectionUtil {
+public class CyCollectionUtil extends CollectionUtil {
 
 
 
