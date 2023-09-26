@@ -63,7 +63,7 @@ public class RateLimiterAspect {
             }
             // 最终限流的 key 为 前缀 + IP地址 + token信息
             String ipAddr = CyStrUtil.isEmpty(IpUtil.getIpAddr()) ? "无IP" : IpUtil.getIpAddr();
-            key = key + SEPARATOR + ipAddr + "|" + request.getHeader(AuthConstant.HEAD_TOKEN_VALUE);
+            key = key + SEPARATOR + ipAddr + "|" + request.getHeader(AuthConstant.head_token_key);
 
             long max = rateLimiter.max();
             long timeout = rateLimiter.timeout();

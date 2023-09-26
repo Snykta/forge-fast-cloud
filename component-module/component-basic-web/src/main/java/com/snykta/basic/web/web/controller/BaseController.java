@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class BaseController {
 
-    @Value("${app.profile}")
+    @Value("${spring.profiles.active}")
     public String appProfile;
 
 

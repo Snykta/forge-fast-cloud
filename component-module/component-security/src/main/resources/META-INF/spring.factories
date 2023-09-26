@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.snykta.security.config.SaTokenConfig
+  com.snykta.security.config.SaTokenAutoConfig
 
 
 

@@ -14,28 +14,29 @@
     <version>1.0.0</version>
     <name>fast-auth</name>
 
-    <description>微服务认证授权</description>
+    <description>认证授权服务</description>
 
 
     <dependencies>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
-        </dependency>
+<!--        暂时注释-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.snykta</groupId>
             <artifactId>component-basic-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.snykta</groupId>
+            <artifactId>component-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.snykta</groupId>
+            <artifactId>component-redis</artifactId>
         </dependency>
 
     </dependencies>

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class BaseService {
 
-    @Value("${app.profile}")
+    @Value("${spring.profiles.active}")
     public String appProfile;
 
 
