@@ -1,10 +1,11 @@
 package com.snykta.basic.web.aspect;
 
 import com.snykta.basic.web.annotation.RateLimiter;
-import com.snykta.basic.web.constant.CyBasicConstant;
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.CyIpUtil;
-import com.snykta.basic.web.utils.CyStrUtil;
+import com.snykta.tools.utils.CyStrUtil;
+import com.snykta.basic.web.web.utils.IpUtil;
+import com.snykta.redis.config.RedisAutoConfig;
+import com.snykta.tools.constant.AuthConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Aspect
 @Component
-@ConditionalOnClass({StringRedisTemplate.class, RedisScript.class, RedisTemplate.class, Servlet.class})
+@ConditionalOnClass({StringRedisTemplate.class, RedisScript.class, RedisTemplate.class, Servlet.class, RedisAutoConfig.class})
 public class RateLimiterAspect {
     private final static String SEPARATOR = ":";
     private final static String REDIS_LIMIT_KEY_PREFIX = "limit:";
@@ -61,8 +62,8 @@ public class RateLimiterAspect {
                 key = method.getDeclaringClass().getName() + CyStrUtil.DOT + method.getName();
             }
             // 最终限流的 key 为 前缀 + IP地址 + token信息
-            String ipAddr = CyStrUtil.isEmpty(CyIpUtil.getIpAddr()) ? "无IP" : CyIpUtil.getIpAddr();
-            key = key + SEPARATOR + ipAddr + "|" + request.getHeader(CyBasicConstant.HEAD_TOKEN_VALUE);
+            String ipAddr = CyStrUtil.isEmpty(IpUtil.getIpAddr()) ? "无IP" : IpUtil.getIpAddr();
+            key = key + SEPARATOR + ipAddr + "|" + request.getHeader(AuthConstant.HEAD_TOKEN_VALUE);
 
             long max = rateLimiter.max();
             long timeout = rateLimiter.timeout();
@@ -98,4 +99,7 @@ public class RateLimiterAspect {
         }
         return false;
     }
+
+
+
 }

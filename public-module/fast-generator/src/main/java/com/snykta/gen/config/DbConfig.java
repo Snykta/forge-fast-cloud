@@ -1,7 +1,7 @@
 package com.snykta.gen.config;
 
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.CyStrUtil;
+import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.gen.mapper.MySQLGeneratorMapper;
 import com.snykta.gen.mapper.OracleGeneratorMapper;
 import com.snykta.gen.mapper.PostgreSQLGeneratorMapper;

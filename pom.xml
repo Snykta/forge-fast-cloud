@@ -22,7 +22,7 @@
 
 	<!--版本属性-->
 	<properties>
-		<fast-start-cloud.version>1.0.0</fast-start-cloud.version>
+		<forge-fast-cloud.version>1.0.0</forge-fast-cloud.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -38,6 +38,8 @@
 		<ok-http3.version>4.9.1</ok-http3.version>
 		<knife4j-api.version>4.3.0</knife4j-api.version>
 		<apache.velocity.version>1.7</apache.velocity.version>
+		<sa.token.version>1.36.0</sa.token.version>
+		<commons-pool2.version>2.11.1</commons-pool2.version>
 	</properties>
 
 
@@ -82,28 +84,42 @@
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-basic-web</artifactId>
-				<version>${fast-start-cloud.version}</version>
+				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 
 			<!--自定义组件：feign核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-feign</artifactId>
-				<version>${fast-start-cloud.version}</version>
+				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 
 			<!--自定义组件：mybatisPlus核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-mybatis-plus</artifactId>
-				<version>${fast-start-cloud.version}</version>
+				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 
 			<!--自定义组件：redis核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-redis</artifactId>
-				<version>${fast-start-cloud.version}</version>
+				<version>${forge-fast-cloud.version}</version>
+			</dependency>
+
+			<!--自定义组件：认证授权组件-->
+			<dependency>
+				<groupId>com.snykta</groupId>
+				<artifactId>component-security</artifactId>
+				<version>${forge-fast-cloud.version}</version>
+			</dependency>
+
+			<!--自定义组件：工具类、自定义常量、字典值等基础类组件-->
+			<dependency>
+				<groupId>com.snykta</groupId>
+				<artifactId>component-common-tools</artifactId>
+				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 
 
@@ -217,6 +233,27 @@
 				<groupId>org.apache.velocity</groupId>
 				<artifactId>velocity</artifactId>
 				<version>${apache.velocity.version}</version>
+			</dependency>
+
+			<!-- Sa-Token 权限认证 -->
+			<dependency>
+				<groupId>cn.dev33</groupId>
+				<artifactId>sa-token-spring-boot-starter</artifactId>
+				<version>${sa.token.version}</version>
+			</dependency>
+
+			<!-- Sa-Token 整合 Redis （使用 jackson 序列化方式） -->
+			<dependency>
+				<groupId>cn.dev33</groupId>
+				<artifactId>sa-token-redis-jackson</artifactId>
+				<version>${sa.token.version}</version>
+			</dependency>
+
+			<!--连接池-->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-pool2</artifactId>
+				<version>${commons-pool2.version}</version>
 			</dependency>
 
 

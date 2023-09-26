@@ -2,8 +2,8 @@ package ${package}.controller;
 
 
 import com.snykta.basic.web.web.controller.BaseController;
-import com.snykta.basic.web.web.page.PageDto;
-import com.snykta.basic.web.web.utils.Ret;
+import com.snykta.tools.web.page.PageDto;
+import com.snykta.tools.web.result.Ret;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

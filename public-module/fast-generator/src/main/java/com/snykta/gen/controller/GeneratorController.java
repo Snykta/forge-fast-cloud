@@ -1,12 +1,12 @@
 package com.snykta.gen.controller;
 
 import cn.hutool.core.io.IoUtil;
-import com.snykta.basic.web.utils.CyStrUtil;
-import com.snykta.basic.web.web.page.PageDto;
-import com.snykta.basic.web.web.utils.Ret;
+import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.gen.dto.SearchDto;
 import com.snykta.gen.dto.TableDto;
 import com.snykta.gen.service.GeneratorService;
+import com.snykta.tools.web.page.PageDto;
+import com.snykta.tools.web.result.Ret;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

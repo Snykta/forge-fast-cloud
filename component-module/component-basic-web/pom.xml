@@ -48,16 +48,6 @@
 			<artifactId>spring-boot-admin-starter-client</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-		</dependency>
-
-
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-all</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -75,10 +65,14 @@
 			<optional>true</optional>
 		</dependency>
 
-
 		<dependency>
 			<groupId>com.github.xiaoymin</groupId>
 			<artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.snykta</groupId>
+			<artifactId>component-common-tools</artifactId>
 		</dependency>
 
 
@@ -88,6 +82,8 @@
 			<artifactId>component-redis</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+
 
 
 	</dependencies>

@@ -3,10 +3,11 @@ package com.snykta.basic.web.log;
 
 import cn.hutool.json.JSONUtil;
 import com.snykta.basic.web.exception.ServiceException;
-import com.snykta.basic.web.utils.CyExceptionUtils;
-import com.snykta.basic.web.utils.CyObjUtil;
-import com.snykta.basic.web.utils.CyStrUtil;
-import com.snykta.basic.web.web.utils.ResultCode;
+import com.snykta.basic.web.web.utils.IpUtil;
+import com.snykta.tools.utils.CyObjUtil;
+import com.snykta.tools.utils.CyStrUtil;
+import com.snykta.tools.utils.CyExceptionUtil;
+import com.snykta.tools.web.result.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -95,6 +96,7 @@ public class LogAspect {
             } catch (Exception e) {
                 sbLog.append("\n\r|--请求参数：解析异常错误原因->" + e.getMessage());
             }
+            sbLog.append("\n\r|--请求方IP：" + IpUtil.getIpAddr());
             returnValue = proceedingJoinPoint.proceed();
             sbLog.append("\n\r|--处理结果：正常");
 
@@ -113,7 +115,7 @@ public class LogAspect {
                     }
                 }
             }
-            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + CyExceptionUtils.getStackMsg(e));
+            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + CyExceptionUtil.getStackMsg(e));
             success = false;
             throw new ServiceException(errorMsg, ResultCode.ERROR);
         } finally {

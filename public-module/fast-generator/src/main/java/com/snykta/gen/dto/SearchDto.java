@@ -1,6 +1,7 @@
 package com.snykta.gen.dto;
 
-import com.snykta.basic.web.web.search.BaseSearchDto;
+
+import com.snykta.tools.web.search.BaseSearchDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
