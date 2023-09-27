@@ -4,13 +4,15 @@ package com.snykta.system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
 @SpringBootApplication
-public class FastSystemApplication {
+@EnableDiscoveryClient
+public class SystemApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FastSystemApplication.class, args);
+		SpringApplication.run(SystemApplication.class, args);
 	}
 
 }

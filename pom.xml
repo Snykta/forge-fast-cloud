@@ -49,14 +49,14 @@
 			<properties>
 				<profile.active>dev</profile.active>
 				<app.swagger.enable>true</app.swagger.enable>
-				<mysql.url><![CDATA[jdbc:mysql://127.0.0.1:3306/fast_cloud_demo?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai]]></mysql.url>
+				<mysql.url><![CDATA[jdbc:mysql://127.0.0.1:3306/forge_fast_cloud?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai]]></mysql.url>
 				<mysql.username>root</mysql.username>
 				<mysql.password>123456</mysql.password>
 				<redis.host>127.0.0.1</redis.host>
 				<redis.port>6379</redis.port>
 				<redis.password></redis.password>
 				<redis.db>2</redis.db>
-
+				<nacos.config.address>127.0.0.1:8848</nacos.config.address>
 			</properties>
 			<!--默认开发环境生效-->
 			<activation>
@@ -157,7 +157,7 @@
 				<version>${spring-cloud-alibaba.version}</version>
 			</dependency>
 
-			<!--微服务nacos配置监管-->
+			<!--微服务nacos配置中心-->
 			<dependency>
 				<groupId>com.alibaba.cloud</groupId>
 				<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>

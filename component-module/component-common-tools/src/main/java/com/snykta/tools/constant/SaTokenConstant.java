@@ -1,17 +1,23 @@
 package com.snykta.tools.constant;
 
 import com.snykta.tools.utils.CyStrUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class SaTokenConstant {
 
+    /**
+     * SaToken的未登录异常包路径
+     */
     private static List<String> un_Authorized_ExceptionList;
     static {
         un_Authorized_ExceptionList = new ArrayList<>();
         un_Authorized_ExceptionList.add("cn.dev33.satoken.exception.NotLoginException");
     }
+
+    /**
+     * SaToken的未授权异常包路径
+     */
     private static List<String> un_Permissions_ExceptionList;
     static {
         un_Permissions_ExceptionList = new ArrayList<>();

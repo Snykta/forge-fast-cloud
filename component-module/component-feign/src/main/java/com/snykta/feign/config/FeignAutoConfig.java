@@ -16,7 +16,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @Configuration
 @Slf4j
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.snykta"})
 @PropertySource("classpath:config/application-feign.properties")
 public class FeignAutoConfig implements DisposableBean {
 

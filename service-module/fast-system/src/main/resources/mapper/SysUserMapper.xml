@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.snykta.system.mapper.SysUserMapper">
+
+    <resultMap type="com.snykta.system.entity.SysUserEntity" id="sysUserMap">
+        <result property="id" column="id"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="password" column="password"/>
+        <result property="statusCode" column="status_code"/>
+        <result property="createId" column="create_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createName" column="create_name"/>
+        <result property="updateId" column="update_id"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateName" column="update_name"/>
+        <result property="remarkInfo" column="remark_info"/>
+    </resultMap>
+
+
+</mapper>

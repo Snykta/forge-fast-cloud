@@ -21,4 +21,10 @@ public class AuthConstant {
      */
     public static final boolean isAutoRenew_token = false;
 
+
+    /**
+     * 用户密码加密的偏移量，必须是16位字符
+     */
+    public static final String iv_salt = "2017$_!($/}17Y$@";
+
 }

@@ -18,11 +18,18 @@
 
 
     <dependencies>
-<!--        暂时注释-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--        </dependency>-->
+
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
 
         <dependency>
             <groupId>com.snykta</groupId>
@@ -37,6 +44,11 @@
         <dependency>
             <groupId>com.snykta</groupId>
             <artifactId>component-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.snykta</groupId>
+            <artifactId>component-feign</artifactId>
         </dependency>
 
     </dependencies>

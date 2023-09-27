@@ -6,6 +6,7 @@ import com.snykta.auth.service.IAuthService;
 import com.snykta.basic.web.web.controller.BaseController;
 import com.snykta.tools.web.result.Ret;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +19,15 @@ public class AuthController extends BaseController {
         this.authService = authService;
     }
 
-    @GetMapping("/doLogin")
-    public Ret<String> doLogin(@RequestParam(value = "userNumber") String userNumber, @RequestParam(value = "passWord") String passWord) {
-        StpUtil.login(userNumber);
-
-        return Ret.success(StpUtil.getTokenValue());
+    /**
+     * 用户登录并且返回token
+     * @param phoneNumber
+     * @param password
+     * @return
+     */
+    @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public Ret<String> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
+        return Ret.success(authService.doLogin(phoneNumber, password));
     }
 
 
