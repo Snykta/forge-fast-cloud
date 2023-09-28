@@ -5,7 +5,8 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.snykta.tools.utils.CySpringUtil,\
   com.snykta.basic.web.config.swagger.SwaggerAutoConfig,\
   com.snykta.basic.web.handler.GlobalExceptionHandler,\
-  com.snykta.basic.web.aspect.RateLimiterAspect
+  com.snykta.basic.web.aspect.RateLimiterAspect,\
+  com.snykta.basic.web.config.RestTemplateConfig
 
 
 

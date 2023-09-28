@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * fast-system 微服务
  */
-@FeignClient(value = "fast-system")
+@FeignClient("fast-system")
 public interface SystemClient {
 
     /**

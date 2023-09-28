@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.service.ISysUserService;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -41,7 +42,8 @@ public class SysUserController extends BaseController {
      */
     @ApiOperation("用户登录")
     @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public Ret<TokenUserInfo> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
+    public Ret<TokenUserInfo> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password, HttpServletRequest request) {
+        System.out.println(request.getHeader("cc"));
         return Ret.success(sysUserService.doLogin(phoneNumber, password));
     }
 
