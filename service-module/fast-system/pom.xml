@@ -37,6 +37,12 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>com.snykta</groupId>
+			<artifactId>component-basic-cloud</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 

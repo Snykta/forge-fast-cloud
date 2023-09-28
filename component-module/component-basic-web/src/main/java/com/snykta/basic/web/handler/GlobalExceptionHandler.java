@@ -1,7 +1,7 @@
 package com.snykta.basic.web.handler;
 
 
-import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;

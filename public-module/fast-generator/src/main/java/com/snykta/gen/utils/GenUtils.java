@@ -3,7 +3,7 @@ package com.snykta.gen.utils;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.setting.dialect.Props;
-import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.gen.dto.ColumnDto;
 import com.snykta.gen.dto.TableDto;
 import com.snykta.gen.entity.ColumnEntity;

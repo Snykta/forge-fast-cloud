@@ -1,7 +1,7 @@
 package com.snykta.basic.web.aspect;
 
 import com.snykta.basic.web.annotation.RateLimiter;
-import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.basic.web.web.utils.IpUtil;
 import com.snykta.redis.config.RedisAutoConfig;

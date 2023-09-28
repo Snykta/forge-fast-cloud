@@ -4,7 +4,7 @@ package com.snykta.gen.service;
 
 import cn.hutool.core.io.IoUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyConvertUtil;
 import com.snykta.tools.utils.CyReUtil;
 import com.snykta.tools.utils.CyObjUtil;

@@ -3,6 +3,7 @@ package com.snykta.basic.cloud.interceptor;
 import cn.hutool.extra.servlet.ServletUtil;
 import com.snykta.tools.utils.CyCollectionUtil;
 import com.snykta.tools.utils.CyObjUtil;
+import com.snykta.tools.utils.CyStrUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,8 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             Map<String, List<String>> headersMap = ServletUtil.getHeadersMap(request);
             if (CyCollectionUtil.isNotEmpty(headersMap)) {
                 headersMap.forEach((key, values) -> {
-                    if (CyCollectionUtil.isNotEmpty(values)) {
+                    // Content-Type的信息不转发
+                    if (!CyStrUtil.containsIgnoreCase(key, "content-")) {
                         template.header(key, values);
                     }
                 });

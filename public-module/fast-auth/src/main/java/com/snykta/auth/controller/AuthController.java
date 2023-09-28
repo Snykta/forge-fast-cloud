@@ -9,9 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+
 
 @RestController
 @RequestMapping(value = "auth")
@@ -33,8 +32,7 @@ public class AuthController extends BaseController {
      * @return
      */
     @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public Ret<String> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password, HttpServletRequest request) {
-        System.out.println(request.getHeader("cc"));
+    public Ret<String> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
         return Ret.success(authService.doLogin(phoneNumber, password));
     }
 

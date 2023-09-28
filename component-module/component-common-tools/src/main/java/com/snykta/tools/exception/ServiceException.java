@@ -1,6 +1,7 @@
-package com.snykta.basic.web.exception;
+package com.snykta.tools.exception;
 
 
+import com.snykta.tools.web.result.Ret;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -42,4 +43,11 @@ public class ServiceException extends RuntimeException {
         this.message = message;
         this.code = code;
     }
+
+    public <T> ServiceException(Ret<T> ret){
+        super(ret.getMessage());
+        this.message = ret.getMessage();
+        this.code = ret.getCode();
+    }
+
 }

@@ -1,9 +1,8 @@
 package com.snykta.system.service.impl;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.system.mapper.SysUserMapper;
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.entity.SysUserEntity;
@@ -16,7 +15,6 @@ import com.snykta.tools.utils.CyStrUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.snykta.basic.web.web.service.BaseService;
-import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 
 /**

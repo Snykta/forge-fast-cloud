@@ -2,9 +2,16 @@ package com.snykta.basic.cloud.config;
 
 
 
+import com.snykta.basic.cloud.decoder.FeignDecoderConfig;
+import feign.codec.Decoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
@@ -22,6 +29,18 @@ public class FeignAutoConfig implements DisposableBean {
         log.info("初始化[Feign]模块...");
     }
 
+
+    /**
+     * 自定义feign的解码实现
+     * @param messageConverters
+     * @param customizers
+     * @return
+     */
+    @Bean
+    public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters,
+                                ObjectProvider<HttpMessageConverterCustomizer> customizers) {
+        return new FeignDecoderConfig(messageConverters, customizers);
+    }
 
 
     @Override

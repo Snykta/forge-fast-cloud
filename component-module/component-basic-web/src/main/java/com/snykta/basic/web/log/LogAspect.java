@@ -2,7 +2,7 @@ package com.snykta.basic.web.log;
 
 
 import cn.hutool.json.JSONUtil;
-import com.snykta.basic.web.exception.ServiceException;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.basic.web.web.utils.IpUtil;
 import com.snykta.tools.constant.SaTokenConstant;
 import com.snykta.tools.utils.CyObjUtil;

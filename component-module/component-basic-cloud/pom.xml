@@ -15,7 +15,10 @@
 	<version>1.0.0</version>
 	<name>component-basic-cloud</name>
 
-	<description>微服务组件模块：feign、nacos服务注册与发现、nacos分布式配置中心等</description>
+	<description>
+		微服务组件模块：feign、nacos服务注册与发现、nacos分布式配置中心等
+		引入此包则自动实现服务注册与发现，路由访问等
+	</description>
 
 
 	<dependencies>
@@ -66,6 +69,12 @@
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+		</dependency>
+
+		<!--新版AlibabaCloud移除了bootstrap，使用新的方式引入分布式配置，防止启动报错因此再手动引入bootstrap-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
 
 	</dependencies>

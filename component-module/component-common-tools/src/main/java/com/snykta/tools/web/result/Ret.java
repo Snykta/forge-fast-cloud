@@ -1,5 +1,6 @@
 package com.snykta.tools.web.result;
 
+import com.snykta.tools.utils.CyObjUtil;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,8 @@ public class Ret<T> implements Serializable {
      * 消息内容
      */
     private String message;
+
+
 
     public static <T> Ret<T> success() {
         return restResult(null, ResultCode.SUCCESS, "操作成功");
@@ -81,8 +84,9 @@ public class Ret<T> implements Serializable {
         return !isSuccess(ret);
     }
 
+
     public static <T> Boolean isSuccess(Ret<T> ret) {
-        return ResultCode.SUCCESS == ret.getCode();
+        return CyObjUtil.equal(ResultCode.SUCCESS, ret.getCode());
     }
 
 
