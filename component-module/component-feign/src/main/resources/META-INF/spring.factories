@@ -1,9 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.snykta.feign.config.FeignAutoConfig,\
-  com.snykta.feign.utils.FeignContextUtil,\
-  com.snykta.feign.config.FeignRequestInterceptor
-
-
-
-
-  

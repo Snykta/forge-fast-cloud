@@ -88,10 +88,10 @@
 				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 
-			<!--自定义组件：feign核心组件-->
+			<!--自定义组件：微服务核心组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
-				<artifactId>component-feign</artifactId>
+				<artifactId>component-basic-cloud</artifactId>
 				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 

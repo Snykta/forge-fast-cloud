@@ -19,18 +19,6 @@
 
     <dependencies>
 
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
-
         <dependency>
             <groupId>com.snykta</groupId>
             <artifactId>component-basic-web</artifactId>
@@ -48,7 +36,7 @@
 
         <dependency>
             <groupId>com.snykta</groupId>
-            <artifactId>component-feign</artifactId>
+            <artifactId>component-basic-cloud</artifactId>
         </dependency>
 
     </dependencies>

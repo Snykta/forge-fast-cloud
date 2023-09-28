@@ -22,7 +22,7 @@
 	<modules>
 		<module>component-common-tools</module>
 		<module>component-basic-web</module>
-		<module>component-feign</module>
+		<module>component-basic-cloud</module>
 		<module>component-mybatis-plus</module>
 		<module>component-redis</module>
 		<module>component-security</module>

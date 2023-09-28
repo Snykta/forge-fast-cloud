@@ -1,4 +1,4 @@
-package com.snykta.feign.config;
+package com.snykta.basic.cloud.config;
 
 
 
@@ -21,6 +21,7 @@ public class FeignAutoConfig implements DisposableBean {
     public FeignAutoConfig(){
         log.info("初始化[Feign]模块...");
     }
+
 
 
     @Override

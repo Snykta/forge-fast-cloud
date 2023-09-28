@@ -1,19 +1,21 @@
-package com.snykta.feign.config;
+package com.snykta.basic.cloud.interceptor;
 
 import cn.hutool.extra.servlet.ServletUtil;
 import com.snykta.tools.utils.CyCollectionUtil;
 import com.snykta.tools.utils.CyObjUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
 
-
+@Slf4j
 @Component
 public class FeignRequestInterceptor implements RequestInterceptor {
 
