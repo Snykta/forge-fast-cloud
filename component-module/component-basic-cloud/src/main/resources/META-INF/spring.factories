@@ -1,8 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.snykta.basic.cloud.config.FeignAutoConfig,\
-  com.snykta.basic.cloud.interceptor.FeignRequestInterceptor,\
-  com.snykta.basic.cloud.config.NacosAutoConfig,\
-  com.snykta.basic.cloud.config.FeignErrorMsgConfig
+  com.snykta.basic.cloud.feign.config.FeignAutoConfig,\
+  com.snykta.basic.cloud.nacos.config.NacosAutoConfig
 
 
   

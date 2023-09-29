@@ -1,9 +1,12 @@
-package com.snykta.basic.cloud.config;
+package com.snykta.basic.cloud.feign.config;
 
 
-
-import com.snykta.basic.cloud.decoder.FeignDecoderConfig;
+import com.snykta.basic.cloud.feign.decoder.FeignErrorDecoder;
+import com.snykta.basic.cloud.feign.decoder.FeignResponseDecoder;
+import com.snykta.basic.cloud.feign.interceptor.FeignRequestInterceptor;
+import feign.RequestInterceptor;
 import feign.codec.Decoder;
+import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.ObjectFactory;
@@ -39,8 +42,28 @@ public class FeignAutoConfig implements DisposableBean {
     @Bean
     public Decoder feignDecoder(ObjectFactory<HttpMessageConverters> messageConverters,
                                 ObjectProvider<HttpMessageConverterCustomizer> customizers) {
-        return new FeignDecoderConfig(messageConverters, customizers);
+        return new FeignResponseDecoder(messageConverters, customizers);
     }
+
+
+    /**
+     * 设置请求前拦截器
+     * @return
+     */
+    @Bean
+    public RequestInterceptor requestInterceptor() {
+        return new FeignRequestInterceptor();
+    }
+
+    /**
+     * 自定义异常解码器
+     * @return
+     */
+    @Bean
+    public ErrorDecoder errorDecoder() {
+        return new FeignErrorDecoder();
+    }
+
 
 
     @Override
