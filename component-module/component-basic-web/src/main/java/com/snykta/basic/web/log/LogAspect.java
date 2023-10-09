@@ -104,9 +104,10 @@ public class LogAspect {
         } catch (Exception e) {
             sbLog.append("\n\r|--处理结果：失败");
             String errorMsg = null;
-
+            Integer resultCode = ResultCode.ERROR;
             if (e instanceof ServiceException) {
                 errorMsg = e.getMessage();
+                resultCode = ((ServiceException) e).getCode();
             } else {
                 if (CyStrUtil.isNotEmpty(e.getMessage())) {
                     errorMsg = e.getMessage();
@@ -126,7 +127,7 @@ public class LogAspect {
             if (SaTokenConstant.isSaPermissionsException(stackMessage)) {
                 throw new ServiceException("无权限操作", ResultCode.UN_PERMISSIONS);
             }
-            throw new ServiceException(errorMsg, ResultCode.ERROR);
+            throw new ServiceException(errorMsg, CyObjUtil.isNull(resultCode) ? ResultCode.ERROR : resultCode);
         } finally {
             stopWatch.stop();
             Double totalTimeSeconds = stopWatch.getTotalTimeSeconds();

@@ -21,22 +21,22 @@ public class BasicToken implements Serializable {
     /**
      * 用户中文名称
      */
-    private  String getUserName;
+    private  String userName;
 
     /**
-     * 用户编号
+     * 用户编号（手机号、工号、微信号、QQ号）等唯一编码
      */
-    private  String getUserNumber;
+    private  String userNumber;
 
     /**
      * 权限编码集合
      */
-    private List<String> getRightCodeList;
+    private List<String> rightCodeList;
 
     /**
      * 角色编码集合
      */
-    private  List<String> getRoleCodeList;
+    private  List<String> roleCodeList;
 
 
 }

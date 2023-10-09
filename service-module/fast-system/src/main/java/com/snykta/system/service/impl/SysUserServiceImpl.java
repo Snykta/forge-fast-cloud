@@ -2,6 +2,7 @@ package com.snykta.system.service.impl;
 
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.snykta.tools.constant.DictValueConstant;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.system.mapper.SysUserMapper;
 import com.snykta.system.dto.SysUserDto;
@@ -19,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 用户信息表
  *
- * 1、禁止删除 @Transactional(readOnly = true)
+ * 1、禁止删除 @Transactional(readOnly = true)！！！！增删改的方法上必须加上 @Transactional(rollbackFor = Exception.class)否则将操作失败！！！
  * 2、禁止继承或者实现mybatisPlus自带的crud基类service
+ * 3、所有crud操作下沉到Mapper层，service只关心业务
  *
- * 增删改的操作方法上需要加上 @Transactional(rollbackFor = Exception.class)
  *
  * @author Snykta
  * @since 2023-09-27
@@ -71,6 +72,7 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
      * 注册
      * @param sysUserDto
      */
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void doRegister(SysUserDto sysUserDto) {
         if (CyObjUtil.isNull(sysUserDto)) {
@@ -87,9 +89,14 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
         }
         boolean existsFlag = sysUserMapper.exists(Wrappers.<SysUserEntity>lambdaQuery().eq(SysUserEntity::getPhoneNumber, sysUserDto.getPhoneNumber()));
         if (existsFlag) {
-            throw new ServiceException("注册账号已存在");
+            throw new ServiceException("注册手机号已存在");
         }
         sysUserDto.setId(null);
+        sysUserDto.setStatusCode(DictValueConstant.sys_status_code_正常);
+        sysUserDto.setPassword(CyEncryptUtil.encryptAes(sysUserDto.getPassword()));
+        sysUserDto.setCreateId(null);
+        sysUserDto.setCreateName(null);
+        sysUserDto.setCreateTime(null);
         sysUserMapper.insert(CyConvertUtil.convertToEntity(sysUserDto, SysUserEntity.class));
     }
 

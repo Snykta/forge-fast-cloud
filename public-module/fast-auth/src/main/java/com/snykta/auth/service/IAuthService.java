@@ -6,7 +6,7 @@ import com.snykta.auth.dto.SysUserDto;
 public interface IAuthService {
 
     /**
-     * 用户登录 并返回token
+     * 登录 并返回token
      * @param phoneNumber
      * @param password
      * @return

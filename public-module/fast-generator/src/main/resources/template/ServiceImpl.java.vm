@@ -14,10 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * ${comments}
  *
- * 1、禁止删除 @Transactional(readOnly = true)
+ * 1、禁止删除 @Transactional(readOnly = true)！！！！增删改的方法上必须加上 @Transactional(rollbackFor = Exception.class)否则将操作失败！！！
  * 2、禁止继承或者实现mybatisPlus自带的crud基类service
+ * 3、所有crud操作下沉到Mapper层，service只关心业务
  *
- * 增删改的操作方法上需要加上 @Transactional(rollbackFor = Exception.class)
  *
  * @author ${author}
  * @since ${date}

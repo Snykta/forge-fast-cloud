@@ -13,7 +13,7 @@ import com.snykta.system.entity.SysUserEntity;
 public interface ISysUserService {
 
     /**
-     * 用户登录
+     * 登录
      * @param phoneNumber
      * @param password
      * @return

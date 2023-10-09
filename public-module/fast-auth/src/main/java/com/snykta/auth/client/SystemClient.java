@@ -15,15 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface SystemClient {
 
     /**
-     * 注册
-     * @param sysUserDto
-     * @return
-     */
-    @PostMapping(value = "sysUser/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
-    Ret<Void> doRegister(@RequestBody SysUserDto sysUserDto);
-
-
-    /**
      * 登录
      * @param phoneNumber
      * @param password
@@ -31,6 +22,17 @@ public interface SystemClient {
      */
     @PostMapping(value = "sysUser/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     Ret<SysUserDto> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password);
+
+
+    /**
+     * 注册
+     * @param sysUserDto
+     * @return
+     */
+    @PostMapping(value = "sysUser/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
+    Ret<String> doRegister(@RequestBody SysUserDto sysUserDto);
+
+
 
 
 

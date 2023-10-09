@@ -33,25 +33,25 @@ public class SysUserController extends BaseController {
 
 
     /**
-     * 用户登录
+     * 登录
      * @param phoneNumber
      * @param password
      * @return
      */
-    @ApiOperation("用户登录")
+    @ApiOperation("登录")
     @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public Ret<SysUserDto> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
         return Ret.success(sysUserService.doLogin(phoneNumber, password));
     }
 
     /**
-     * 用户注册
+     * 注册
      * @param sysUserDto
      * @return
      */
-    @ApiOperation("用户注册")
+    @ApiOperation("注册")
     @PostMapping(value = "/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Ret<Void> doRegister(@RequestBody SysUserDto sysUserDto) {
+    public Ret<String> doRegister(@RequestBody SysUserDto sysUserDto) {
         sysUserService.doRegister(sysUserDto);
         return Ret.success("注册成功");
     }

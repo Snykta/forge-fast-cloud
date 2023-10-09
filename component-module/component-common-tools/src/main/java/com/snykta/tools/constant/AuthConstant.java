@@ -37,4 +37,9 @@ public class AuthConstant {
      */
     public static final String iv_salt = "2017$_!($/}17Y$@";
 
+    /**
+     * 用户密码加密的Key，必须是16位字符
+     */
+    public static final String key_salt = "2023%{=U@+*A0?/#";
+
 }

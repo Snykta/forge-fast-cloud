@@ -24,8 +24,7 @@ public class GlobalExceptionHandler {
      * 业务异常
      */
     @ExceptionHandler(ServiceException.class)
-    public Ret<Void> handleServiceException(ServiceException e, HttpServletRequest request)
-    {
+    public Ret<Void> handleServiceException(ServiceException e, HttpServletRequest request) {
         if (CyStrUtil.isEmpty(e.getMessage())) {
             e.setMessage("系统内部异常");
         }
@@ -40,8 +39,7 @@ public class GlobalExceptionHandler {
      * 请求方式不支持
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public Ret<Void> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e, HttpServletRequest request)
-    {
+    public Ret<Void> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',不支持'{}'请求", requestURI, e.getMethod());
         return Ret.fail("请求方式不支持");

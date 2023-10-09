@@ -51,9 +51,9 @@ public class SysUserDto implements Serializable {
 
 
     /**
-    * 帐号状态（0正常 1停用）
+    * 帐号状态（Y正常 N停用）
     */
-    @ApiModelProperty(value = "帐号状态（0正常 1停用）")
+    @ApiModelProperty(value = "帐号状态（Y正常 N停用）")
     private String statusCode;
 
 

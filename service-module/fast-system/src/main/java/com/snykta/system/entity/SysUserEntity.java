@@ -49,7 +49,7 @@ public class SysUserEntity extends BaseEntity {
     private String password;
 
     /**
-     * 帐号状态（0正常 1停用）
+     * 帐号状态（Y正常 N停用）
      */
     @TableField("status_code")
     private String statusCode;

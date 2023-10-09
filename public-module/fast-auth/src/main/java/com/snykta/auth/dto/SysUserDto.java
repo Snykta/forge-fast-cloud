@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -52,9 +53,9 @@ public class SysUserDto implements Serializable {
 
 
     /**
-    * 帐号状态（0正常 1停用）
+    * 帐号状态（Y正常 N停用）
     */
-    @ApiModelProperty(value = "帐号状态（0正常 1停用）")
+    @ApiModelProperty(value = "帐号状态（Y正常 N停用）")
     private String statusCode;
 
 
@@ -108,5 +109,15 @@ public class SysUserDto implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remarkInfo;
 
+
+    /**
+     * 权限编码集合
+     */
+    private List<String> rightCodeList;
+
+    /**
+     * 角色编码集合
+     */
+    private  List<String> roleCodeList;
 
 }

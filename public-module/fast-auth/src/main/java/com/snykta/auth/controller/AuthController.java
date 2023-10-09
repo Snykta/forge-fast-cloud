@@ -2,8 +2,10 @@ package com.snykta.auth.controller;
 
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.snykta.auth.dto.SysUserDto;
 import com.snykta.auth.service.IAuthService;
 import com.snykta.basic.web.web.controller.BaseController;
+import com.snykta.security.token.BasicToken;
 import com.snykta.security.utils.CyTokenUtil;
 import com.snykta.security.utils.TokenUserInfo;
 import com.snykta.tools.constant.AuthConstant;
@@ -29,7 +31,7 @@ public class AuthController extends BaseController {
 
 
     /**
-     * 用户登录并且返回token
+     * 登录并且返回token
      * @param phoneNumber
      * @param password
      * @return
@@ -39,15 +41,38 @@ public class AuthController extends BaseController {
         return Ret.success(authService.doLogin(phoneNumber, password));
     }
 
+    /**
+     * 注册
+     * @param sysUserDto
+     * @return
+     */
+    @PostMapping(value = "/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Ret<Void> doRegister(@RequestBody SysUserDto sysUserDto) {
+        authService.doRegister(sysUserDto);
+        return Ret.success("注册成功");
+    }
+
 
     /**
      * 刷新token，将返回新的token
      * @param headers
      * @return
      */
-    @GetMapping("/refreshToken")
+    @PostMapping("/refreshToken")
     public Ret<String> refreshToken(@RequestHeader HttpHeaders headers) {
         return Ret.success(CyTokenUtil.refreshToken(headers.getFirst(AuthConstant.head_token_key)));
     }
+
+
+    /**
+     * 校验Token
+     * token放在请求头中
+     * @return 返回用户信息数据
+     */
+    @PostMapping
+    public Ret<BasicToken> validateToken() {
+        return Ret.success(CyTokenUtil.validateToken());
+    }
+
 
 }
