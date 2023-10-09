@@ -1,7 +1,6 @@
 package com.snykta.auth.client;
 
 import com.snykta.auth.dto.SysUserDto;
-import com.snykta.tools.dto.TokenUserInfo;
 import com.snykta.tools.web.result.Ret;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -31,7 +30,7 @@ public interface SystemClient {
      * @return
      */
     @PostMapping(value = "sysUser/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    Ret<TokenUserInfo> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password);
+    Ret<SysUserDto> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password);
 
 
 

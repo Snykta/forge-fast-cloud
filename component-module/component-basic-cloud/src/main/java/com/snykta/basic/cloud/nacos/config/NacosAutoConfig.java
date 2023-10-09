@@ -1,4 +1,4 @@
-package com.snykta.basic.cloud.config;
+package com.snykta.basic.cloud.nacos.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.DisposableBean;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+
 import javax.annotation.PostConstruct;
 
 

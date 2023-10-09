@@ -3,7 +3,6 @@ package com.snykta.system.service;
 
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.entity.SysUserEntity;
-import com.snykta.tools.dto.TokenUserInfo;
 
 /**
  * 用户信息表
@@ -19,7 +18,7 @@ public interface ISysUserService {
      * @param password
      * @return
      */
-    TokenUserInfo doLogin(String phoneNumber, String password);
+    SysUserDto doLogin(String phoneNumber, String password);
 
     /**
      * 注册

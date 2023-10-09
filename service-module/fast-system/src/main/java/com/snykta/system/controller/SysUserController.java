@@ -2,7 +2,6 @@ package com.snykta.system.controller;
 
 
 import com.snykta.basic.web.web.controller.BaseController;
-import com.snykta.tools.dto.TokenUserInfo;
 import com.snykta.tools.web.page.PageDto;
 import com.snykta.tools.web.result.Ret;
 import io.swagger.annotations.Api;
@@ -41,7 +40,7 @@ public class SysUserController extends BaseController {
      */
     @ApiOperation("用户登录")
     @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public Ret<TokenUserInfo> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
+    public Ret<SysUserDto> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
         return Ret.success(sysUserService.doLogin(phoneNumber, password));
     }
 

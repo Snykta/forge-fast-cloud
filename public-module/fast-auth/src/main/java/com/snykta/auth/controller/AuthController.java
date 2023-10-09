@@ -4,9 +4,14 @@ package com.snykta.auth.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import com.snykta.auth.service.IAuthService;
 import com.snykta.basic.web.web.controller.BaseController;
+import com.snykta.security.utils.CyTokenUtil;
+import com.snykta.security.utils.TokenUserInfo;
+import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.web.result.Ret;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import javax.annotation.Resource;
@@ -22,8 +27,6 @@ public class AuthController extends BaseController {
         this.authService = authService;
     }
 
-    @Resource
-    private RestTemplate restTemplate;
 
     /**
      * 用户登录并且返回token
@@ -37,15 +40,14 @@ public class AuthController extends BaseController {
     }
 
 
-
-
-    @GetMapping("/cc")
-    public Ret<String> cc(String token) {
-
-        System.out.println(StpUtil.getTokenValue());
-        System.out.println(StpUtil.getTokenInfo());
-        System.out.println(StpUtil.getTokenSession());
-        return Ret.success();
+    /**
+     * 刷新token，将返回新的token
+     * @param headers
+     * @return
+     */
+    @GetMapping("/refreshToken")
+    public Ret<String> refreshToken(@RequestHeader HttpHeaders headers) {
+        return Ret.success(CyTokenUtil.refreshToken(headers.getFirst(AuthConstant.head_token_key)));
     }
 
 }

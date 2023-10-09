@@ -7,7 +7,6 @@ import com.snykta.system.mapper.SysUserMapper;
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.entity.SysUserEntity;
 import com.snykta.system.service.ISysUserService;
-import com.snykta.tools.dto.TokenUserInfo;
 import com.snykta.tools.utils.CyConvertUtil;
 import com.snykta.tools.utils.CyEncryptUtil;
 import com.snykta.tools.utils.CyObjUtil;
@@ -47,7 +46,7 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
      * @return
      */
     @Override
-    public TokenUserInfo doLogin(String phoneNumber, String password) {
+    public SysUserDto doLogin(String phoneNumber, String password) {
         if (CyStrUtil.isEmpty(phoneNumber)) {
             throw new ServiceException("请输入登录手机号");
         }
@@ -61,15 +60,11 @@ public class SysUserServiceImpl extends BaseService implements ISysUserService {
         if (!CyStrUtil.equals(CyEncryptUtil.decryptAes(sysUserEntity.getPassword()), password)) {
             throw new ServiceException("账户或密码不正确");
         }
-        TokenUserInfo tokenUserInfo = new TokenUserInfo();
-        tokenUserInfo.setId(sysUserEntity.getId());
-        tokenUserInfo.setPhoneNumber(sysUserEntity.getPhoneNumber());
-        tokenUserInfo.setNickName(sysUserEntity.getNickName());
-        tokenUserInfo.setPassword(sysUserEntity.getPassword());
-        tokenUserInfo.setStatusCode(sysUserEntity.getStatusCode());
+        SysUserDto sysUserDto = CyConvertUtil.convertToDto(sysUserEntity, SysUserDto.class);
         // TODO 添加权限、角色
 
-        return tokenUserInfo;
+
+        return sysUserDto;
     }
 
     /**
