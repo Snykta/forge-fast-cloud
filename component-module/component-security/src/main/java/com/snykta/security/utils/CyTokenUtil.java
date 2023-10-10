@@ -11,7 +11,6 @@ import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;
 
-
 public class CyTokenUtil {
 
     /**
@@ -20,22 +19,24 @@ public class CyTokenUtil {
      * @return
      */
     public static String createToken(BasicToken basicToken) {
-        StpUtil.logout(basicToken.getUserId());
+        if (StpUtil.isLogin(basicToken.getUserId())) {
+            StpUtil.logout(basicToken.getUserId());
+        }
         StpUtil.login(basicToken.getUserId());
-        String tokenValue = StpUtil.getTokenValue();
-        SaSession tokenSession = StpUtil.getTokenSessionByToken(tokenValue);
-        tokenSession.set(AuthConstant.token_user_info, basicToken);
-        tokenSession.updateTimeout(AuthConstant.token_session_Timeout);
-        return tokenValue;
+
+        SaSession accountSession = StpUtil.getSessionByLoginId(basicToken.getUserId());
+        accountSession.set(AuthConstant.token_user_info, basicToken);
+
+        return StpUtil.getTokenValue();
     }
 
 
     /**
      * 刷新Token
-     * @param token
+     *
      * @return
      */
-    public static String refreshToken(String token) {
+    public static String refreshToken() {
         String oldTokenValue = StpUtil.getTokenValue();
         if (CyStrUtil.isEmpty(oldTokenValue)) {
             throw new ServiceException("token不存在");
@@ -44,16 +45,18 @@ public class CyTokenUtil {
         if (tokenInfo.getIsLogin()) {
             throw new ServiceException("token在有效期内，无需刷新");
         }
-        SaSession tokenSession = StpUtil.stpLogic.getTokenSessionByToken(token, false);
-        if (CyObjUtil.isNull(tokenSession)) {
+        if (tokenInfo.getTokenTimeout() <= 0) {
             throw new ServiceException("token已超时，请重新登录", ResultCode.UN_AUTHORIZED);
         }
-        BasicToken modelToken = tokenSession.getModel(AuthConstant.token_user_info, BasicToken.class);
+        StpUtil.updateLastActiveToNow();
+        SaSession accountSession = StpUtil.getSessionByLoginId(StpUtil.getLoginId(), false);
+        if (CyObjUtil.isNull(accountSession)) {
+            throw new ServiceException("token已超时，请重新登录", ResultCode.UN_AUTHORIZED);
+        }
+        BasicToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
         if (CyObjUtil.isNull(modelToken)) {
             throw new ServiceException("token已超时，请重新登录", ResultCode.UN_AUTHORIZED);
         }
-        // 退出原有登录
-        StpUtil.logoutByTokenValue(oldTokenValue);
         // 生成新token
         return createToken(modelToken);
     }
@@ -72,17 +75,25 @@ public class CyTokenUtil {
         if (!tokenInfo.getIsLogin()) {
             throw new ServiceException("未认证，请登录", ResultCode.UN_AUTHORIZED);
         }
-        SaSession tokenSession = StpUtil.stpLogic.getTokenSessionByToken(oldTokenValue, false);
-        if (CyObjUtil.isNull(tokenSession)) {
-            throw new ServiceException("未认证，请登录", ResultCode.UN_AUTHORIZED);
-        }
-        BasicToken modelToken = tokenSession.getModel(AuthConstant.token_user_info, BasicToken.class);
+        SaSession accountSession = StpUtil.getSessionByLoginId(tokenInfo.getLoginId(), false);
+        BasicToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
         if (CyObjUtil.isNull(modelToken)) {
             throw new ServiceException("未认证，请登录", ResultCode.UN_AUTHORIZED);
         }
         return modelToken;
     }
 
+
+    /**
+     * 退出登录
+     */
+    public static void doLogout() {
+        String oldTokenValue = StpUtil.getTokenValue();
+        if (CyStrUtil.isEmpty(oldTokenValue)) {
+            return;
+        }
+        StpUtil.logoutByTokenValue(oldTokenValue);
+    }
 
 
 }

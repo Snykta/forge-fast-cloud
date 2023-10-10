@@ -15,19 +15,19 @@ public class AuthConstant {
     public static final String token_user_info = "token_user_info";
 
     /**
-     * token 有效期（单位：秒） 默认5天
+     * token 有效期（单位：秒） 默认7天
      */
-    public static final long token_Timeout = 5 * 24 * 60 * 60;
+    public static final long token_timeout = 7 * 24 * 60 * 60;
 
     /**
-     * tokenSession 有效期（单位：秒） 默认7天  token_session > token_Timeout
+     * token的活跃期 有效期（单位：秒） 默认5天  token_timeout > token_active_timeout
      */
-    public static final long token_session_Timeout = 7 * 24 * 60 * 60;
+    public static final long token_active_timeout = 5 * 24 * 60 * 60;
 
     /**
-     * token是否自动继签
+     * token活跃期是否自动继签active_timeout时间
      *
-     * true：当token过期后系统自动续签
+     * true：当token的活跃期过期后系统自动续签
      * false：不自动续签，由开发者根据实际业务情况自动刷新token
      */
     public static final boolean isAutoRenew_token = false;

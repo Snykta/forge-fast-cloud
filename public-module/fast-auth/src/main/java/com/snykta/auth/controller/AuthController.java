@@ -52,15 +52,24 @@ public class AuthController extends BaseController {
         return Ret.success("注册成功");
     }
 
+    /**
+     * 退出登录
+     * @return
+     */
+    @GetMapping(value = "/doLogout")
+    public Ret<Void> doLogout() {
+        CyTokenUtil.doLogout();
+        return Ret.success("退出登录成功");
+    }
+
 
     /**
      * 刷新token，将返回新的token
-     * @param headers
      * @return
      */
     @PostMapping("/refreshToken")
-    public Ret<String> refreshToken(@RequestHeader HttpHeaders headers) {
-        return Ret.success(CyTokenUtil.refreshToken(headers.getFirst(AuthConstant.head_token_key)));
+    public Ret<String> refreshToken() {
+        return Ret.success(CyTokenUtil.refreshToken());
     }
 
 
@@ -69,7 +78,7 @@ public class AuthController extends BaseController {
      * token放在请求头中
      * @return 返回用户信息数据
      */
-    @PostMapping
+    @PostMapping("/validateToken")
     public Ret<BasicToken> validateToken() {
         return Ret.success(CyTokenUtil.validateToken());
     }
