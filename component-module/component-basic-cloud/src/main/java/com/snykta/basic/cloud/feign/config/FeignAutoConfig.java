@@ -17,6 +17,9 @@ import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomize
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.http.converter.HttpMessageConverter;
+
+import java.util.stream.Collectors;
 
 
 /**
@@ -64,6 +67,11 @@ public class FeignAutoConfig implements DisposableBean {
         return new FeignErrorDecoder();
     }
 
+
+    @Bean
+    public HttpMessageConverters messageConverters(ObjectProvider<HttpMessageConverter<?>> converters) {
+        return new HttpMessageConverters(converters.orderedStream().collect(Collectors.toList()));
+    }
 
 
     @Override

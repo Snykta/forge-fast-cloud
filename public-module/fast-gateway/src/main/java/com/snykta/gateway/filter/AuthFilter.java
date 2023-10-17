@@ -1,0 +1,67 @@
+package com.snykta.gateway.filter;
+
+
+import com.snykta.gateway.client.AuthClient;
+import com.snykta.gateway.utils.WebFluxUtil;
+import com.snykta.security.token.BasicToken;
+import com.snykta.tools.constant.AuthConstant;
+import com.snykta.tools.constant.WebConstant;
+import com.snykta.tools.utils.CyStrUtil;
+import com.snykta.tools.web.result.ResultCode;
+import com.snykta.tools.web.result.Ret;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.gateway.filter.GatewayFilterChain;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.core.Ordered;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import reactor.core.publisher.Mono;
+
+/**
+ * Gateway认证授权
+ */
+
+@Slf4j
+@Component
+public class AuthFilter implements GlobalFilter, Ordered {
+
+
+    private final AuthClient authClient;
+    public AuthFilter(AuthClient authClient) {
+        this.authClient = authClient;
+    }
+
+
+    @Override
+    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        ServerHttpRequest request = exchange.getRequest();
+
+        String url = request.getURI().getPath();
+        if (WebConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {
+            return chain.filter(exchange);
+        }
+
+        String token = request.getHeaders().getFirst(AuthConstant.head_token_key);
+        if (CyStrUtil.isEmpty(token)) {
+            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, Ret.fail(ResultCode.UN_AUTHORIZED, "未认证，请登录"));
+        }
+        Ret<BasicToken> ret = authClient.validateToken();
+        if (Ret.isError(ret)) {
+            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, ret);
+        }
+
+        return chain.filter(exchange);
+    }
+
+
+
+
+
+
+    @Override
+    public int getOrder() {
+        return -200;
+    }
+}
