@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class GeneratorApplication {
+public class FastGeneratorApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GeneratorApplication.class, args);
+        SpringApplication.run(FastGeneratorApplication.class, args);
     }
 
 }
