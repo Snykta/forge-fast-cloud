@@ -1,7 +1,9 @@
 package com.snykta.system.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckRole;
 import com.snykta.basic.web.web.controller.BaseController;
+import com.snykta.system.dto.SearchUserDto;
 import com.snykta.tools.web.page.PageDto;
 import com.snykta.tools.web.result.Ret;
 import io.swagger.annotations.Api;
@@ -33,27 +35,15 @@ public class SysUserController extends BaseController {
 
 
     /**
-     * 登录
-     * @param phoneNumber
-     * @param password
+     * 分页查询用户数据
+     * @param searchUserDto
      * @return
      */
-    @ApiOperation("登录")
-    @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public Ret<SysUserDto> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
-        return Ret.success(sysUserService.doLogin(phoneNumber, password));
-    }
-
-    /**
-     * 注册
-     * @param sysUserDto
-     * @return
-     */
-    @ApiOperation("注册")
-    @PostMapping(value = "/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Ret<String> doRegister(@RequestBody SysUserDto sysUserDto) {
-        sysUserService.doRegister(sysUserDto);
-        return Ret.success("注册成功");
+    @SaCheckRole("super-admin")
+    @ApiOperation("分页查询用户数据")
+    @PostMapping(value = "/queryPage", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Ret<PageDto<SysUserDto>> queryPage(@RequestBody SearchUserDto searchUserDto) {
+        return Ret.success(sysUserService.queryPage(searchUserDto));
     }
 
 

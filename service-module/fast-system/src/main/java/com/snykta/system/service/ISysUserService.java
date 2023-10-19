@@ -1,8 +1,9 @@
 package com.snykta.system.service;
 
 
+import com.snykta.system.dto.SearchUserDto;
 import com.snykta.system.dto.SysUserDto;
-import com.snykta.system.entity.SysUserEntity;
+import com.snykta.tools.web.page.PageDto;
 
 /**
  * 用户信息表
@@ -13,17 +14,9 @@ import com.snykta.system.entity.SysUserEntity;
 public interface ISysUserService {
 
     /**
-     * 登录
-     * @param phoneNumber
-     * @param password
+     * 分页查询用户
+     * @param searchUserDto
      * @return
      */
-    SysUserDto doLogin(String phoneNumber, String password);
-
-    /**
-     * 注册
-     * @param sysUserDto
-     */
-    void doRegister(SysUserDto sysUserDto);
-
+    PageDto<SysUserDto> queryPage(SearchUserDto searchUserDto);
 }

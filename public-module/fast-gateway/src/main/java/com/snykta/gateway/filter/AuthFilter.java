@@ -37,8 +37,11 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        ServerHttpRequest.Builder mutate = request.mutate();
 
+        // 请求URL
         String url = request.getURI().getPath();
+        // 忽略不校验的url
         if (WebConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {
             return chain.filter(exchange);
         }
@@ -47,7 +50,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (CyStrUtil.isEmpty(token)) {
             return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, Ret.fail(ResultCode.UN_AUTHORIZED, "未认证，请登录"));
         }
-        Ret<BasicToken> ret = authClient.validateToken();
+        Ret<BasicToken> ret = authClient.validateToken(token);
         if (Ret.isError(ret)) {
             return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, ret);
         }

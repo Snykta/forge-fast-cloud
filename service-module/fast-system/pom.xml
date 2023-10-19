@@ -36,6 +36,11 @@
 			<artifactId>component-redis</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.snykta</groupId>
+			<artifactId>component-security</artifactId>
+		</dependency>
+
 
 		<dependency>
 			<groupId>com.snykta</groupId>

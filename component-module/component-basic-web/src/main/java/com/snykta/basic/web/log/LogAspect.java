@@ -4,7 +4,6 @@ package com.snykta.basic.web.log;
 import cn.hutool.json.JSONUtil;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.basic.web.web.utils.IpUtil;
-import com.snykta.tools.constant.SaTokenConstant;
 import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.utils.CyExceptionUtil;
@@ -117,16 +116,10 @@ public class LogAspect {
                     }
                 }
             }
-            String stackMessage = CyExceptionUtil.getStackMsg(e);
-            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + stackMessage);
+            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + CyExceptionUtil.getStackMsg(e));
             success = false;
 
-            if (SaTokenConstant.isSaAuthorizeException(stackMessage)) {
-                throw new ServiceException("请先登录", ResultCode.UN_AUTHORIZED);
-            }
-            if (SaTokenConstant.isSaPermissionsException(stackMessage)) {
-                throw new ServiceException("无权限操作", ResultCode.UN_PERMISSIONS);
-            }
+            // 抛出业务异常
             throw new ServiceException(errorMsg, CyObjUtil.isNull(resultCode) ? ResultCode.ERROR : resultCode);
         } finally {
             stopWatch.stop();

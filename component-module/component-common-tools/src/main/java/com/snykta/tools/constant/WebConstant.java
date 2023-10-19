@@ -14,7 +14,7 @@ public class WebConstant {
     /**
      * gateway忽略不校验的URl
      */
-    public static final List<String> ignoreUrlList = Arrays.asList("/fast-auth/auth/doLogin", "/fast-auth/auth/doRegister",
-            "/fast-auth/auth/doLogout", "/fast-auth/auth/refreshToken");
+    public static final List<String> ignoreUrlList = Arrays.asList("/fast-auth/auth/doLogin",
+                    "/fast-auth/auth/doRegister", "/fast-auth/auth/doLogout", "/fast-auth/auth/refreshToken");
 
 }

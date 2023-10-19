@@ -21,12 +21,8 @@ import javax.servlet.Servlet;
 public class WebMvcConfig implements WebMvcConfigurer {
 
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        log.info("加载映射资源目录...");
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-//        registry.addResourceHandler("/swagger-ui/**")
-//                .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
+    public WebMvcConfig() {
+        log.info("初始化[WebMvc]模块...");
     }
 
 

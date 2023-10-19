@@ -1,22 +1,18 @@
 package com.snykta.auth.controller;
 
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.snykta.auth.dto.SysUserDto;
 import com.snykta.auth.service.IAuthService;
+import com.snykta.basic.web.annotation.RateLimiter;
 import com.snykta.basic.web.web.controller.BaseController;
 import com.snykta.security.token.BasicToken;
 import com.snykta.security.utils.CyTokenUtil;
-import com.snykta.security.utils.TokenUserInfo;
-import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.web.result.Ret;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-import javax.annotation.Resource;
+
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -38,7 +34,7 @@ public class AuthController extends BaseController {
      */
     @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public Ret<String> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
-        return Ret.success(authService.doLogin(phoneNumber, password));
+        return Ret.success("登录成功", authService.doLogin(phoneNumber, password));
     }
 
     /**
@@ -67,9 +63,10 @@ public class AuthController extends BaseController {
      * 刷新token，将返回新的token
      * @return
      */
+    @RateLimiter(value = 1, timeout = 5, timeUnit = TimeUnit.SECONDS)
     @PostMapping("/refreshToken")
     public Ret<String> refreshToken() {
-        return Ret.success(CyTokenUtil.refreshToken());
+        return Ret.success("刷新成功", CyTokenUtil.refreshToken());
     }
 
 

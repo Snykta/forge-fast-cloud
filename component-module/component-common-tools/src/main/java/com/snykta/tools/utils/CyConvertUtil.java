@@ -203,7 +203,7 @@ public class CyConvertUtil extends Convert {
     public static <E, T> PageDto<T> toPageDto(E page, Class<T> clazz){
         // 目前默认只转换 MybatisPlus
         MybatisPlusPage mybatisPlusPage = CyBeanUtil.copyProperties(page, MybatisPlusPage.class);
-        // 未来如果使用其他分页，比如jpa，则使用 SpringDataJpaPage
+        // 未来如果使用其他分页，比如jpa，则使用 SpringDataJpaPage 或者别的适配类
         return PageDto.<T>builder().pageSize(mybatisPlusPage.getSize())
                 .pageNum(mybatisPlusPage.getCurrent())
                 .totalCount(mybatisPlusPage.getTotal())

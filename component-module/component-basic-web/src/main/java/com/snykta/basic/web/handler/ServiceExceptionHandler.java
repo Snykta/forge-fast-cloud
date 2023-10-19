@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 全局异常处理器
+ * Web全局异常处理器
  */
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public class ServiceExceptionHandler {
 
     /**
      * 业务异常
