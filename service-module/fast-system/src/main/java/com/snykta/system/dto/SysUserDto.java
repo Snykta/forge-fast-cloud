@@ -6,6 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -107,5 +108,18 @@ public class SysUserDto implements Serializable {
     @ApiModelProperty(value = "备注")
     private String remarkInfo;
 
+
+
+    /**
+     * 权限编码集合
+     */
+    @ApiModelProperty(value = "权限编码集合")
+    private List<String> rightCodeList;
+
+    /**
+     * 角色编码集合
+     */
+    @ApiModelProperty(value = "角色编码集合")
+    private  List<String> roleCodeList;
 
 }

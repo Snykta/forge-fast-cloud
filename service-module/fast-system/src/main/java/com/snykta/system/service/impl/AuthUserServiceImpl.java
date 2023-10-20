@@ -8,10 +8,7 @@ import com.snykta.system.mapper.SysUserMapper;
 import com.snykta.system.service.IAuthUserService;
 import com.snykta.tools.constant.DictValueConstant;
 import com.snykta.tools.exception.ServiceException;
-import com.snykta.tools.utils.CyConvertUtil;
-import com.snykta.tools.utils.CyEncryptUtil;
-import com.snykta.tools.utils.CyObjUtil;
-import com.snykta.tools.utils.CyStrUtil;
+import com.snykta.tools.utils.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,7 +57,13 @@ public class AuthUserServiceImpl extends BaseService implements IAuthUserService
             throw new ServiceException("账户或密码不正确");
         }
         SysUserDto sysUserDto = CyConvertUtil.convertToDto(sysUserEntity, SysUserDto.class);
-        // TODO 添加权限、角色
+
+        if (CyObjUtil.isNotNull(sysUserDto)) {
+            sysUserDto.setRightCodeList(CyCollectionUtil.newArrayList("sysUser-query"));
+            // TODO 添加权限、角色
+        }
+
+
 
 
         return sysUserDto;

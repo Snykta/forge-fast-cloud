@@ -96,4 +96,18 @@ public class CyTokenUtil {
     }
 
 
+    /**
+     * 获取用户实体信息
+     * @param loginId
+     * @return
+     */
+    public static BasicToken getBasicToken(Object loginId) {
+        BasicToken basicToken = new BasicToken();
+        SaSession accountSession = StpUtil.getSessionByLoginId(loginId, false);
+        if (CyObjUtil.isNotNull(accountSession)) {
+            basicToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
+        }
+        return basicToken;
+    }
+
 }

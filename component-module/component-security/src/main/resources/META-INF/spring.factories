@@ -1,6 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.snykta.security.config.SaTokenAutoConfig,\
-  com.snykta.security.handler.SecurityExceptionHandler
+  com.snykta.security.handler.SecurityExceptionHandler,\
+  com.snykta.security.Interceptor.AuthorizeInterceptor
 
 
 

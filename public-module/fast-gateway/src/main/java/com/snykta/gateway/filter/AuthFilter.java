@@ -6,6 +6,7 @@ import com.snykta.gateway.utils.WebFluxUtil;
 import com.snykta.security.token.BasicToken;
 import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.constant.WebConstant;
+import com.snykta.tools.utils.CyExceptionUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;
 import com.snykta.tools.web.result.Ret;
@@ -44,14 +45,18 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (WebConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {
             return chain.filter(exchange);
         }
-
-        String token = request.getHeaders().getFirst(AuthConstant.head_token_key);
-        if (CyStrUtil.isEmpty(token)) {
-            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, Ret.fail(ResultCode.UN_AUTHORIZED, "未认证，请登录"));
-        }
-        Ret<BasicToken> ret = authClient.validateToken(token);
-        if (Ret.isError(ret)) {
-            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, ret);
+        try {
+            String token = request.getHeaders().getFirst(AuthConstant.head_token_key);
+            if (CyStrUtil.isEmpty(token)) {
+                return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, Ret.fail(ResultCode.UN_AUTHORIZED, "未认证，请登录"));
+            }
+            Ret<BasicToken> ret = authClient.validateToken(token);
+            if (Ret.isError(ret)) {
+                return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, ret);
+            }
+        } catch (Exception e) {
+            log.error("\r\ngateway处理器异常：" + CyExceptionUtil.getStackMsg(e));
+            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.INTERNAL_SERVER_ERROR, Ret.fail(ResultCode.ERROR, e.getMessage()));
         }
 
         return chain.filter(exchange);

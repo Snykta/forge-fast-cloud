@@ -1,6 +1,7 @@
 package com.snykta.system.controller;
 
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaCheckRole;
 import com.snykta.basic.web.web.controller.BaseController;
 import com.snykta.system.dto.SearchUserDto;
@@ -39,7 +40,7 @@ public class SysUserController extends BaseController {
      * @param searchUserDto
      * @return
      */
-    @SaCheckRole("super-admin")
+    @SaCheckPermission("sysUser-query")
     @ApiOperation("分页查询用户数据")
     @PostMapping(value = "/queryPage", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Ret<PageDto<SysUserDto>> queryPage(@RequestBody SearchUserDto searchUserDto) {
