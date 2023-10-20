@@ -7,6 +7,7 @@ import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;
 import com.snykta.tools.web.result.Ret;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -41,12 +42,21 @@ public class ServiceExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Ret<Void> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',不支持'{}'请求", requestURI, e.getMethod());
+        log.error("全局异常捕获-> 请求地址'{}'，不支持'{}'请求", requestURI, e.getMethod());
         return Ret.fail("请求方式不支持");
     }
 
 
-
+//    /**
+//     * 如果实体类上添加有@Transactional(readOnly = true)
+//     * 然后在具体的增删改的方法上没有添加（@Transactional）则会报此异常
+//     */
+//    @ExceptionHandler(TransientDataAccessResourceException.class)
+//    public Ret<Void> handleTransientDataAccessResourceException(TransientDataAccessResourceException e, HttpServletRequest request) {
+//        String requestURI = request.getRequestURI();
+//        log.error("全局异常捕获-> 请求地址'{}' 请检查具体方法上是否添加@Transactional", requestURI);
+//        return Ret.fail("系统内部异常");
+//    }
 
 
 

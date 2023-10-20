@@ -44,9 +44,9 @@ public class AuthUserController {
      */
     @ApiOperation("注册")
     @PostMapping(value = "/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Ret<String> doRegister(@RequestBody SysUserDto sysUserDto) {
+    public Ret<Void> doRegister(@RequestBody SysUserDto sysUserDto) {
         authUserService.doRegister(sysUserDto);
-        return Ret.success("注册成功");
+        return Ret.success();
     }
 
 

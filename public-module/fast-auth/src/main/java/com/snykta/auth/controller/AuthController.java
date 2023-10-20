@@ -34,7 +34,7 @@ public class AuthController extends BaseController {
      */
     @PostMapping(value = "/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public Ret<String> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password) {
-        return Ret.success("登录成功", authService.doLogin(phoneNumber, password));
+        return Ret.success(authService.doLogin(phoneNumber, password));
     }
 
     /**
@@ -45,7 +45,7 @@ public class AuthController extends BaseController {
     @PostMapping(value = "/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
     public Ret<Void> doRegister(@RequestBody SysUserDto sysUserDto) {
         authService.doRegister(sysUserDto);
-        return Ret.success("注册成功");
+        return Ret.success();
     }
 
     /**
@@ -55,7 +55,7 @@ public class AuthController extends BaseController {
     @GetMapping(value = "/doLogout")
     public Ret<Void> doLogout() {
         CyTokenUtil.doLogout();
-        return Ret.success("退出登录成功");
+        return Ret.success();
     }
 
 
@@ -66,7 +66,7 @@ public class AuthController extends BaseController {
     @RateLimiter(value = 1, timeout = 5, timeUnit = TimeUnit.SECONDS)
     @PostMapping("/refreshToken")
     public Ret<String> refreshToken() {
-        return Ret.success("刷新成功", CyTokenUtil.refreshToken());
+        return Ret.success(CyTokenUtil.refreshToken());
     }
 
 

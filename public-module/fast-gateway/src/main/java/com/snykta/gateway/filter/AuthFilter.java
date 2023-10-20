@@ -37,7 +37,6 @@ public class AuthFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        ServerHttpRequest.Builder mutate = request.mutate();
 
         // 请求URL
         String url = request.getURI().getPath();

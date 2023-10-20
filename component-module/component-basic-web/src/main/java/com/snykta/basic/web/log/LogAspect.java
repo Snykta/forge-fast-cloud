@@ -1,21 +1,24 @@
 package com.snykta.basic.web.log;
 
 
+import cn.hutool.core.date.TimeInterval;
+import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.basic.web.web.utils.IpUtil;
+import com.snykta.tools.utils.CyDateUtil;
 import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.utils.CyExceptionUtil;
 import com.snykta.tools.web.result.ResultCode;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -27,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -56,89 +60,101 @@ public class LogAspect {
 
     @Around("inAction()")
     public Object doAction(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        StopWatch stopWatch = new StopWatch();
+        boolean success = true;
+        TimeInterval timerWatch = CyDateUtil.timer();
         StringBuilder sbLog = new StringBuilder();
         sbLog.append("\n\r------------操作日志开始------------------");
+        LogDto logDto = new LogDto();
         Object returnValue = null;
-        boolean success = true;
-        LogDto logInfoDto = new LogDto();
         try {
-            stopWatch.start();
-            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-            assert attributes != null;
-            HttpServletRequest request = attributes.getRequest();
-            //1获得调用的类
+            HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+
             String className = proceedingJoinPoint.getTarget().getClass().getName();
-            logInfoDto.setClassName(className);
-            //获得调用的方法
+            logDto.setClassName(className);
+
             String methodName = proceedingJoinPoint.getSignature().getName();
-            logInfoDto.setMethodName(methodName);
-            //获得参数
-            List<Object> canSerizableList = new ArrayList<>();
+            logDto.setMethodName(methodName);
+
+            String appName = environment.getProperty("spring.application.name");
+            logDto.setAppName(appName);
+
+            List<Object> requestParamList = new ArrayList<>();
             Object[] args = proceedingJoinPoint.getArgs();
             for (Object object : args) {
                 if (CyObjUtil.isNotNull(object) && (object instanceof Serializable)) {
-                    canSerizableList.add(object);
+                    requestParamList.add(object);
                 }
             }
-            String paramInfo = JSONUtil.toJsonStr(canSerizableList);
+            String paramInfo = JSONUtil.toJsonStr(requestParamList);
             if (paramInfo.length() > 100000) {
                 paramInfo = "长度超长已进行截断:" + paramInfo.substring(0, 100000);
             }
-            String appName = environment.getProperty("spring.application.name");
-            sbLog.append("\n\r|--应用名称：" + appName);
-            logInfoDto.setAppName(appName);
-            sbLog.append("\n\r|--访问类名：" + className);
-            sbLog.append("\n\r|--访问方法：" + methodName);
-            sbLog.append("\n\r|--访问路径：" + request.getRequestURI());
-            try {
-                sbLog.append("\n\r|--请求参数：" + paramInfo);
-            } catch (Exception e) {
-                sbLog.append("\n\r|--请求参数：解析异常错误原因->" + e.getMessage());
-            }
-            sbLog.append("\n\r|--请求方IP：" + IpUtil.getIpAddr());
+            sbLog.append("\n\r|--应用名称：").append(appName);
+            sbLog.append("\n\r|--访问类名：").append(className);
+            sbLog.append("\n\r|--访问方法：").append(methodName);
+            sbLog.append("\n\r|--访问路径：").append(request.getRequestURI());
+            sbLog.append("\n\r|--请求参数：").append(paramInfo);
+            sbLog.append("\n\r|--请求方IP：").append(IpUtil.getIpAddr());
+
+
+            // 开始执行程序
             returnValue = proceedingJoinPoint.proceed();
-            sbLog.append("\n\r|--处理结果：正常");
+
+            sbLog.append("\n\r|--处理结果：成功");
 
         } catch (Exception e) {
             sbLog.append("\n\r|--处理结果：失败");
-            String errorMsg = null;
-            Integer resultCode = ResultCode.ERROR;
-            if (e instanceof ServiceException) {
-                errorMsg = e.getMessage();
-                resultCode = ((ServiceException) e).getCode();
-            } else {
-                if (CyStrUtil.isNotEmpty(e.getMessage())) {
-                    errorMsg = e.getMessage();
-                } else {
-                    if (CyObjUtil.isNotNull(e.getCause())) {
-                        errorMsg = e.getCause().toString();
-                    }
-                }
-            }
-            sbLog.append("\n\r|--错误内容：" + e + "\n\r" + CyExceptionUtil.getStackMsg(e));
+            sbLog.append("\n\r|--错误内容：")
+                    .append(e)
+                    .append("\n\r")
+                    .append(CyExceptionUtil.getStackMsg(e));
             success = false;
 
-            // 抛出业务异常
-            throw new ServiceException(errorMsg, CyObjUtil.isNull(resultCode) ? ResultCode.ERROR : resultCode);
+            // 二次处理，重新抛出异常
+            throw throwBindException(e);
         } finally {
-            stopWatch.stop();
-            Double totalTimeSeconds = stopWatch.getTotalTimeSeconds();
-            sbLog.append("\n\r|--请求耗时：" + String.format("%.2f", totalTimeSeconds) + " 秒");
+            double totalSeconds = (double) (timerWatch.interval()) / 1000;
+            sbLog.append("\n\r|--请求耗时：").append(String.format("%.2f", totalSeconds)).append("秒");
             sbLog.append("\n\r------------操作日志结束------------------");
-            //设置统计时间
-            logInfoDto.setTotalTime(totalTimeSeconds);
+            logDto.setTotalTime(totalSeconds);
+
             if (success) {
                 log.info(sbLog.toString());
-                //加入耗时统计的日志
-                log.info(logInfoDto.toString());
+                log.info(logDto.toString());
             } else {
                 log.error(sbLog.toString());
-                log.error(logInfoDto.toString());
+                log.error(logDto.toString());
             }
         }
 
+
         return returnValue;
+    }
+
+
+
+
+    /**
+     * 自定义异常类
+     * @param e
+     * @return
+     */
+    private ServiceException throwBindException(Exception e) {
+        String errorMsg = null;
+        Integer resultCode = ResultCode.ERROR;
+        if (e instanceof ServiceException) {
+            errorMsg = e.getMessage();
+            resultCode = ((ServiceException) e).getCode();
+        } else {
+            if (CyStrUtil.isNotEmpty(e.getMessage())) {
+                errorMsg = e.getMessage();
+            } else {
+                if (CyObjUtil.isNotNull(e.getCause())) {
+                    errorMsg = e.getCause().toString();
+                }
+            }
+        }
+        return new ServiceException(errorMsg, CyObjUtil.isNull(resultCode) ? ResultCode.ERROR : resultCode);
     }
 
 

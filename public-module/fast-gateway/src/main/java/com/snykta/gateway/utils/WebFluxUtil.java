@@ -22,6 +22,7 @@ public class WebFluxUtil {
      * @return Mono<Void>
      */
     public static Mono<Void> webFluxResponseWriter(ServerHttpResponse response, HttpStatus status, Ret<?> ret) {
+        response.setStatusCode(status);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSONUtil.toJsonStr(ret, JSONConfig.create().setIgnoreNullValue(false)).getBytes());
         return response.writeWith(Mono.just(dataBuffer));

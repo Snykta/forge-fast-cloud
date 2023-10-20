@@ -40,9 +40,9 @@ public class Ret<T> implements Serializable {
         return restResult(data,  ResultCode.SUCCESS, "操作成功");
     }
 
-    public static <T> Ret<T> success(String msg) {
-        return restResult(null, ResultCode.SUCCESS, msg);
-    }
+//    public static <T> Ret<T> success(String msg) {
+//        return restResult(null, ResultCode.SUCCESS, msg);
+//    }
 
     public static <T> Ret<T> success(String msg, T data) {
         return restResult(data, ResultCode.SUCCESS, msg);
