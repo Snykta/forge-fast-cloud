@@ -2,8 +2,10 @@ package com.snykta.basic.web.log;
 
 
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.json.JSONUtil;
+import com.snykta.tools.constant.WebConstant;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.basic.web.web.utils.IpUtil;
 import com.snykta.tools.utils.CyDateUtil;
@@ -15,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.slf4j.MDC;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
@@ -68,6 +71,13 @@ public class LogAspect {
         Object returnValue = null;
         try {
             HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+
+            // 获取全链路ID
+            String logback_trace_uuid = request.getHeader(WebConstant.logback_trace_uuid);
+            if (CyStrUtil.isNotEmpty(logback_trace_uuid)) {
+                MDC.put(WebConstant.logback_trace_uuid, logback_trace_uuid);
+                logDto.setRequestLinkId(logback_trace_uuid);
+            }
 
             String className = proceedingJoinPoint.getTarget().getClass().getName();
             logDto.setClassName(className);
@@ -125,6 +135,8 @@ public class LogAspect {
                 log.error(sbLog.toString());
                 log.error(logDto.toString());
             }
+            // 请求结束
+            MDC.clear();
         }
 
 

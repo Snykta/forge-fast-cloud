@@ -1,17 +1,13 @@
 package com.snykta.basic.cloud.feign.interceptor;
 
-import cn.hutool.extra.servlet.ServletUtil;
+import com.snykta.tools.constant.WebConstant;
 import com.snykta.tools.utils.CyCollectionUtil;
-import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import org.slf4j.MDC;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -23,20 +19,22 @@ public class FeignRequestInterceptor implements RequestInterceptor {
 
     @Override
     public void apply(RequestTemplate template) {
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        if (CyObjUtil.isNotNull(attributes)) {
-            // 转发请求头
-            HttpServletRequest request = attributes.getRequest();
-            Map<String, List<String>> headersMap = ServletUtil.getHeadersMap(request);
-            if (CyCollectionUtil.isNotEmpty(headersMap)) {
-                headersMap.forEach((key, values) -> {
-                    // Content-Type的信息不转发
-                    if (!CyStrUtil.containsIgnoreCase(key, "content-")) {
-                        template.header(key, values);
-                    }
-                });
-            }
+        Map<String, Collection<String>> headersMap = template.headers();
+        if (CyCollectionUtil.isNotEmpty(headersMap)) {
+            headersMap.forEach((key, values) -> {
+                // Content-Type的信息不转发
+                if (CyStrUtil.containsIgnoreCase(key, "content-")) {
+                    template.removeHeader(key);
+                }
+            });
         }
+
+        // 转发全链路ID
+        String logback_trace_uuid = MDC.get(WebConstant.logback_trace_uuid);
+        if (CyStrUtil.isNotEmpty(logback_trace_uuid)) {
+            template.header(WebConstant.logback_trace_uuid, logback_trace_uuid);
+        }
+
     }
 
 

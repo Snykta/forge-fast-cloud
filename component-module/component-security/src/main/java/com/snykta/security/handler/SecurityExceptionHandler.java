@@ -26,7 +26,7 @@ public class SecurityExceptionHandler {
      */
     @ExceptionHandler(NotLoginException.class)
     public Ret<Void> notLoginException(HttpServletRequest request) {
-        log.error("全局异常捕获-> 未认证，请登录。请求地址：'{}'", request.getRequestURI());
+        log.error("全局异常捕获 -> 未认证，请登录。请求地址：'{}'", request.getRequestURI());
         return Ret.fail(ResultCode.UN_AUTHORIZED, "未认证，请先登录");
     }
 
@@ -38,7 +38,7 @@ public class SecurityExceptionHandler {
      */
     @ExceptionHandler(value = {NotRoleException.class, NotPermissionException.class})
     public Ret<Void> notPermissionException(HttpServletRequest request) {
-        log.error("全局异常捕获-> 权限不足，无法访问。请求地址：'{}'", request.getRequestURI());
+        log.error("全局异常捕获 -> 权限不足，无法访问。请求地址：'{}'", request.getRequestURI());
         return Ret.fail(ResultCode.UN_PERMISSIONS, "权限不足，无法访问");
     }
 

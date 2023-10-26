@@ -11,11 +11,30 @@ import java.io.Serializable;
 @Data
 public class LogDto implements Serializable {
 
+    /**
+     * 模块名称
+     */
     private String appName;
+
+    /**
+     * 请求耗时
+     */
     private Double totalTime;
+
+    /**
+     * 类路径
+     */
     private String className;
+
+    /**
+     * 方法名称
+     */
     private String methodName;
-    private String LogTag = "LogDto";
+
+    /**
+     * 请求链路ID
+     */
+    private String requestLinkId;
 
 
     @Override

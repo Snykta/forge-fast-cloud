@@ -1,16 +1,19 @@
 package com.snykta.gateway.filter;
 
 
+import cn.hutool.core.util.IdUtil;
 import com.snykta.gateway.client.AuthClient;
 import com.snykta.gateway.utils.WebFluxUtil;
 import com.snykta.security.token.BasicToken;
 import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.constant.WebConstant;
 import com.snykta.tools.utils.CyExceptionUtil;
+import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;
 import com.snykta.tools.web.result.Ret;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -37,7 +40,12 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // 生成全链路ID
+        String fastSimpleUUID = IdUtil.fastSimpleUUID();
+        MDC.put(WebConstant.logback_trace_uuid, fastSimpleUUID);
+
         ServerHttpRequest request = exchange.getRequest();
+        ServerHttpRequest.Builder mutate = request.mutate();
 
         // 请求URL
         String url = request.getURI().getPath();
@@ -59,10 +67,12 @@ public class AuthFilter implements GlobalFilter, Ordered {
             return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.INTERNAL_SERVER_ERROR, Ret.fail(ResultCode.ERROR, e.getMessage()));
         }
 
-        return chain.filter(exchange);
+
+        // 添加链路请求头
+        mutate.header(WebConstant.logback_trace_uuid, fastSimpleUUID);
+
+        return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
-
-
 
 
 

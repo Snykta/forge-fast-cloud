@@ -16,6 +16,12 @@ public class ResultCode {
     public static Integer ERROR =  500;
 
     /**
+     * 不存在
+     */
+    public static Integer NOT_FOUND = 404;
+
+
+    /**
      * 没有认证
      */
     public static Integer UN_AUTHORIZED =  401;
