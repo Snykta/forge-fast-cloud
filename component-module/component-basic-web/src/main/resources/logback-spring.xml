@@ -6,7 +6,7 @@
     <property name="log.path" value="./logs" />
 
     <!-- 文件中的日志输出格式 -->
-    <property name="log.pattern" value="[%X{logback_trace_uuid}] %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
 
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
@@ -16,8 +16,7 @@
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
     <!-- 彩色日志格式 -->
     <property name="console_log_pattern"
-              value="${CONSOLE_LOG_PATTERN:-%clr([%X{logback_trace_uuid}]) %clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
-
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -64,6 +63,7 @@
         </filter>
     </appender>
 
+
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--当前活动名称-->
         <file>${log.path}/${logFileName}/error_${logFileName}.log</file>
@@ -95,14 +95,6 @@
     </appender>
 
 
-    <!--异步日志输出-->
-    <appender name="trace-async-appender" class="ch.qos.logback.classic.AsyncAppender">
-        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
-        <queueSize>256</queueSize>
-        <!-- 添加附加的appender,最多只能添加一个 -->
-        <appender-ref ref="file_info"/>
-        <appender-ref ref="file_error"/>
-    </appender>
 
 
     <!--控制台-->
@@ -112,7 +104,15 @@
 
     <!--系统操作日志-->
     <root level="info">
-        <appender-ref ref="file_info" />
-        <appender-ref ref="file_error" />
+        <if condition='!property("logFileName").equals("defaultName")'>
+            <then>
+                <appender-ref ref="file_info"/>
+                <appender-ref ref="file_error"/>
+            </then>
+        </if>
     </root>
+
+    <!--未来实现在ES中存储-->
+
+
 </configuration>

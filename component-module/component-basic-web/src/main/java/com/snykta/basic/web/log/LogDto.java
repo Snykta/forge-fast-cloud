@@ -31,11 +31,6 @@ public class LogDto implements Serializable {
      */
     private String methodName;
 
-    /**
-     * 请求链路ID
-     */
-    private String requestLinkId;
-
 
     @Override
     public String toString() {

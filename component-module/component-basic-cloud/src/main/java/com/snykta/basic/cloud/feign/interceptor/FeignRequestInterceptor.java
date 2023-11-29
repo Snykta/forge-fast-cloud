@@ -1,12 +1,11 @@
 package com.snykta.basic.cloud.feign.interceptor;
 
-import com.snykta.tools.constant.WebConstant;
+
 import com.snykta.tools.utils.CyCollectionUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import java.util.Collection;
 import java.util.Map;
 
@@ -28,13 +27,6 @@ public class FeignRequestInterceptor implements RequestInterceptor {
                 }
             });
         }
-
-        // 转发全链路ID
-        String logback_trace_uuid = MDC.get(WebConstant.logback_trace_uuid);
-        if (CyStrUtil.isNotEmpty(logback_trace_uuid)) {
-            template.header(WebConstant.logback_trace_uuid, logback_trace_uuid);
-        }
-
     }
 
 
