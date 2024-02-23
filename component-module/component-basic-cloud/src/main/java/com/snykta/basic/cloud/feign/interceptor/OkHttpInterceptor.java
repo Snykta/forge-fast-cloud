@@ -1,5 +1,6 @@
 package com.snykta.basic.cloud.feign.interceptor;
 
+import com.snykta.basic.cloud.feign.decoder.FeignResponseDecoder;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.Interceptor;
 import okhttp3.Response;
@@ -14,7 +15,13 @@ import java.io.IOException;
 public class OkHttpInterceptor implements Interceptor {
 
 
-
+    /**
+     *
+     * 在此可以处理使用Feign调用接口后返回的Response
+     * 与如下方法区别在于此拦截器会早于 FeignResponseDecoder 先执行
+     * @see FeignResponseDecoder
+     *
+     */
     @NotNull
     @Override
     public Response intercept(@NotNull Chain chain) throws IOException {
