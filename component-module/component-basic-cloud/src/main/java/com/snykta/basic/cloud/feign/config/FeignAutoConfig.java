@@ -4,10 +4,12 @@ package com.snykta.basic.cloud.feign.config;
 import com.snykta.basic.cloud.feign.decoder.FeignErrorDecoder;
 import com.snykta.basic.cloud.feign.decoder.FeignResponseDecoder;
 import com.snykta.basic.cloud.feign.interceptor.FeignRequestInterceptor;
+import com.snykta.basic.cloud.feign.interceptor.OkHttpInterceptor;
 import feign.RequestInterceptor;
 import feign.codec.Decoder;
 import feign.codec.ErrorDecoder;
 import lombok.extern.slf4j.Slf4j;
+import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -72,6 +74,19 @@ public class FeignAutoConfig implements DisposableBean {
     public HttpMessageConverters messageConverters(ObjectProvider<HttpMessageConverter<?>> converters) {
         return new HttpMessageConverters(converters.orderedStream().collect(Collectors.toList()));
     }
+
+
+    /**
+     * 创建okHttp实例对象，并且注入okHttp拦截器，feign底层请求使用此对象
+     * @return
+     */
+    @Bean
+    public okhttp3.OkHttpClient okHttpClient() {
+        return new OkHttpClient.Builder()
+                .addInterceptor(new OkHttpInterceptor())
+                .build();
+    }
+
 
 
     @Override
