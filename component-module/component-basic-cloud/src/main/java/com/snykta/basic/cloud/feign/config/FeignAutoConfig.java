@@ -14,7 +14,6 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.support.HttpMessageConverterCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,6 @@ import java.util.stream.Collectors;
  */
 @Configuration
 @Slf4j
-@EnableFeignClients(basePackages = {"com.snykta"})
 @PropertySource("classpath:config/application-feign.properties")
 public class FeignAutoConfig implements DisposableBean {
 

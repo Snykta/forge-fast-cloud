@@ -71,7 +71,7 @@
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
 
-		<!--新版AlibabaCloud移除了bootstrap，使用新的方式引入分布式配置，防止启动报错因此再手动引入bootstrap-->
+		<!--新版AlibabaCloud移除了bootstrap，使用新的方式引入分布式配置，但防止启动报错因此再手动引入bootstrap-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>

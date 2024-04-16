@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "app.swagger.enable",
+      "type": "java.lang.Boolean",
+      "description": "swagger是否开启的控制属性 true=开启 false=关闭",
+      "sourceType": "com.snykta.basic.web.config.swagger.SwaggerAutoConfig"
+    }
+  ]
+}
