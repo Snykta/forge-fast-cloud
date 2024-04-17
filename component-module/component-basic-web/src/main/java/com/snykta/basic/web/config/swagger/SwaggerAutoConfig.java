@@ -1,7 +1,7 @@
 package com.snykta.basic.web.config.swagger;
 
 
-import com.snykta.tools.constant.WebConstant;
+import com.snykta.tools.constant.GeneralConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -43,7 +43,7 @@ public class SwaggerAutoConfig {
                 .groupName(groupName)
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage(WebConstant.swaggerBasePackage))
+                .apis(RequestHandlerSelectors.basePackage(GeneralConstant.swaggerBasePackage))
                 .paths(PathSelectors.any())
                 .build();
     }

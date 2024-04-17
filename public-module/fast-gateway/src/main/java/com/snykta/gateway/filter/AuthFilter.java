@@ -2,11 +2,11 @@ package com.snykta.gateway.filter;
 
 
 
+import com.snykta.gateway.GatewayConstant;
 import com.snykta.gateway.client.AuthClient;
 import com.snykta.gateway.utils.WebFluxUtil;
 import com.snykta.security.token.BasicToken;
 import com.snykta.tools.constant.AuthConstant;
-import com.snykta.tools.constant.WebConstant;
 import com.snykta.tools.utils.CyExceptionUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;
@@ -44,7 +44,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         // 请求URL
         String url = request.getURI().getPath();
         // 忽略不校验的url
-        if (WebConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {
+        if (GatewayConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {
             return chain.filter(exchange);
         }
         try {

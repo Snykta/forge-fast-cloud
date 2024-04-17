@@ -2,7 +2,6 @@ package com.snykta.gateway.client;
 
 import com.snykta.security.token.BasicToken;
 import com.snykta.tools.constant.AuthConstant;
-import com.snykta.tools.constant.WebConstant;
 import com.snykta.tools.web.result.Ret;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
