@@ -7,8 +7,11 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.request.WebRequest;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 重写ErrorController异常
@@ -24,6 +27,13 @@ public class GlobalErrorController implements ErrorController {
         Integer statusCode = (Integer)httpServletRequest.getAttribute("javax.servlet.error.status_code");
         String requestURI = String.valueOf(httpServletRequest.getAttribute("javax.servlet.error.request_uri"));
         log.error("Error路由捕获异常 -> 请求地址：{}", requestURI);
+
+        // 但响应码继续用200
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getResponse();
+        if (response != null) {
+            response.setStatus(200);
+        }
+
         if (statusCode == 404) {
             return Ret.fail(ResultCode.NOT_FOUND, "请求地址不存在");
         }
