@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -44,18 +43,6 @@ public class ServiceExceptionHandler {
         log.error("全局异常捕获 -> 请求地址：{}，不支持：{}请求", requestURI, e.getMethod());
         return Ret.fail("请求方式不支持");
     }
-
-
-    /**
-     * 接口不存在
-     */
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public Ret<Void> handleHttpRequestMethodNotSupported(NoHandlerFoundException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("全局异常捕获 -> 请求地址：{} 请求地址不存在404", requestURI);
-        return Ret.fail(ResultCode.NOT_FOUND, "请求地址不存在");
-    }
-
 
 
 }

@@ -5,7 +5,9 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.snykta.basic.web.config.swagger.SwaggerAutoConfig,\
   com.snykta.basic.web.handler.ServiceExceptionHandler,\
   com.snykta.basic.web.aspect.RateLimiterAspect,\
-  com.snykta.basic.web.config.RestTemplateConfig
+  com.snykta.basic.web.config.RestTemplateConfig,\
+  com.snykta.basic.web.web.controller.GlobalErrorController,\
+  com.snykta.basic.web.config.RemoveBeanConfig
 
 
 
