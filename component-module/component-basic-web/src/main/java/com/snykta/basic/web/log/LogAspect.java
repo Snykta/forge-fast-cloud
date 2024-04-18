@@ -30,8 +30,9 @@ import java.util.Objects;
 
 
 /**
- *
  * 控制台日志记录输出
+ *
+ * 注意：自定义业务 Controller 必须继承 BaseController 才会记录日志
  *
  */
 
@@ -50,7 +51,7 @@ public class LogAspect {
     }
 
 
-    @Pointcut("execution(public * com.snykta.*.controller.*Controller.*(..))")
+    @Pointcut("target(com.snykta.basic.web.web.controller.BaseController)")
     public void inAction() {
     }
 

@@ -29,8 +29,8 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
+            <groupId>com.snykta</groupId>
+            <artifactId>component-code-generator</artifactId>
         </dependency>
 
 

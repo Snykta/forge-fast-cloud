@@ -75,7 +75,7 @@
         // 渲染
         table.render({
             elem: '#gen-code-table',
-            url:'gen/queryPage',
+            url:'/gen/queryPage',
             page: { // 支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
                 prev: '上一页',
                 next: '下一页',
@@ -142,7 +142,7 @@
                         layer.msg('请输入父包名', {icon: 2});
                     } else {
                         $.ajax({
-                            url: "gen/code",
+                            url: "/gen/code",
                             type: "GET",
                             data: {
                                 tables: checkTableNames.join(","),
@@ -152,7 +152,7 @@
                                 if (xhr.responseJSON !== undefined) {
                                     layer.msg(response.message, {icon: 2});
                                 } else {
-                                    let url = "gen/code?tables=" + checkTableNames.join(",") + "&packName=" + packNames;
+                                    let url = "/gen/code?tables=" + checkTableNames.join(",") + "&packName=" + packNames;
                                     window.open(url, "_blank");
                                 }
                             },

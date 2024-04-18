@@ -1,10 +1,33 @@
 {
+  "groups": [
+    {
+      "name": "swagger.app.config",
+      "type": "com.snykta.basic.web.config.swagger.SwaggerPropertyConfig",
+      "sourceType": "com.snykta.basic.web.config.swagger.SwaggerPropertyConfig"
+    }
+  ],
   "properties": [
     {
-      "name": "app.swagger.enable",
+      "name": "swagger.app.config.appName",
+      "type": "java.lang.String",
+      "description": "swagger 项目名称",
+      "sourceType": "com.snykta.basic.web.config.swagger.SwaggerPropertyConfig",
+      "defaultValue": "xxx"
+    },
+    {
+      "name": "swagger.app.config.enable",
       "type": "java.lang.Boolean",
       "description": "swagger是否开启的控制属性 true=开启 false=关闭",
-      "sourceType": "com.snykta.basic.web.config.swagger.SwaggerAutoConfig"
+      "sourceType": "com.snykta.basic.web.config.swagger.SwaggerPropertyConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "swagger.app.config.swaggerBasePackage",
+      "type": "java.lang.String",
+      "description": "swagger 扫描Controller的路径",
+      "sourceType": "com.snykta.basic.web.config.swagger.SwaggerPropertyConfig",
+      "defaultValue": "xxx.xxx"
     }
-  ]
+  ],
+  "hints": []
 }

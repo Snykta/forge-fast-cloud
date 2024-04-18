@@ -1,23 +1,21 @@
 package com.snykta.gen.service;
 
 
-
 import cn.hutool.core.io.IoUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.snykta.tools.exception.ServiceException;
-import com.snykta.tools.utils.CyConvertUtil;
-import com.snykta.tools.utils.CyReUtil;
-import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.gen.dto.ColumnDto;
+import com.snykta.gen.dto.SearchDto;
 import com.snykta.gen.dto.TableDto;
 import com.snykta.gen.mapper.base.BaseGeneratorMapper;
-import com.snykta.gen.dto.SearchDto;
 import com.snykta.gen.utils.GenUtils;
 import com.snykta.mybatis.page.PageRequest;
+import com.snykta.tools.exception.ServiceException;
+import com.snykta.tools.utils.CyConvertUtil;
+import com.snykta.tools.utils.CyObjUtil;
+import com.snykta.tools.utils.CyReUtil;
 import com.snykta.tools.web.page.PageDto;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 import java.util.zip.ZipOutputStream;
@@ -29,8 +27,12 @@ import java.util.zip.ZipOutputStream;
  */
 @Service
 public class GeneratorService {
-    @Resource
-    private BaseGeneratorMapper baseGeneratorMapper;
+
+    private final BaseGeneratorMapper baseGeneratorMapper;
+
+    public GeneratorService(BaseGeneratorMapper baseGeneratorMapper) {
+        this.baseGeneratorMapper = baseGeneratorMapper;
+    }
 
     /**
      * 分页查询表

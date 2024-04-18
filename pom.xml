@@ -49,7 +49,7 @@
 			<id>dev</id>
 			<properties>
 				<profile.active>dev</profile.active>
-				<app.swagger.enable>true</app.swagger.enable>
+				<swagger.app.config.enable>true</swagger.app.config.enable>
 				<mysql.url><![CDATA[jdbc:mysql://127.0.0.1:3306/forge_fast_cloud?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai]]></mysql.url>
 				<mysql.username>root</mysql.username>
 				<mysql.password>123456</mysql.password>
@@ -69,7 +69,7 @@
 			<id>prod</id>
 			<properties>
 				<profile.active>prod</profile.active>
-				<app.swagger.enable>false</app.swagger.enable>
+				<swagger.app.config.enable>false</swagger.app.config.enable>
 			</properties>
 		</profile>
 	</profiles>
@@ -120,6 +120,12 @@
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-common-tools</artifactId>
+				<version>${forge-fast-cloud.version}</version>
+			</dependency>
+			<!--自定义组件：自动生成代码组件-->
+			<dependency>
+				<groupId>com.snykta</groupId>
+				<artifactId>component-code-generator</artifactId>
 				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 

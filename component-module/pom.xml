@@ -26,6 +26,7 @@
 		<module>component-mybatis-plus</module>
 		<module>component-redis</module>
 		<module>component-security</module>
+		<module>component-code-generator</module>
 	</modules>
 
 	<build>
