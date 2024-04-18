@@ -51,7 +51,8 @@ public class SwaggerAutoConfig {
     private ApiInfo apiInfo() {
         log.info("开始创建API文档信息...");
         return new ApiInfoBuilder()
-                .title("Fast Cloud API")
+                .title(new String(swaggerPropertyConfig.getAppName().getBytes(StandardCharsets.ISO_8859_1),
+                        StandardCharsets.UTF_8))
                 .description("Fast-Start-Cloud 接口文档")
                 .version("2.0")
                 .build();
