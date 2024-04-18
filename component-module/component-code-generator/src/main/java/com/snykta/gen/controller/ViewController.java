@@ -16,7 +16,7 @@ public class ViewController extends BaseController {
 
     @GetMapping("/gen-page")
     public String index() {
-        return "index.html";
+        return "main.html";
     }
 
 }
