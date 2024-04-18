@@ -136,8 +136,8 @@
         });
         $('#startGenBtn').click(function() {
             if (checkTableNames.length > 0) {
-                layer.confirm('<input style="margin: 5px" type="text" id="packName" name="" placeholder="文本框" class="layui-input">', {title:'controller、service等包父路径'}, function(index){
-                   let packNames =  $('#packName').val();
+                layer.confirm('<input style="margin: 5px" type="text" id="packName" name="" placeholder="请输入包名" class="layui-input">', {title:'<span style="color: red">controller、service等包父路径</span>'}, function(index){
+                    let packNames =  $('#packName').val();
                     if (packNames.length <= 0) {
                         layer.msg('请输入父包名', {icon: 2});
                     } else {

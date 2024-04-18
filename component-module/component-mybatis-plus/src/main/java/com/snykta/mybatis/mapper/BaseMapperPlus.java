@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 所有自定义 mapper 都继承此 mapper 然后进行crud操作
  * service层禁止继承或者实现 mybatisPlus自带的crud的Service基类 (！！禁止禁止禁止！！)
- * 所有操作数据库的动作全部下放到mapper层，service层只需关系实际的业务
+ * 所有操作数据库的动作全部下放到 mapper 层，service 层只需关系实际的业务
  *
  * @param <T> 单表实体类
  */
