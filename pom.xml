@@ -122,10 +122,18 @@
 				<artifactId>component-common-tools</artifactId>
 				<version>${forge-fast-cloud.version}</version>
 			</dependency>
+
 			<!--自定义组件：自动生成代码组件-->
 			<dependency>
 				<groupId>com.snykta</groupId>
 				<artifactId>component-code-generator</artifactId>
+				<version>${forge-fast-cloud.version}</version>
+			</dependency>
+
+			<!--自定义组件：事件发布组件-->
+			<dependency>
+				<groupId>com.snykta</groupId>
+				<artifactId>component-event-bus</artifactId>
 				<version>${forge-fast-cloud.version}</version>
 			</dependency>
 
