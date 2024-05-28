@@ -41,6 +41,7 @@
 		<apache.velocity.version>1.7</apache.velocity.version>
 		<sa.token.version>1.36.0</sa.token.version>
 		<commons-pool2.version>2.11.1</commons-pool2.version>
+		<logstash.logback.encoder.version>5.2</logstash.logback.encoder.version>
 	</properties>
 
 
@@ -50,6 +51,7 @@
 			<properties>
 				<profile.active>dev</profile.active>
 				<swagger.app.config.enable>true</swagger.app.config.enable>
+				<log.record.type>local</log.record.type>
 				<mysql.url><![CDATA[jdbc:mysql://127.0.0.1:3306/forge_fast_cloud?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=Asia/Shanghai]]></mysql.url>
 				<mysql.username>root</mysql.username>
 				<mysql.password>123456</mysql.password>
@@ -276,6 +278,13 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-pool2</artifactId>
 				<version>${commons-pool2.version}</version>
+			</dependency>
+
+			<!--LogStash日志收集-->
+			<dependency>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash.logback.encoder.version}</version>
 			</dependency>
 
 

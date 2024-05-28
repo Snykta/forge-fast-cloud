@@ -18,6 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 public class FeignErrorDecoder implements ErrorDecoder {
 
 
+    /**
+     * 内部异常或者响应状态码!=200都会被此异常捕获
+     *
+     * @history
+     */
     @Override
     public ServiceException decode(String methodKey, Response response) {
         ServiceException serviceException = new ServiceException("内部组件服务异常");
