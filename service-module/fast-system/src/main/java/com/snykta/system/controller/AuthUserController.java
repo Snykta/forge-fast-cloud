@@ -1,6 +1,7 @@
 package com.snykta.system.controller;
 
 
+import com.snykta.basic.web.web.controller.BaseController;
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.service.IAuthUserService;
 import com.snykta.tools.web.result.Ret;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("auth")
 @Api(tags="认证")
-public class AuthUserController {
+public class AuthUserController extends BaseController {
 
 
     private final IAuthUserService authUserService;

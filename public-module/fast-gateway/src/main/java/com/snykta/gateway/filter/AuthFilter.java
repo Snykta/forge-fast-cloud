@@ -41,7 +41,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpRequest.Builder mutate = request.mutate();
 
-        // 请求URL
+        // 请求的URL
         String url = request.getURI().getPath();
         // 忽略不校验的url
         if (GatewayConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {

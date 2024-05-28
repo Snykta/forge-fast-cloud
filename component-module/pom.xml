@@ -28,6 +28,7 @@
 		<module>component-security</module>
 		<module>component-code-generator</module>
 		<module>component-event-bus</module>
+		<module>component-seata</module>
 	</modules>
 
 	<build>
