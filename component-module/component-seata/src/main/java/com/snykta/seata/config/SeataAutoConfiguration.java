@@ -6,6 +6,11 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ *
+ * Seata分布式事务中心
+ *
+ */
 @Slf4j
 @Configuration
 @PropertySource("classpath:config/application-seata.properties")

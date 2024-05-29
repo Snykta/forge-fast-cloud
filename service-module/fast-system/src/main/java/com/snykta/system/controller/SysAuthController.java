@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.*;
  * 认证
  */
 @RestController
-@RequestMapping("auth")
+@RequestMapping("sysAuth")
 @Api(tags="认证")
-public class AuthUserController extends BaseController {
+public class SysAuthController extends BaseController {
 
 
     private final IAuthUserService authUserService;
 
-    public AuthUserController(IAuthUserService authUserService) {
+    public SysAuthController(IAuthUserService authUserService) {
         this.authUserService = authUserService;
     }
 

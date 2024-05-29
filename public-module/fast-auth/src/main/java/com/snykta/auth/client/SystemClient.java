@@ -20,7 +20,7 @@ public interface SystemClient {
      * @param password
      * @return
      */
-    @PostMapping(value = "auth/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "sysAuth/doLogin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     Ret<SysUserDto> doLogin(@RequestParam("phoneNumber") String phoneNumber, @RequestParam("password") String password);
 
 
@@ -29,7 +29,7 @@ public interface SystemClient {
      * @param sysUserDto
      * @return
      */
-    @PostMapping(value = "auth/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "sysAuth/doRegister", consumes = MediaType.APPLICATION_JSON_VALUE)
     Ret<String> doRegister(@RequestBody SysUserDto sysUserDto);
 
 

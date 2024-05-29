@@ -48,6 +48,12 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>com.snykta</groupId>
+			<artifactId>component-seata</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 
