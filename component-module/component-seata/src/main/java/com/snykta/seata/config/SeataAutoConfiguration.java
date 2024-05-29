@@ -10,6 +10,10 @@ import org.springframework.context.annotation.PropertySource;
  *
  * Seata分布式事务中心
  *
+ * 使用方法：在需要的service方法上添加注解 @GlobalTransactional
+ *
+ * 需要先搭建 seata-server 服务端
+ *
  */
 @Slf4j
 @Configuration

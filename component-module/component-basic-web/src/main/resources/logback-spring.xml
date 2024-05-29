@@ -43,7 +43,7 @@
 
     <!-- 系统日志输出(以磁盘文件形式保存) -->
     <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <if condition='!property("logFileName").equals("defaultName")'>
+        <if condition='!property("logFileName").contains("defaultName")'>
             <then>
                 <!--当前活动名称-->
                 <file>${log.path}/${logFileName}/${logFileName}_info.log</file>
@@ -79,7 +79,7 @@
 
     <!-- 系统日志输出(以磁盘文件形式保存) -->
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <if condition='!property("logFileName").equals("defaultName")'>
+        <if condition='!property("logFileName").contains("defaultName")'>
             <then>
                 <!--当前活动名称-->
                 <file>${log.path}/${logFileName}/${logFileName}_error.log</file>

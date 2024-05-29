@@ -56,11 +56,8 @@ public class AuthService extends BaseService implements IAuthService {
         if (CyObjUtil.isNull(sysUserDto)) {
             throw new ServiceException("注册信息不能为空");
         }
-        Ret<String> ret = systemClient.doRegister(sysUserDto);
-        if (Ret.isError(ret)) {
-            throw new ServiceException(ret);
-        }
 
+        systemClient.doRegister(sysUserDto);
 
     }
 

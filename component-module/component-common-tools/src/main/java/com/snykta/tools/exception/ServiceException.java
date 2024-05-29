@@ -29,12 +29,14 @@ public class ServiceException extends RuntimeException {
     public ServiceException(String message, Throwable e) {
         super(message, e);
         this.message = message;
+        this.code = 500;
     }
 
     public ServiceException(String message)
     {
         super(message);
         this.message = message;
+        this.code = 500;
     }
 
     public ServiceException(String message, Integer code)
