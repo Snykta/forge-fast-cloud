@@ -1,23 +1,26 @@
 package com.snykta.auth.controller;
 
 
+
 import com.snykta.auth.dto.SysUserDto;
 import com.snykta.auth.service.IAuthService;
 import com.snykta.basic.web.annotation.RateLimiter;
 import com.snykta.basic.web.web.controller.BaseController;
 import com.snykta.security.token.BasicToken;
 import com.snykta.security.utils.CyTokenUtil;
+import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.web.result.Ret;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.concurrent.TimeUnit;
 
 
 @RestController
 @RequestMapping(value = "auth")
 @Slf4j
+@Api(tags="认证中心")
 public class AuthController extends BaseController {
 
     private final IAuthService authService;
@@ -75,8 +78,8 @@ public class AuthController extends BaseController {
      * token放在请求头中
      * @return 返回用户信息数据
      */
-    @PostMapping("/validateToken")
-    public Ret<BasicToken> validateToken() {
+    @PostMapping(value = "/validateToken", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Ret<BasicToken> validateToken(@RequestHeader(AuthConstant.head_token_key) String oldTokenValue) {
         return Ret.success(CyTokenUtil.validateToken());
     }
 

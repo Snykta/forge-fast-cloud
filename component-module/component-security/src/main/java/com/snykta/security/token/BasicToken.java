@@ -21,12 +21,12 @@ public class BasicToken implements Serializable {
     /**
      * 用户中文名称
      */
-    private  String userName;
+    private String userName;
 
     /**
      * 用户编号（手机号、工号、微信号、QQ号）等唯一编码都可以
      */
-    private  String userNumber;
+    private String userNumber;
 
     /**
      * 权限编码集合
@@ -36,7 +36,7 @@ public class BasicToken implements Serializable {
     /**
      * 角色编码集合
      */
-    private  List<String> roleCodeList;
+    private List<String> roleCodeList;
 
 
 }

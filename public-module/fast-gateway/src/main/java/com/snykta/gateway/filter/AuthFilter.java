@@ -2,11 +2,14 @@ package com.snykta.gateway.filter;
 
 
 
+import cn.hutool.json.JSONUtil;
 import com.snykta.gateway.GatewayConstant;
 import com.snykta.gateway.client.AuthClient;
 import com.snykta.gateway.utils.WebFluxUtil;
 import com.snykta.security.token.BasicToken;
 import com.snykta.tools.constant.AuthConstant;
+import com.snykta.tools.constant.ExceptionMessageConstant;
+import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyExceptionUtil;
 import com.snykta.tools.utils.CyStrUtil;
 import com.snykta.tools.web.result.ResultCode;
@@ -47,20 +50,18 @@ public class AuthFilter implements GlobalFilter, Ordered {
         if (GatewayConstant.ignoreUrlList.stream().anyMatch(u -> CyStrUtil.equalsIgnoreCase(url, u))) {
             return chain.filter(exchange);
         }
-        try {
-            String token = request.getHeaders().getFirst(AuthConstant.head_token_key);
-            if (CyStrUtil.isEmpty(token)) {
-                return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, Ret.fail(ResultCode.UN_AUTHORIZED, "未认证，请登录"));
-            }
-            Ret<BasicToken> ret = authClient.validateToken(token);
-            if (Ret.isError(ret)) {
-                return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, ret);
-            }
-        } catch (Exception e) {
-            log.error("\r\ngateway处理器异常：" + CyExceptionUtil.getStackMsg(e));
-            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.INTERNAL_SERVER_ERROR, Ret.fail(ResultCode.ERROR, e.getMessage()));
+        String token = request.getHeaders().getFirst(AuthConstant.head_token_key);
+        if (CyStrUtil.isEmpty(token)) {
+            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), HttpStatus.UNAUTHORIZED, Ret.fail(ResultCode.UN_AUTHORIZED, ExceptionMessageConstant.ERROR_UN_AUTHORIZED));
         }
 
+        // 校验当前的Token是否合法
+        try {
+            Ret<BasicToken> tokenRet = authClient.validateToken(token);
+            log.info(String.format("gateway拦截请求，当前请求Token值：【%s】，校验结果为：【%s】", token, JSONUtil.toJsonStr(tokenRet)));
+        } catch (Exception e) {
+            return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), bindRet(e));
+        }
 
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
@@ -72,4 +73,16 @@ public class AuthFilter implements GlobalFilter, Ordered {
     public int getOrder() {
         return -200;
     }
+
+
+    /**
+     * 类型转换处理
+     * @param e
+     * @return
+     */
+    private Ret<Void> bindRet(Exception e) {
+        ServiceException serviceException = CyExceptionUtil.throwConvertException(e);
+        return Ret.fail(serviceException.getCode(), serviceException.getMessage());
+    }
+
 }

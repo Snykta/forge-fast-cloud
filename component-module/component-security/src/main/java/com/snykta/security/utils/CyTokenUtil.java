@@ -6,6 +6,7 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.snykta.security.token.BasicToken;
 import com.snykta.tools.constant.AuthConstant;
+import com.snykta.tools.constant.ExceptionMessageConstant;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
@@ -63,22 +64,23 @@ public class CyTokenUtil {
 
 
     /**
+     *
      * 校验Token
      * @return
      */
     public static BasicToken validateToken() {
         String oldTokenValue = StpUtil.getTokenValue();
         if (CyStrUtil.isEmpty(oldTokenValue)) {
-            throw new ServiceException("未认证，请登录", ResultCode.UN_AUTHORIZED);
+            throw new ServiceException(ExceptionMessageConstant.ERROR_UN_AUTHORIZED, ResultCode.UN_AUTHORIZED);
         }
         SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
         if (!tokenInfo.getIsLogin()) {
-            throw new ServiceException("未认证，请登录", ResultCode.UN_AUTHORIZED);
+            throw new ServiceException(ExceptionMessageConstant.ERROR_UN_AUTHORIZED, ResultCode.UN_AUTHORIZED);
         }
         SaSession accountSession = StpUtil.getSessionByLoginId(tokenInfo.getLoginId(), false);
         BasicToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
         if (CyObjUtil.isNull(modelToken)) {
-            throw new ServiceException("未认证，请登录", ResultCode.UN_AUTHORIZED);
+            throw new ServiceException(ExceptionMessageConstant.ERROR_UN_AUTHORIZED, ResultCode.UN_AUTHORIZED);
         }
         return modelToken;
     }

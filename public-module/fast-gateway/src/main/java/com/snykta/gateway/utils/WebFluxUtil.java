@@ -27,4 +27,20 @@ public class WebFluxUtil {
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSONUtil.toJsonStr(ret, JSONConfig.create().setIgnoreNullValue(false)).getBytes());
         return response.writeWith(Mono.just(dataBuffer));
     }
+
+
+    /**
+     * 设置webflux模型响应
+     *
+     * @param response ServerHttpResponse
+     * @param ret 响应内容
+     * @return Mono<Void>
+     */
+    public static Mono<Void> webFluxResponseWriter(ServerHttpResponse response, Ret<?> ret) {
+        response.setStatusCode(HttpStatus.resolve(ret.getCode()));
+        response.getHeaders().add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        DataBuffer dataBuffer = response.bufferFactory().wrap(JSONUtil.toJsonStr(ret, JSONConfig.create().setIgnoreNullValue(false)).getBytes());
+        return response.writeWith(Mono.just(dataBuffer));
+    }
+
 }

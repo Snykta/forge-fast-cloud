@@ -1,5 +1,6 @@
 package com.snykta.basic.web.web.controller;
 
+import com.snykta.tools.constant.ExceptionMessageConstant;
 import com.snykta.tools.web.result.ResultCode;
 import com.snykta.tools.web.result.Ret;
 import lombok.extern.slf4j.Slf4j;
@@ -27,10 +28,10 @@ public class GlobalErrorController implements ErrorController {
         log.error("Error路由捕获异常 -> 请求地址：{}", requestURI);
 
         if (statusCode == 404) {
-            return Ret.fail(ResultCode.NOT_FOUND, "请求地址不存在");
+            return Ret.fail(ResultCode.NOT_FOUND, ExceptionMessageConstant.ERROR_PATH_NOT_FOUND);
         }
 
-        return Ret.fail(ResultCode.ERROR, "系统内部异常");
+        return Ret.fail(ResultCode.ERROR, ExceptionMessageConstant.ERROR_SERVICE_INSIDE);
     }
 
 

@@ -110,7 +110,7 @@ public class LogAspect {
             success = false;
 
             // 二次处理，重新抛出异常
-            throw throwBindException(e);
+            throw CyExceptionUtil.throwConvertException(e);
         } finally {
             double totalSeconds = (double) (timerWatch.interval()) / 1000;
             sbLog.append("\n\r|--请求耗时：").append(String.format("%.2f", totalSeconds)).append("秒");
@@ -130,31 +130,6 @@ public class LogAspect {
         return returnValue;
     }
 
-
-
-
-    /**
-     * 自定义异常类
-     * @param e
-     * @return
-     */
-    private ServiceException throwBindException(Exception e) {
-        String errorMsg = null;
-        Integer resultCode = ResultCode.ERROR;
-        if (e instanceof ServiceException) {
-            errorMsg = e.getMessage();
-            resultCode = ((ServiceException) e).getCode();
-        } else {
-            if (CyStrUtil.isNotEmpty(e.getMessage())) {
-                errorMsg = e.getMessage();
-            } else {
-                if (CyObjUtil.isNotNull(e.getCause())) {
-                    errorMsg = e.getCause().toString();
-                }
-            }
-        }
-        return new ServiceException(errorMsg, CyObjUtil.isNull(resultCode) ? ResultCode.ERROR : resultCode);
-    }
 
 
 

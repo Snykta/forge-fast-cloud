@@ -1,6 +1,7 @@
 package com.snykta.basic.web.handler;
 
 
+import com.snykta.tools.constant.ExceptionMessageConstant;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyObjUtil;
 import com.snykta.tools.utils.CyStrUtil;
@@ -26,7 +27,7 @@ public class ServiceExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     public Ret<Void> handleServiceException(ServiceException e, HttpServletRequest request, HttpServletResponse response) {
         if (CyStrUtil.isEmpty(e.getMessage())) {
-            e.setMessage("系统内部异常");
+            e.setMessage(ExceptionMessageConstant.ERROR_SERVICE_INSIDE);
         }
         if (CyObjUtil.isNull(e.getCode())) {
             e.setCode(ResultCode.ERROR);
