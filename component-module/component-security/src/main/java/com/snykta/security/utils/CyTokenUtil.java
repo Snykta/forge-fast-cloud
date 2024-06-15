@@ -4,7 +4,7 @@ package com.snykta.security.utils;
 import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
-import com.snykta.security.token.BasicToken;
+import com.snykta.security.token.BasicAuthToken;
 import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.constant.ExceptionMessageConstant;
 import com.snykta.tools.exception.ServiceException;
@@ -16,17 +16,17 @@ public class CyTokenUtil {
 
     /**
      * 生成token
-     * @param basicToken
+     * @param basicAuthToken
      * @return
      */
-    public static String createToken(BasicToken basicToken) {
-        if (StpUtil.isLogin(basicToken.getUserId())) {
-            StpUtil.logout(basicToken.getUserId());
+    public static String createToken(BasicAuthToken basicAuthToken) {
+        if (StpUtil.isLogin(basicAuthToken.getUserId())) {
+            StpUtil.logout(basicAuthToken.getUserId());
         }
-        StpUtil.login(basicToken.getUserId());
+        StpUtil.login(basicAuthToken.getUserId());
 
-        SaSession accountSession = StpUtil.getSessionByLoginId(basicToken.getUserId());
-        accountSession.set(AuthConstant.token_user_info, basicToken);
+        SaSession accountSession = StpUtil.getSessionByLoginId(basicAuthToken.getUserId());
+        accountSession.set(AuthConstant.token_user_info, basicAuthToken);
 
         return StpUtil.getTokenValue();
     }
@@ -54,7 +54,7 @@ public class CyTokenUtil {
         if (CyObjUtil.isNull(accountSession)) {
             throw new ServiceException("token已超时，请重新登录", ResultCode.UN_AUTHORIZED);
         }
-        BasicToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
+        BasicAuthToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicAuthToken.class);
         if (CyObjUtil.isNull(modelToken)) {
             throw new ServiceException("token已超时，请重新登录", ResultCode.UN_AUTHORIZED);
         }
@@ -68,7 +68,7 @@ public class CyTokenUtil {
      * 校验Token
      * @return
      */
-    public static BasicToken validateToken() {
+    public static BasicAuthToken validateToken() {
         String oldTokenValue = StpUtil.getTokenValue();
         if (CyStrUtil.isEmpty(oldTokenValue)) {
             throw new ServiceException(ExceptionMessageConstant.ERROR_UN_AUTHORIZED, ResultCode.UN_AUTHORIZED);
@@ -78,7 +78,7 @@ public class CyTokenUtil {
             throw new ServiceException(ExceptionMessageConstant.ERROR_UN_AUTHORIZED, ResultCode.UN_AUTHORIZED);
         }
         SaSession accountSession = StpUtil.getSessionByLoginId(tokenInfo.getLoginId(), false);
-        BasicToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
+        BasicAuthToken modelToken = accountSession.getModel(AuthConstant.token_user_info, BasicAuthToken.class);
         if (CyObjUtil.isNull(modelToken)) {
             throw new ServiceException(ExceptionMessageConstant.ERROR_UN_AUTHORIZED, ResultCode.UN_AUTHORIZED);
         }
@@ -103,13 +103,13 @@ public class CyTokenUtil {
      * @param loginId
      * @return
      */
-    public static BasicToken getBasicToken(Object loginId) {
-        BasicToken basicToken = new BasicToken();
+    public static BasicAuthToken getBasicToken(Object loginId) {
+        BasicAuthToken basicAuthToken = new BasicAuthToken();
         SaSession accountSession = StpUtil.getSessionByLoginId(loginId, false);
         if (CyObjUtil.isNotNull(accountSession)) {
-            basicToken = accountSession.getModel(AuthConstant.token_user_info, BasicToken.class);
+            basicAuthToken = accountSession.getModel(AuthConstant.token_user_info, BasicAuthToken.class);
         }
-        return basicToken;
+        return basicAuthToken;
     }
 
 }

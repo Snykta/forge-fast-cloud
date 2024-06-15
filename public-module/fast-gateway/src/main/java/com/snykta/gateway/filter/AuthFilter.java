@@ -6,7 +6,7 @@ import cn.hutool.json.JSONUtil;
 import com.snykta.gateway.GatewayConstant;
 import com.snykta.gateway.client.AuthClient;
 import com.snykta.gateway.utils.WebFluxUtil;
-import com.snykta.security.token.BasicToken;
+import com.snykta.security.token.BasicAuthToken;
 import com.snykta.tools.constant.AuthConstant;
 import com.snykta.tools.constant.ExceptionMessageConstant;
 import com.snykta.tools.exception.ServiceException;
@@ -57,7 +57,7 @@ public class AuthFilter implements GlobalFilter, Ordered {
 
         // 校验当前的Token是否合法
         try {
-            Ret<BasicToken> tokenRet = authClient.validateToken(token);
+            Ret<BasicAuthToken> tokenRet = authClient.validateToken(token);
             log.info(String.format("gateway拦截请求，当前请求Token值：【%s】，校验结果为：【%s】", token, JSONUtil.toJsonStr(tokenRet)));
         } catch (Exception e) {
             return WebFluxUtil.webFluxResponseWriter(exchange.getResponse(), bindRet(e));

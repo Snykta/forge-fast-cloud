@@ -1,6 +1,7 @@
 package com.snykta.tools.utils;
 
 import cn.hutool.core.exceptions.ExceptionUtil;
+import com.snykta.tools.constant.ExceptionMessageConstant;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.web.result.ResultCode;
 
@@ -54,7 +55,7 @@ public class CyExceptionUtil extends ExceptionUtil {
      * @return
      */
     public static ServiceException throwConvertException(Exception e) {
-        String errorMsg = null;
+        String errorMsg = ExceptionMessageConstant.ERROR_SERVICE_INSIDE;
         Integer resultCode = ResultCode.ERROR;
         if (e instanceof ServiceException) {
             errorMsg = e.getMessage();

@@ -5,7 +5,7 @@ import com.snykta.auth.client.SystemClient;
 import com.snykta.auth.dto.SysUserDto;
 import com.snykta.auth.service.IAuthService;
 import com.snykta.basic.web.web.service.BaseService;
-import com.snykta.security.token.BasicToken;
+import com.snykta.security.token.BasicAuthToken;
 import com.snykta.security.utils.CyTokenUtil;
 import com.snykta.tools.exception.ServiceException;
 import com.snykta.tools.utils.CyObjUtil;
@@ -37,14 +37,14 @@ public class AuthService extends BaseService implements IAuthService {
         if (CyObjUtil.isNull(sysUserDto)) {
             throw new ServiceException("登录失败");
         }
-        BasicToken basicToken = new BasicToken();
-        basicToken.setUserId(sysUserDto.getId());
-        basicToken.setUserName(sysUserDto.getNickName());
-        basicToken.setUserNumber(sysUserDto.getPhoneNumber());
-        basicToken.setRightCodeList(sysUserDto.getRightCodeList());
-        basicToken.setRoleCodeList(sysUserDto.getRoleCodeList());
+        BasicAuthToken basicAuthToken = new BasicAuthToken();
+        basicAuthToken.setUserId(sysUserDto.getId());
+        basicAuthToken.setUserName(sysUserDto.getNickName());
+        basicAuthToken.setUserNumber(sysUserDto.getPhoneNumber());
+        basicAuthToken.setRightCodeList(sysUserDto.getRightCodeList());
+        basicAuthToken.setRoleCodeList(sysUserDto.getRoleCodeList());
 
-        return CyTokenUtil.createToken(basicToken);
+        return CyTokenUtil.createToken(basicAuthToken);
     }
 
     /**

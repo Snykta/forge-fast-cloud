@@ -11,7 +11,7 @@ import java.util.List;
  * 包含：用户信息、用户角色、用户权限
  */
 @Data
-public class BasicToken implements Serializable {
+public class BasicAuthToken implements Serializable {
 
     /**
      * 用户ID主键
