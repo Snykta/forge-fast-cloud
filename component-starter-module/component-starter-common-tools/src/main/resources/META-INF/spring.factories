@@ -1,0 +1,7 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.snykta.starter.tools.utils.CySpringUtil
+
+
+
+
+  

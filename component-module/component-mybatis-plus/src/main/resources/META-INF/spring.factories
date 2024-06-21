@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.snykta.mybatis.config.MybatisPlusAutoConfig,\
-  com.snykta.mybatis.interceptor.SqlLogInterceptor
-  

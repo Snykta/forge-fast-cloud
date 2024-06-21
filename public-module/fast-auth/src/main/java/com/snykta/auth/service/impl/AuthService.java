@@ -4,12 +4,12 @@ package com.snykta.auth.service.impl;
 import com.snykta.auth.client.SystemClient;
 import com.snykta.auth.dto.SysUserDto;
 import com.snykta.auth.service.IAuthService;
-import com.snykta.basic.web.web.service.BaseService;
-import com.snykta.security.token.BasicAuthToken;
-import com.snykta.security.utils.CyTokenUtil;
-import com.snykta.tools.exception.ServiceException;
-import com.snykta.tools.utils.CyObjUtil;
-import com.snykta.tools.web.result.Ret;
+import com.snykta.starter.basic.web.web.service.BaseService;
+import com.snykta.starter.security.token.BasicAuthToken;
+import com.snykta.starter.security.utils.CyTokenUtil;
+import com.snykta.starter.tools.exception.ServiceException;
+import com.snykta.starter.tools.utils.CyObjUtil;
+import com.snykta.starter.tools.web.result.Ret;
 import org.springframework.stereotype.Service;
 
 @Service

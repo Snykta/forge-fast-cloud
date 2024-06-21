@@ -3,7 +3,7 @@ package com.snykta.system.mapper;
 
 import com.snykta.system.entity.SysUserEntity;
 import org.springframework.stereotype.Repository;
-import com.snykta.mybatis.mapper.BaseMapperPlus;
+import com.snykta.starter.mybatis.plus.mapper.BaseMapperPlus;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

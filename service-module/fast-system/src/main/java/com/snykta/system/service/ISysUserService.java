@@ -3,7 +3,7 @@ package com.snykta.system.service;
 
 import com.snykta.system.dto.SearchUserDto;
 import com.snykta.system.dto.SysUserDto;
-import com.snykta.tools.web.page.PageDto;
+import com.snykta.starter.tools.web.page.PageDto;
 
 /**
  * 用户信息表

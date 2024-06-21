@@ -1,10 +1,10 @@
 package com.snykta.system.controller;
 
 
-import com.snykta.basic.web.web.controller.BaseController;
+import com.snykta.starter.basic.web.web.controller.BaseController;
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.service.IAuthUserService;
-import com.snykta.tools.web.result.Ret;
+import com.snykta.starter.tools.web.result.Ret;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;

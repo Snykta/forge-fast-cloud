@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.snykta</groupId>
+        <groupId>com.snykta.fast.cloud</groupId>
         <artifactId>public-module</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -21,8 +21,8 @@
 
 
         <dependency>
-            <groupId>com.snykta</groupId>
-            <artifactId>component-basic-cloud</artifactId>
+            <groupId>com.snykta.fast.cloud</groupId>
+            <artifactId>component-starter-basic-cloud</artifactId>
         </dependency>
 
 

@@ -4,12 +4,12 @@ package com.snykta.auth.controller;
 
 import com.snykta.auth.dto.SysUserDto;
 import com.snykta.auth.service.IAuthService;
-import com.snykta.basic.web.annotation.RateLimiter;
-import com.snykta.basic.web.web.controller.BaseController;
-import com.snykta.security.token.BasicAuthToken;
-import com.snykta.security.utils.CyTokenUtil;
-import com.snykta.tools.constant.AuthConstant;
-import com.snykta.tools.web.result.Ret;
+import com.snykta.starter.basic.web.annotation.RateLimiter;
+import com.snykta.starter.basic.web.web.controller.BaseController;
+import com.snykta.starter.security.token.BasicAuthToken;
+import com.snykta.starter.security.utils.CyTokenUtil;
+import com.snykta.starter.tools.constant.AuthConstant;
+import com.snykta.starter.tools.web.result.Ret;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

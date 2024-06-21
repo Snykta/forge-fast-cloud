@@ -2,7 +2,7 @@ package com.snykta.gateway.utils;
 
 import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
-import com.snykta.tools.web.result.Ret;
+import com.snykta.starter.tools.web.result.Ret;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

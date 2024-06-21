@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.snykta.fast.cloud</groupId>
+		<artifactId>forge-fast-cloud</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>component-starter-module</artifactId>
+	<name>component-starter-module</name>
+	<packaging>pom</packaging>
+
+	<description>
+		component-module：自定义服务组件
+	</description>
+
+
+	<!--模块-->
+	<modules>
+		<module>component-starter-common-tools</module>
+		<module>component-starter-basic-web</module>
+		<module>component-starter-basic-cloud</module>
+		<module>component-starter-mybatis-plus</module>
+		<module>component-starter-redis</module>
+		<module>component-starter-security</module>
+		<module>component-starter-code-generator</module>
+		<module>component-starter-event-bus</module>
+		<module>component-starter-seata</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+
+
+</project>

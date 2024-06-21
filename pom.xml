@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.snykta</groupId>
+	<groupId>com.snykta.fast.cloud</groupId>
 	<artifactId>forge-fast-cloud</artifactId>
 	<version>1.0.0</version>
 
@@ -14,7 +14,7 @@
 
 	<!--模块-->
 	<modules>
-		<module>component-module</module>
+		<module>component-starter-module</module>
 		<module>public-module</module>
 		<module>service-module</module>
 	</modules>
@@ -22,7 +22,15 @@
 
 	<!--版本属性-->
 	<properties>
-		<forge-fast-cloud.version>1.0.0</forge-fast-cloud.version>
+		<component-starter-basic-web.version>1.0.0</component-starter-basic-web.version>
+		<component-starter-redis.version>1.0.0</component-starter-redis.version>
+		<component-starter-common-tools.version>1.0.0</component-starter-common-tools.version>
+		<component-starter-security.version>1.0.0</component-starter-security.version>
+		<component-starter-mybatis-plus.version>1.0.0</component-starter-mybatis-plus.version>
+		<component-starter-code-generator.version>1.0.0</component-starter-code-generator.version>
+		<component-starter-event-bus.version>1.0.0</component-starter-event-bus.version>
+		<component-starter-basic-cloud.version>1.0.0</component-starter-basic-cloud.version>
+		<component-starter-seata.version>1.0.0</component-starter-seata.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
@@ -86,65 +94,65 @@
 
 			<!--自定义组件：web核心组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-basic-web</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-basic-web</artifactId>
+				<version>${component-starter-basic-web.version}</version>
 			</dependency>
 
 			<!--自定义组件：微服务核心组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-basic-cloud</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-basic-cloud</artifactId>
+				<version>${component-starter-basic-cloud.version}</version>
 			</dependency>
 
 			<!--自定义组件：mybatisPlus核心组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-mybatis-plus</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-mybatis-plus</artifactId>
+				<version>${component-starter-mybatis-plus.version}</version>
 			</dependency>
 
 			<!--自定义组件：redis核心组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-redis</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-redis</artifactId>
+				<version>${component-starter-redis.version}</version>
 			</dependency>
 
 			<!--自定义组件：认证授权组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-security</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-security</artifactId>
+				<version>${component-starter-security.version}</version>
 			</dependency>
 
 			<!--自定义组件：工具类、自定义常量、字典值等基础类组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-common-tools</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-common-tools</artifactId>
+				<version>${component-starter-common-tools.version}</version>
 			</dependency>
 
 			<!--自定义组件：自动生成代码组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-code-generator</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-code-generator</artifactId>
+				<version>${component-starter-code-generator.version}</version>
 			</dependency>
 
 			<!--自定义组件：事件发布组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-event-bus</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-event-bus</artifactId>
+				<version>${component-starter-event-bus.version}</version>
 			</dependency>
 
 			<!--自定义组件：分布式事务组件-->
 			<dependency>
-				<groupId>com.snykta</groupId>
-				<artifactId>component-seata</artifactId>
-				<version>${forge-fast-cloud.version}</version>
+				<groupId>com.snykta.fast.cloud</groupId>
+				<artifactId>component-starter-seata</artifactId>
+				<version>${component-starter-seata.version}</version>
 			</dependency>
 
 			<!-- SpringCloud 微服务 -->

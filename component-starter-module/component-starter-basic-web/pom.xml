@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.snykta.fast.cloud</groupId>
+		<artifactId>component-starter-module</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+
+	<artifactId>component-starter-basic-web</artifactId>
+	<version>1.0.0</version>
+	<name>component-starter-basic-web</name>
+
+	<description>
+		web基础通用配置，如果是Web项目则都可以引用此包
+		PS: 如需要限流注解，请单独在各自子项目中引入component-redis 依赖
+	</description>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-undertow</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>spring-boot-admin-starter-client</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.snykta.fast.cloud</groupId>
+			<artifactId>component-starter-common-tools</artifactId>
+		</dependency>
+
+
+		<!--<optional>true</optional> 此Redis依赖不向下传递，需要按需引入-->
+		<dependency>
+			<groupId>com.snykta.fast.cloud</groupId>
+			<artifactId>component-starter-redis</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+
+		<!--logback中使用动态语法-->
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+		</dependency>
+
+
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+		</dependency>
+
+
+	</dependencies>
+
+
+
+
+
+</project>

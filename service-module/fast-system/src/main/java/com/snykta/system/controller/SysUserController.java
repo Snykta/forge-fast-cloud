@@ -2,11 +2,10 @@ package com.snykta.system.controller;
 
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
-import cn.dev33.satoken.annotation.SaCheckRole;
-import com.snykta.basic.web.web.controller.BaseController;
+import com.snykta.starter.basic.web.web.controller.BaseController;
 import com.snykta.system.dto.SearchUserDto;
-import com.snykta.tools.web.page.PageDto;
-import com.snykta.tools.web.result.Ret;
+import com.snykta.starter.tools.web.page.PageDto;
+import com.snykta.starter.tools.web.result.Ret;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;

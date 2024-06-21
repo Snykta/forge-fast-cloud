@@ -1,7 +1,7 @@
 package com.snykta.auth.client;
 
 import com.snykta.auth.dto.SysUserDto;
-import com.snykta.tools.web.result.Ret;
+import com.snykta.starter.tools.web.result.Ret;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;

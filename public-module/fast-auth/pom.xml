@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.snykta</groupId>
+        <groupId>com.snykta.fast.cloud</groupId>
         <artifactId>public-module</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -20,23 +20,23 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.snykta</groupId>
-            <artifactId>component-basic-web</artifactId>
+            <groupId>com.snykta.fast.cloud</groupId>
+            <artifactId>component-starter-basic-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.snykta</groupId>
-            <artifactId>component-security</artifactId>
+            <groupId>com.snykta.fast.cloud</groupId>
+            <artifactId>component-starter-security</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.snykta</groupId>
-            <artifactId>component-redis</artifactId>
+            <groupId>com.snykta.fast.cloud</groupId>
+            <artifactId>component-starter-redis</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.snykta</groupId>
-            <artifactId>component-basic-cloud</artifactId>
+            <groupId>com.snykta.fast.cloud</groupId>
+            <artifactId>component-starter-basic-cloud</artifactId>
         </dependency>
 
     </dependencies>

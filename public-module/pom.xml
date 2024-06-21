@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.snykta</groupId>
+        <groupId>com.snykta.fast.cloud</groupId>
         <artifactId>forge-fast-cloud</artifactId>
         <version>1.0.0</version>
     </parent>
@@ -23,6 +23,7 @@
         <module>fast-auth</module>
         <module>fast-gateway</module>
         <module>fast-generator</module>
+        <module>fast-monitor</module>
     </modules>
 
 </project>

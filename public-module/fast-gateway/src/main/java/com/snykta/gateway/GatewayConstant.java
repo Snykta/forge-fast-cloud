@@ -1,6 +1,6 @@
 package com.snykta.gateway;
 
-import com.snykta.tools.constant.GeneralConstant;
+import com.snykta.starter.tools.constant.GeneralConstant;
 
 import java.util.Arrays;
 import java.util.List;

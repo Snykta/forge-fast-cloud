@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <!--模块名称-->
+    <springProperty name="logFileName" source="spring.application.name" defaultValue="defaultName"/>
+    <!-- 日志存放父路径 -->
+    <property name="log.path" value="./logs" />
+    <!--IP-->
+    <conversionRule conversionWord="ip" converterClass="com.snykta.starter.basic.web.web.utils.IPLogConvert"/>
+    <!--当前spring环境属性-->
+    <springProperty name="spring.profiles.active" source="spring.profiles.active" defaultValue="xxx"/>
+    <!--当前日志记录方式属性-->
+    <springProperty name="log.record.type" source="log.record.type" defaultValue="xxx"/>
+    <!--项目名称-->
+    <springProperty name="spring.application.name" source="spring.application.name" defaultValue="xxx"/>
+
+    <!-- 文件中的日志输出格式 -->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
+
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!-- 彩色日志格式 -->
+    <property name="console_log_pattern"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+        <encoder>
+            <charset>utf8</charset>
+            <pattern>${console_log_pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+
+
+
+    <!-- 系统日志输出(以磁盘文件形式保存) -->
+    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <if condition='!property("logFileName").contains("defaultName")'>
+            <then>
+                <!--当前活动名称-->
+                <file>${log.path}/${logFileName}/${logFileName}_info.log</file>
+                <!-- 循环政策：基于时间创建日志文件 -->
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <!-- 归档的日志文件名格式 -->
+                    <fileNamePattern>${log.path}/${logFileName}/${logFileName}-%d{yyyy-MM-dd}_info_%i.log</fileNamePattern>
+
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <!-- maxFileSize:这是活动文件的大小，默认值是10MB -->
+                        <maxFileSize>10MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+
+                    <!-- 日志最大的历史 90天 -->
+                    <maxHistory>90</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <charset>utf8</charset>
+                    <pattern>${log.pattern}</pattern>
+                </encoder>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <!-- 过滤的级别 -->
+                    <level>INFO</level>
+                    <!-- 匹配时的操作：接收（记录） -->
+                    <onMatch>ACCEPT</onMatch>
+                    <!-- 不匹配时的操作：拒绝（不记录） -->
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+            </then>
+        </if>
+    </appender>
+
+
+    <!-- 系统日志输出(以磁盘文件形式保存) -->
+    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <if condition='!property("logFileName").contains("defaultName")'>
+            <then>
+                <!--当前活动名称-->
+                <file>${log.path}/${logFileName}/${logFileName}_error.log</file>
+                <!-- 循环政策：基于时间创建日志文件 -->
+                <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                    <!-- 归档的日志文件名格式 -->
+                    <fileNamePattern>${log.path}/${logFileName}/${logFileName}-%d{yyyy-MM-dd}_error_%i.log</fileNamePattern>
+
+                    <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                        <!-- maxFileSize:这是活动文件的大小，默认值是10MB -->
+                        <maxFileSize>10MB</maxFileSize>
+                    </timeBasedFileNamingAndTriggeringPolicy>
+
+                    <!-- 日志最大的历史 90天 -->
+                    <maxHistory>90</maxHistory>
+                </rollingPolicy>
+                <encoder>
+                    <charset>utf8</charset>
+                    <pattern>${log.pattern}</pattern>
+                </encoder>
+                <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                    <!-- 过滤的级别 -->
+                    <level>ERROR</level>
+                    <!-- 匹配时的操作：接收（记录） -->
+                    <onMatch>ACCEPT</onMatch>
+                    <!-- 不匹配时的操作：拒绝（不记录） -->
+                    <onMismatch>DENY</onMismatch>
+                </filter>
+            </then>
+        </if>
+    </appender>
+
+
+
+    <!-- 上传日志到OpenObserve。比ES更轻量-->
+    <appender name="OpenObserve" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>info</level>
+        </filter>
+        <!--替换为FluentBit收集器地址-->
+        <destination>192.168.93.27:24224</destination>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "event.dataset":"${spring.application.name}-${spring.profiles.active}",
+                        "level": "%level",
+                        "createTime": "%d{yyyy-MM-dd HH:mm:ss}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "requestId": "%X{requestId}",
+                        "host": {"ip":"%ip"},
+                        "span": "%X{X-B3-SpanId:-}",
+                        "parent": "%X{X-B3-ParentSpanId:-}",
+                        "thread": "%thread",
+                        "className": "%logger{40}",
+                        "message": "%message",
+                        "stackTrace": "%exception{10}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+        <connectionStrategy>
+            <roundRobin>
+                <connectionTTL>5 minutes</connectionTTL>
+            </roundRobin>
+        </connectionStrategy>
+    </appender>
+
+
+
+    <!--具体日志采用哪种方式逻辑处理-->
+    <root level="info">
+
+        <!--开发环境在默认控制台显示-->
+        <if condition='property("spring.profiles.active").contains("dev")'>
+            <then>
+                <appender-ref ref="console"/>
+            </then>
+        </if>
+
+
+        <!--非开发环境：本地以磁盘文件形式保存-->
+        <if condition='!property("spring.profiles.active").contains("dev")'>
+            <then>
+                <if condition='property("log.record.type").contains("local")'>
+                    <then>
+                        <appender-ref ref="file_info"/>
+                        <appender-ref ref="file_error"/>
+                    </then>
+                </if>
+            </then>
+        </if>
+
+
+        <!--非开发环境：上传到云端记录日志。例如ES、OpenSearch、数据库...在此配置的为(FluentBit + OpenObserve)-->
+        <if condition='!property("spring.profiles.active").contains("dev")'>
+            <then>
+                <if condition='property("log.record.type").contains("cloud")'>
+                    <then>
+                        <appender-ref ref="OpenObserve"/>
+                    </then>
+                </if>
+            </then>
+        </if>
+
+    </root>
+
+
+</configuration>

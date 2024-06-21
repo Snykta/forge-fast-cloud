@@ -1,14 +1,14 @@
 package com.snykta.system.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.snykta.basic.web.web.service.BaseService;
+import com.snykta.starter.basic.web.web.service.BaseService;
+import com.snykta.starter.tools.utils.*;
 import com.snykta.system.dto.SysUserDto;
 import com.snykta.system.entity.SysUserEntity;
 import com.snykta.system.mapper.SysUserMapper;
 import com.snykta.system.service.IAuthUserService;
-import com.snykta.tools.constant.DictValueConstant;
-import com.snykta.tools.exception.ServiceException;
-import com.snykta.tools.utils.*;
+import com.snykta.starter.tools.constant.DictValueConstant;
+import com.snykta.starter.tools.exception.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
