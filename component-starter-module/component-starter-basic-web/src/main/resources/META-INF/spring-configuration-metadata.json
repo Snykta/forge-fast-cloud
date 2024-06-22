@@ -33,6 +33,13 @@
       "description": "非开发环境日志记录方式（local-本地磁盘方式。cloud-云端收集方式，此方式需要自行搭建云端，例如ES，然后在logback-spring.xml中配置。）",
       "sourceType": "com.snykta.starter.basic.web.log.LogRecordPropertyConfig",
       "defaultValue": "local"
+    },
+    {
+      "name": "log.record.cloudIpAddress",
+      "type": "java.lang.String",
+      "description": "如果使用云端方式(cloud)则必须配置远程日志收集器的IP地址",
+      "sourceType": "com.snykta.starter.basic.web.log.LogRecordPropertyConfig",
+      "defaultValue": "-1"
     }
   ],
   "hints": []

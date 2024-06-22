@@ -12,6 +12,8 @@
     <springProperty name="log.record.type" source="log.record.type" defaultValue="xxx"/>
     <!--项目名称-->
     <springProperty name="spring.application.name" source="spring.application.name" defaultValue="xxx"/>
+    <!--如果是云端记录则需要配置远程收集器IP地址-->
+    <springProperty name="log.record.cloudIpAddress" source="log.record.cloud-ip-address" defaultValue="xxx"/>
 
     <!-- 文件中的日志输出格式 -->
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n" />
@@ -36,8 +38,6 @@
             <pattern>${console_log_pattern}</pattern>
         </encoder>
     </appender>
-
-
 
 
 
@@ -120,7 +120,7 @@
             <level>info</level>
         </filter>
         <!--替换为FluentBit收集器地址-->
-        <destination>192.168.93.27:24224</destination>
+        <destination>${log.record.cloudIpAddress}</destination>
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
                 <pattern>
@@ -149,7 +149,6 @@
             </roundRobin>
         </connectionStrategy>
     </appender>
-
 
 
     <!--具体日志采用哪种方式逻辑处理-->
